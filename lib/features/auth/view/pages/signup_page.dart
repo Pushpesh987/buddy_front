@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/helpers/failure.dart';
 import '../../../../core/helpers/hide_keyboard.dart';
+import '../../../../core/helpers/success_snackbar.dart';
 import '../../providers/signup_auth_providers.dart';
 import '../../viewmodel/signup_auth_view_model.dart';
 import '../widgets/app_custom_field.dart';
@@ -64,6 +65,7 @@ class _SignupPageState extends ConsumerState<SignupPage> {
 
       final state = ref.read(signupAuthViewModelProvider);
       if (state.status == SignupStatus.success) {
+        showSuccess(context, 'Account Created Successfull!!!');
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(

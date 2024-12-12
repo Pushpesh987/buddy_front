@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/helpers/failure.dart';
 import '../../../../core/helpers/hide_keyboard.dart';
+import '../../../../core/helpers/success_snackbar.dart';
 import '../../providers/auth_providers.dart';
 import '../../viewmodel/auth_view_model.dart';
 import 'signup_page.dart';
@@ -57,6 +58,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
       final state = ref.read(authViewModelProvider);
       if (state.status == AuthStatus.success) {
+        showSuccess(context, 'Login Successfull!!!');
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
@@ -64,7 +66,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
           ),
         );
       } else if (state.status == AuthStatus.failure) {
-        showError(context, state.errorMessage ?? 'Login failed');
+        showError(context, 'Login failed');
       }
     }
   }

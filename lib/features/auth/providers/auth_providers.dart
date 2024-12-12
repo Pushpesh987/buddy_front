@@ -7,7 +7,9 @@ import '../repositories/auth_repository.dart';
 import '../viewmodel/auth_view_model.dart';
 
 final apiServiceProvider = Provider<ApiService>((ref) {
-  return ApiService();
+  final shared = ref.read(sharedProvider);
+
+  return ApiService(shared: shared);
 });
 
 final sharedProvider = Provider<Shared>((ref) {
