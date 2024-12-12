@@ -30,22 +30,19 @@ mixin _$SignUpModel {
   /// Create a copy of SignUpModel
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $SignUpModelCopyWith<SignUpModel> get copyWith =>
-      throw _privateConstructorUsedError;
+  $SignUpModelCopyWith<SignUpModel> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $SignUpModelCopyWith<$Res> {
-  factory $SignUpModelCopyWith(
-          SignUpModel value, $Res Function(SignUpModel) then) =
+  factory $SignUpModelCopyWith(SignUpModel value, $Res Function(SignUpModel) then) =
       _$SignUpModelCopyWithImpl<$Res, SignUpModel>;
   @useResult
   $Res call({String username, String email, String password});
 }
 
 /// @nodoc
-class _$SignUpModelCopyWithImpl<$Res, $Val extends SignUpModel>
-    implements $SignUpModelCopyWith<$Res> {
+class _$SignUpModelCopyWithImpl<$Res, $Val extends SignUpModel> implements $SignUpModelCopyWith<$Res> {
   _$SignUpModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -80,10 +77,8 @@ class _$SignUpModelCopyWithImpl<$Res, $Val extends SignUpModel>
 }
 
 /// @nodoc
-abstract class _$$SignUpModelImplCopyWith<$Res>
-    implements $SignUpModelCopyWith<$Res> {
-  factory _$$SignUpModelImplCopyWith(
-          _$SignUpModelImpl value, $Res Function(_$SignUpModelImpl) then) =
+abstract class _$$SignUpModelImplCopyWith<$Res> implements $SignUpModelCopyWith<$Res> {
+  factory _$$SignUpModelImplCopyWith(_$SignUpModelImpl value, $Res Function(_$SignUpModelImpl) then) =
       __$$SignUpModelImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -91,11 +86,9 @@ abstract class _$$SignUpModelImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$SignUpModelImplCopyWithImpl<$Res>
-    extends _$SignUpModelCopyWithImpl<$Res, _$SignUpModelImpl>
+class __$$SignUpModelImplCopyWithImpl<$Res> extends _$SignUpModelCopyWithImpl<$Res, _$SignUpModelImpl>
     implements _$$SignUpModelImplCopyWith<$Res> {
-  __$$SignUpModelImplCopyWithImpl(
-      _$SignUpModelImpl _value, $Res Function(_$SignUpModelImpl) _then)
+  __$$SignUpModelImplCopyWithImpl(_$SignUpModelImpl _value, $Res Function(_$SignUpModelImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of SignUpModel
@@ -127,11 +120,9 @@ class __$$SignUpModelImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$SignUpModelImpl implements _SignUpModel {
-  const _$SignUpModelImpl(
-      {required this.username, required this.email, required this.password});
+  const _$SignUpModelImpl({required this.username, required this.email, required this.password});
 
-  factory _$SignUpModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$SignUpModelImplFromJson(json);
+  factory _$SignUpModelImpl.fromJson(Map<String, dynamic> json) => _$$SignUpModelImplFromJson(json);
 
   @override
   final String username;
@@ -150,11 +141,9 @@ class _$SignUpModelImpl implements _SignUpModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SignUpModelImpl &&
-            (identical(other.username, username) ||
-                other.username == username) &&
+            (identical(other.username, username) || other.username == username) &&
             (identical(other.email, email) || other.email == email) &&
-            (identical(other.password, password) ||
-                other.password == password));
+            (identical(other.password, password) || other.password == password));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -183,8 +172,7 @@ abstract class _SignUpModel implements SignUpModel {
       required final String email,
       required final String password}) = _$SignUpModelImpl;
 
-  factory _SignUpModel.fromJson(Map<String, dynamic> json) =
-      _$SignUpModelImpl.fromJson;
+  factory _SignUpModel.fromJson(Map<String, dynamic> json) = _$SignUpModelImpl.fromJson;
 
   @override
   String get username;
@@ -197,6 +185,5 @@ abstract class _SignUpModel implements SignUpModel {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$SignUpModelImplCopyWith<_$SignUpModelImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$SignUpModelImplCopyWith<_$SignUpModelImpl> get copyWith => throw _privateConstructorUsedError;
 }

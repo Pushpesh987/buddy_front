@@ -36,14 +36,12 @@ mixin _$EditProfileModel {
   /// Create a copy of EditProfileModel
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $EditProfileModelCopyWith<EditProfileModel> get copyWith =>
-      throw _privateConstructorUsedError;
+  $EditProfileModelCopyWith<EditProfileModel> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $EditProfileModelCopyWith<$Res> {
-  factory $EditProfileModelCopyWith(
-          EditProfileModel value, $Res Function(EditProfileModel) then) =
+  factory $EditProfileModelCopyWith(EditProfileModel value, $Res Function(EditProfileModel) then) =
       _$EditProfileModelCopyWithImpl<$Res, EditProfileModel>;
   @useResult
   $Res call(
@@ -59,8 +57,7 @@ abstract class $EditProfileModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$EditProfileModelCopyWithImpl<$Res, $Val extends EditProfileModel>
-    implements $EditProfileModelCopyWith<$Res> {
+class _$EditProfileModelCopyWithImpl<$Res, $Val extends EditProfileModel> implements $EditProfileModelCopyWith<$Res> {
   _$EditProfileModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -125,10 +122,8 @@ class _$EditProfileModelCopyWithImpl<$Res, $Val extends EditProfileModel>
 }
 
 /// @nodoc
-abstract class _$$EditProfileModelImplCopyWith<$Res>
-    implements $EditProfileModelCopyWith<$Res> {
-  factory _$$EditProfileModelImplCopyWith(_$EditProfileModelImpl value,
-          $Res Function(_$EditProfileModelImpl) then) =
+abstract class _$$EditProfileModelImplCopyWith<$Res> implements $EditProfileModelCopyWith<$Res> {
+  factory _$$EditProfileModelImplCopyWith(_$EditProfileModelImpl value, $Res Function(_$EditProfileModelImpl) then) =
       __$$EditProfileModelImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -145,11 +140,9 @@ abstract class _$$EditProfileModelImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$EditProfileModelImplCopyWithImpl<$Res>
-    extends _$EditProfileModelCopyWithImpl<$Res, _$EditProfileModelImpl>
+class __$$EditProfileModelImplCopyWithImpl<$Res> extends _$EditProfileModelCopyWithImpl<$Res, _$EditProfileModelImpl>
     implements _$$EditProfileModelImplCopyWith<$Res> {
-  __$$EditProfileModelImplCopyWithImpl(_$EditProfileModelImpl _value,
-      $Res Function(_$EditProfileModelImpl) _then)
+  __$$EditProfileModelImplCopyWithImpl(_$EditProfileModelImpl _value, $Res Function(_$EditProfileModelImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of EditProfileModel
@@ -224,8 +217,7 @@ class _$EditProfileModelImpl implements _EditProfileModel {
       : _skills = skills,
         _interests = interests;
 
-  factory _$EditProfileModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$EditProfileModelImplFromJson(json);
+  factory _$EditProfileModelImpl.fromJson(Map<String, dynamic> json) => _$$EditProfileModelImplFromJson(json);
 
   @override
   final String? firstName;
@@ -271,37 +263,21 @@ class _$EditProfileModelImpl implements _EditProfileModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$EditProfileModelImpl &&
-            (identical(other.firstName, firstName) ||
-                other.firstName == firstName) &&
-            (identical(other.lastName, lastName) ||
-                other.lastName == lastName) &&
+            (identical(other.firstName, firstName) || other.firstName == firstName) &&
+            (identical(other.lastName, lastName) || other.lastName == lastName) &&
             (identical(other.gender, gender) || other.gender == gender) &&
-            (identical(other.location, location) ||
-                other.location == location) &&
-            (identical(other.educationLevel, educationLevel) ||
-                other.educationLevel == educationLevel) &&
-            (identical(other.fieldOfStudy, fieldOfStudy) ||
-                other.fieldOfStudy == fieldOfStudy) &&
-            (identical(other.collegeName, collegeName) ||
-                other.collegeName == collegeName) &&
+            (identical(other.location, location) || other.location == location) &&
+            (identical(other.educationLevel, educationLevel) || other.educationLevel == educationLevel) &&
+            (identical(other.fieldOfStudy, fieldOfStudy) || other.fieldOfStudy == fieldOfStudy) &&
+            (identical(other.collegeName, collegeName) || other.collegeName == collegeName) &&
             const DeepCollectionEquality().equals(other._skills, _skills) &&
-            const DeepCollectionEquality()
-                .equals(other._interests, _interests));
+            const DeepCollectionEquality().equals(other._interests, _interests));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      firstName,
-      lastName,
-      gender,
-      location,
-      educationLevel,
-      fieldOfStudy,
-      collegeName,
-      const DeepCollectionEquality().hash(_skills),
-      const DeepCollectionEquality().hash(_interests));
+  int get hashCode => Object.hash(runtimeType, firstName, lastName, gender, location, educationLevel, fieldOfStudy,
+      collegeName, const DeepCollectionEquality().hash(_skills), const DeepCollectionEquality().hash(_interests));
 
   /// Create a copy of EditProfileModel
   /// with the given fields replaced by the non-null parameter values.
@@ -309,8 +285,7 @@ class _$EditProfileModelImpl implements _EditProfileModel {
   @override
   @pragma('vm:prefer-inline')
   _$$EditProfileModelImplCopyWith<_$EditProfileModelImpl> get copyWith =>
-      __$$EditProfileModelImplCopyWithImpl<_$EditProfileModelImpl>(
-          this, _$identity);
+      __$$EditProfileModelImplCopyWithImpl<_$EditProfileModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -332,8 +307,7 @@ abstract class _EditProfileModel implements EditProfileModel {
       final List<String>? skills,
       final List<String>? interests}) = _$EditProfileModelImpl;
 
-  factory _EditProfileModel.fromJson(Map<String, dynamic> json) =
-      _$EditProfileModelImpl.fromJson;
+  factory _EditProfileModel.fromJson(Map<String, dynamic> json) = _$EditProfileModelImpl.fromJson;
 
   @override
   String? get firstName;
@@ -358,6 +332,5 @@ abstract class _EditProfileModel implements EditProfileModel {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$EditProfileModelImplCopyWith<_$EditProfileModelImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$EditProfileModelImplCopyWith<_$EditProfileModelImpl> get copyWith => throw _privateConstructorUsedError;
 }

@@ -28,8 +28,7 @@ mixin _$AuthModel {
   /// Create a copy of AuthModel
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $AuthModelCopyWith<AuthModel> get copyWith =>
-      throw _privateConstructorUsedError;
+  $AuthModelCopyWith<AuthModel> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -41,8 +40,7 @@ abstract class $AuthModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$AuthModelCopyWithImpl<$Res, $Val extends AuthModel>
-    implements $AuthModelCopyWith<$Res> {
+class _$AuthModelCopyWithImpl<$Res, $Val extends AuthModel> implements $AuthModelCopyWith<$Res> {
   _$AuthModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -67,10 +65,8 @@ class _$AuthModelCopyWithImpl<$Res, $Val extends AuthModel>
 }
 
 /// @nodoc
-abstract class _$$AuthModelImplCopyWith<$Res>
-    implements $AuthModelCopyWith<$Res> {
-  factory _$$AuthModelImplCopyWith(
-          _$AuthModelImpl value, $Res Function(_$AuthModelImpl) then) =
+abstract class _$$AuthModelImplCopyWith<$Res> implements $AuthModelCopyWith<$Res> {
+  factory _$$AuthModelImplCopyWith(_$AuthModelImpl value, $Res Function(_$AuthModelImpl) then) =
       __$$AuthModelImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -78,12 +74,9 @@ abstract class _$$AuthModelImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$AuthModelImplCopyWithImpl<$Res>
-    extends _$AuthModelCopyWithImpl<$Res, _$AuthModelImpl>
+class __$$AuthModelImplCopyWithImpl<$Res> extends _$AuthModelCopyWithImpl<$Res, _$AuthModelImpl>
     implements _$$AuthModelImplCopyWith<$Res> {
-  __$$AuthModelImplCopyWithImpl(
-      _$AuthModelImpl _value, $Res Function(_$AuthModelImpl) _then)
-      : super(_value, _then);
+  __$$AuthModelImplCopyWithImpl(_$AuthModelImpl _value, $Res Function(_$AuthModelImpl) _then) : super(_value, _then);
 
   /// Create a copy of AuthModel
   /// with the given fields replaced by the non-null parameter values.
@@ -106,8 +99,7 @@ class __$$AuthModelImplCopyWithImpl<$Res>
 class _$AuthModelImpl implements _AuthModel {
   const _$AuthModelImpl({required this.token});
 
-  factory _$AuthModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$AuthModelImplFromJson(json);
+  factory _$AuthModelImpl.fromJson(Map<String, dynamic> json) => _$$AuthModelImplFromJson(json);
 
   @override
   final String token;
@@ -148,8 +140,7 @@ class _$AuthModelImpl implements _AuthModel {
 abstract class _AuthModel implements AuthModel {
   const factory _AuthModel({required final String token}) = _$AuthModelImpl;
 
-  factory _AuthModel.fromJson(Map<String, dynamic> json) =
-      _$AuthModelImpl.fromJson;
+  factory _AuthModel.fromJson(Map<String, dynamic> json) = _$AuthModelImpl.fromJson;
 
   @override
   String get token;
@@ -158,6 +149,5 @@ abstract class _AuthModel implements AuthModel {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$AuthModelImplCopyWith<_$AuthModelImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$AuthModelImplCopyWith<_$AuthModelImpl> get copyWith => throw _privateConstructorUsedError;
 }
