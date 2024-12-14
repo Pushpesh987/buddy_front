@@ -1,18 +1,7 @@
-import 'package:buddy_front/core/shared/shared.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import '../../../core/service_provider.dart/service_provider.dart';
 import '../repositories/signup_auth_repository.dart';
 import '../viewmodel/signup_auth_view_model.dart';
-import '../../../core/api_service/api_service.dart';
-
-final sharedProvider = Provider<Shared>((ref) {
-  return Shared(secureStorage: const FlutterSecureStorage());
-});
-
-final apiServiceProvider = Provider<ApiService>((ref) {
-  final shared = ref.read(sharedProvider);
-  return ApiService(shared: shared);
-});
 
 final signupAuthRepositoryProvider = Provider<SignupAuthRepository>((ref) {
   final apiService = ref.watch(apiServiceProvider);

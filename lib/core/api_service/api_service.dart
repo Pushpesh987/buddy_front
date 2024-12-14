@@ -15,8 +15,8 @@ class ApiService {
       : _dio = Dio(
           BaseOptions(
             baseUrl: ServerConstant.serverURL,
-            connectTimeout: const Duration(seconds: 5),
-            receiveTimeout: const Duration(seconds: 5),
+            connectTimeout: const Duration(seconds: 10),
+            receiveTimeout: const Duration(seconds: 10),
             followRedirects: true,
             validateStatus: (status) {
               return status != null && (status < 500);
@@ -33,7 +33,6 @@ class ApiService {
   }) async {
     try {
       final token = await _shared.getAuthToken();
-
       final Map<String, dynamic> headers = token != null ? {'Authorization': 'Bearer $token'} : {};
 
       Response response;
@@ -69,11 +68,22 @@ class ApiService {
           break;
       }
 
-      final Map<String, dynamic> responseData = Map<String, dynamic>.from(response.data);
-
-      return Right(responseData);
+      if (response.data is Map<String, dynamic>) {
+        final Map<String, dynamic> responseData = Map<String, dynamic>.from(response.data);
+        return Right(responseData);
+      } else {
+        return Left('Unexpected response format: ${response.data}');
+      }
     } catch (e) {
-      return Left('Error occurred: $e');
+      if (e is DioException) {
+        if (e.response != null) {
+          return Left('Dio error: ${e.response?.statusCode} - ${e.response?.data}');
+        } else {
+          return Left('Dio error: ${e.message}');
+        }
+      } else {
+        return Left('Unknown error occurred: $e');
+      }
     }
   }
 }

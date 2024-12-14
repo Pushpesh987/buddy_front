@@ -20,12 +20,31 @@ EditProfileModel _$EditProfileModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$EditProfileModel {
+  @JsonKey(name: 'first_name')
   String? get firstName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'last_name')
   String? get lastName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'username')
+  String? get username => throw _privateConstructorUsedError;
+  @JsonKey(name: 'profile_photo_url')
+  String? get profilePhotoUrl => throw _privateConstructorUsedError;
+  @JsonKey(name: 'age')
+  int? get age => throw _privateConstructorUsedError;
+  @JsonKey(name: 'dob')
+  String? get dob => throw _privateConstructorUsedError;
+  @JsonKey(name: 'gender')
   String? get gender => throw _privateConstructorUsedError;
+  @JsonKey(name: 'phone')
+  String? get phone => throw _privateConstructorUsedError;
+  @JsonKey(name: 'email')
+  String? get email => throw _privateConstructorUsedError;
+  @JsonKey(name: 'location_name')
   String? get location => throw _privateConstructorUsedError;
+  @JsonKey(name: 'education_level')
   String? get educationLevel => throw _privateConstructorUsedError;
+  @JsonKey(name: 'field_of_study')
   String? get fieldOfStudy => throw _privateConstructorUsedError;
+  @JsonKey(name: 'college_name')
   String? get collegeName => throw _privateConstructorUsedError;
   List<String>? get skills => throw _privateConstructorUsedError;
   List<String>? get interests => throw _privateConstructorUsedError;
@@ -45,13 +64,19 @@ abstract class $EditProfileModelCopyWith<$Res> {
       _$EditProfileModelCopyWithImpl<$Res, EditProfileModel>;
   @useResult
   $Res call(
-      {String? firstName,
-      String? lastName,
-      String? gender,
-      String? location,
-      String? educationLevel,
-      String? fieldOfStudy,
-      String? collegeName,
+      {@JsonKey(name: 'first_name') String? firstName,
+      @JsonKey(name: 'last_name') String? lastName,
+      @JsonKey(name: 'username') String? username,
+      @JsonKey(name: 'profile_photo_url') String? profilePhotoUrl,
+      @JsonKey(name: 'age') int? age,
+      @JsonKey(name: 'dob') String? dob,
+      @JsonKey(name: 'gender') String? gender,
+      @JsonKey(name: 'phone') String? phone,
+      @JsonKey(name: 'email') String? email,
+      @JsonKey(name: 'location_name') String? location,
+      @JsonKey(name: 'education_level') String? educationLevel,
+      @JsonKey(name: 'field_of_study') String? fieldOfStudy,
+      @JsonKey(name: 'college_name') String? collegeName,
       List<String>? skills,
       List<String>? interests});
 }
@@ -72,7 +97,13 @@ class _$EditProfileModelCopyWithImpl<$Res, $Val extends EditProfileModel> implem
   $Res call({
     Object? firstName = freezed,
     Object? lastName = freezed,
+    Object? username = freezed,
+    Object? profilePhotoUrl = freezed,
+    Object? age = freezed,
+    Object? dob = freezed,
     Object? gender = freezed,
+    Object? phone = freezed,
+    Object? email = freezed,
     Object? location = freezed,
     Object? educationLevel = freezed,
     Object? fieldOfStudy = freezed,
@@ -89,9 +120,33 @@ class _$EditProfileModelCopyWithImpl<$Res, $Val extends EditProfileModel> implem
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
               as String?,
+      username: freezed == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String?,
+      profilePhotoUrl: freezed == profilePhotoUrl
+          ? _value.profilePhotoUrl
+          : profilePhotoUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      age: freezed == age
+          ? _value.age
+          : age // ignore: cast_nullable_to_non_nullable
+              as int?,
+      dob: freezed == dob
+          ? _value.dob
+          : dob // ignore: cast_nullable_to_non_nullable
+              as String?,
       gender: freezed == gender
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
+              as String?,
+      phone: freezed == phone
+          ? _value.phone
+          : phone // ignore: cast_nullable_to_non_nullable
+              as String?,
+      email: freezed == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
               as String?,
       location: freezed == location
           ? _value.location
@@ -128,13 +183,19 @@ abstract class _$$EditProfileModelImplCopyWith<$Res> implements $EditProfileMode
   @override
   @useResult
   $Res call(
-      {String? firstName,
-      String? lastName,
-      String? gender,
-      String? location,
-      String? educationLevel,
-      String? fieldOfStudy,
-      String? collegeName,
+      {@JsonKey(name: 'first_name') String? firstName,
+      @JsonKey(name: 'last_name') String? lastName,
+      @JsonKey(name: 'username') String? username,
+      @JsonKey(name: 'profile_photo_url') String? profilePhotoUrl,
+      @JsonKey(name: 'age') int? age,
+      @JsonKey(name: 'dob') String? dob,
+      @JsonKey(name: 'gender') String? gender,
+      @JsonKey(name: 'phone') String? phone,
+      @JsonKey(name: 'email') String? email,
+      @JsonKey(name: 'location_name') String? location,
+      @JsonKey(name: 'education_level') String? educationLevel,
+      @JsonKey(name: 'field_of_study') String? fieldOfStudy,
+      @JsonKey(name: 'college_name') String? collegeName,
       List<String>? skills,
       List<String>? interests});
 }
@@ -152,7 +213,13 @@ class __$$EditProfileModelImplCopyWithImpl<$Res> extends _$EditProfileModelCopyW
   $Res call({
     Object? firstName = freezed,
     Object? lastName = freezed,
+    Object? username = freezed,
+    Object? profilePhotoUrl = freezed,
+    Object? age = freezed,
+    Object? dob = freezed,
     Object? gender = freezed,
+    Object? phone = freezed,
+    Object? email = freezed,
     Object? location = freezed,
     Object? educationLevel = freezed,
     Object? fieldOfStudy = freezed,
@@ -169,9 +236,33 @@ class __$$EditProfileModelImplCopyWithImpl<$Res> extends _$EditProfileModelCopyW
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
               as String?,
+      username: freezed == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String?,
+      profilePhotoUrl: freezed == profilePhotoUrl
+          ? _value.profilePhotoUrl
+          : profilePhotoUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      age: freezed == age
+          ? _value.age
+          : age // ignore: cast_nullable_to_non_nullable
+              as int?,
+      dob: freezed == dob
+          ? _value.dob
+          : dob // ignore: cast_nullable_to_non_nullable
+              as String?,
       gender: freezed == gender
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
+              as String?,
+      phone: freezed == phone
+          ? _value.phone
+          : phone // ignore: cast_nullable_to_non_nullable
+              as String?,
+      email: freezed == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
               as String?,
       location: freezed == location
           ? _value.location
@@ -205,13 +296,19 @@ class __$$EditProfileModelImplCopyWithImpl<$Res> extends _$EditProfileModelCopyW
 @JsonSerializable()
 class _$EditProfileModelImpl implements _EditProfileModel {
   _$EditProfileModelImpl(
-      {this.firstName,
-      this.lastName,
-      this.gender,
-      this.location,
-      this.educationLevel,
-      this.fieldOfStudy,
-      this.collegeName,
+      {@JsonKey(name: 'first_name') this.firstName,
+      @JsonKey(name: 'last_name') this.lastName,
+      @JsonKey(name: 'username') this.username,
+      @JsonKey(name: 'profile_photo_url') this.profilePhotoUrl,
+      @JsonKey(name: 'age') this.age,
+      @JsonKey(name: 'dob') this.dob,
+      @JsonKey(name: 'gender') this.gender,
+      @JsonKey(name: 'phone') this.phone,
+      @JsonKey(name: 'email') this.email,
+      @JsonKey(name: 'location_name') this.location,
+      @JsonKey(name: 'education_level') this.educationLevel,
+      @JsonKey(name: 'field_of_study') this.fieldOfStudy,
+      @JsonKey(name: 'college_name') this.collegeName,
       final List<String>? skills,
       final List<String>? interests})
       : _skills = skills,
@@ -220,18 +317,43 @@ class _$EditProfileModelImpl implements _EditProfileModel {
   factory _$EditProfileModelImpl.fromJson(Map<String, dynamic> json) => _$$EditProfileModelImplFromJson(json);
 
   @override
+  @JsonKey(name: 'first_name')
   final String? firstName;
   @override
+  @JsonKey(name: 'last_name')
   final String? lastName;
   @override
+  @JsonKey(name: 'username')
+  final String? username;
+  @override
+  @JsonKey(name: 'profile_photo_url')
+  final String? profilePhotoUrl;
+  @override
+  @JsonKey(name: 'age')
+  final int? age;
+  @override
+  @JsonKey(name: 'dob')
+  final String? dob;
+  @override
+  @JsonKey(name: 'gender')
   final String? gender;
   @override
+  @JsonKey(name: 'phone')
+  final String? phone;
+  @override
+  @JsonKey(name: 'email')
+  final String? email;
+  @override
+  @JsonKey(name: 'location_name')
   final String? location;
   @override
+  @JsonKey(name: 'education_level')
   final String? educationLevel;
   @override
+  @JsonKey(name: 'field_of_study')
   final String? fieldOfStudy;
   @override
+  @JsonKey(name: 'college_name')
   final String? collegeName;
   final List<String>? _skills;
   @override
@@ -255,7 +377,7 @@ class _$EditProfileModelImpl implements _EditProfileModel {
 
   @override
   String toString() {
-    return 'EditProfileModel(firstName: $firstName, lastName: $lastName, gender: $gender, location: $location, educationLevel: $educationLevel, fieldOfStudy: $fieldOfStudy, collegeName: $collegeName, skills: $skills, interests: $interests)';
+    return 'EditProfileModel(firstName: $firstName, lastName: $lastName, username: $username, profilePhotoUrl: $profilePhotoUrl, age: $age, dob: $dob, gender: $gender, phone: $phone, email: $email, location: $location, educationLevel: $educationLevel, fieldOfStudy: $fieldOfStudy, collegeName: $collegeName, skills: $skills, interests: $interests)';
   }
 
   @override
@@ -265,7 +387,13 @@ class _$EditProfileModelImpl implements _EditProfileModel {
             other is _$EditProfileModelImpl &&
             (identical(other.firstName, firstName) || other.firstName == firstName) &&
             (identical(other.lastName, lastName) || other.lastName == lastName) &&
+            (identical(other.username, username) || other.username == username) &&
+            (identical(other.profilePhotoUrl, profilePhotoUrl) || other.profilePhotoUrl == profilePhotoUrl) &&
+            (identical(other.age, age) || other.age == age) &&
+            (identical(other.dob, dob) || other.dob == dob) &&
             (identical(other.gender, gender) || other.gender == gender) &&
+            (identical(other.phone, phone) || other.phone == phone) &&
+            (identical(other.email, email) || other.email == email) &&
             (identical(other.location, location) || other.location == location) &&
             (identical(other.educationLevel, educationLevel) || other.educationLevel == educationLevel) &&
             (identical(other.fieldOfStudy, fieldOfStudy) || other.fieldOfStudy == fieldOfStudy) &&
@@ -276,8 +404,23 @@ class _$EditProfileModelImpl implements _EditProfileModel {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, firstName, lastName, gender, location, educationLevel, fieldOfStudy,
-      collegeName, const DeepCollectionEquality().hash(_skills), const DeepCollectionEquality().hash(_interests));
+  int get hashCode => Object.hash(
+      runtimeType,
+      firstName,
+      lastName,
+      username,
+      profilePhotoUrl,
+      age,
+      dob,
+      gender,
+      phone,
+      email,
+      location,
+      educationLevel,
+      fieldOfStudy,
+      collegeName,
+      const DeepCollectionEquality().hash(_skills),
+      const DeepCollectionEquality().hash(_interests));
 
   /// Create a copy of EditProfileModel
   /// with the given fields replaced by the non-null parameter values.
@@ -297,31 +440,62 @@ class _$EditProfileModelImpl implements _EditProfileModel {
 
 abstract class _EditProfileModel implements EditProfileModel {
   factory _EditProfileModel(
-      {final String? firstName,
-      final String? lastName,
-      final String? gender,
-      final String? location,
-      final String? educationLevel,
-      final String? fieldOfStudy,
-      final String? collegeName,
+      {@JsonKey(name: 'first_name') final String? firstName,
+      @JsonKey(name: 'last_name') final String? lastName,
+      @JsonKey(name: 'username') final String? username,
+      @JsonKey(name: 'profile_photo_url') final String? profilePhotoUrl,
+      @JsonKey(name: 'age') final int? age,
+      @JsonKey(name: 'dob') final String? dob,
+      @JsonKey(name: 'gender') final String? gender,
+      @JsonKey(name: 'phone') final String? phone,
+      @JsonKey(name: 'email') final String? email,
+      @JsonKey(name: 'location_name') final String? location,
+      @JsonKey(name: 'education_level') final String? educationLevel,
+      @JsonKey(name: 'field_of_study') final String? fieldOfStudy,
+      @JsonKey(name: 'college_name') final String? collegeName,
       final List<String>? skills,
       final List<String>? interests}) = _$EditProfileModelImpl;
 
   factory _EditProfileModel.fromJson(Map<String, dynamic> json) = _$EditProfileModelImpl.fromJson;
 
   @override
+  @JsonKey(name: 'first_name')
   String? get firstName;
   @override
+  @JsonKey(name: 'last_name')
   String? get lastName;
   @override
+  @JsonKey(name: 'username')
+  String? get username;
+  @override
+  @JsonKey(name: 'profile_photo_url')
+  String? get profilePhotoUrl;
+  @override
+  @JsonKey(name: 'age')
+  int? get age;
+  @override
+  @JsonKey(name: 'dob')
+  String? get dob;
+  @override
+  @JsonKey(name: 'gender')
   String? get gender;
   @override
+  @JsonKey(name: 'phone')
+  String? get phone;
+  @override
+  @JsonKey(name: 'email')
+  String? get email;
+  @override
+  @JsonKey(name: 'location_name')
   String? get location;
   @override
+  @JsonKey(name: 'education_level')
   String? get educationLevel;
   @override
+  @JsonKey(name: 'field_of_study')
   String? get fieldOfStudy;
   @override
+  @JsonKey(name: 'college_name')
   String? get collegeName;
   @override
   List<String>? get skills;

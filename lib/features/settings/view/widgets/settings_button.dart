@@ -19,7 +19,7 @@ class SettingsButton extends StatelessWidget {
         padding: const EdgeInsets.all(20),
         backgroundColor: AppPalette.redColor1,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(50),
           side: const BorderSide(
             color: AppPalette.blackColor,
             width: 1,
