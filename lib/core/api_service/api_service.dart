@@ -30,6 +30,7 @@ class ApiService {
     String endpoint, {
     Map<String, dynamic>? data,
     Map<String, dynamic>? queryParameters,
+    FormData? formData,
   }) async {
     try {
       final token = await _shared.getAuthToken();
@@ -37,35 +38,64 @@ class ApiService {
 
       Response response;
 
-      switch (method) {
-        case HttpMethod.get:
-          response = await _dio.get(
-            endpoint,
-            queryParameters: queryParameters,
-            options: Options(headers: Map<String, dynamic>.from(headers)),
-          );
-          break;
-        case HttpMethod.post:
-          response = await _dio.post(
-            endpoint,
-            data: json.encode(data),
-            options: Options(headers: Map<String, dynamic>.from(headers)),
-          );
-          break;
-        case HttpMethod.put:
-          response = await _dio.put(
-            endpoint,
-            data: json.encode(data),
-            options: Options(headers: Map<String, dynamic>.from(headers)),
-          );
-          break;
-        case HttpMethod.delete:
-          response = await _dio.delete(
-            endpoint,
-            data: json.encode(data),
-            options: Options(headers: Map<String, dynamic>.from(headers)),
-          );
-          break;
+      if (formData != null) {
+        switch (method) {
+          case HttpMethod.post:
+            response = await _dio.post(
+              endpoint,
+              data: formData,
+              options: Options(headers: Map<String, dynamic>.from(headers)),
+            );
+            break;
+          case HttpMethod.put:
+            response = await _dio.put(
+              endpoint,
+              data: formData,
+              options: Options(headers: Map<String, dynamic>.from(headers)),
+            );
+            break;
+          case HttpMethod.delete:
+            response = await _dio.delete(
+              endpoint,
+              data: formData,
+              options: Options(headers: Map<String, dynamic>.from(headers)),
+            );
+            break;
+          default:
+            return Left('Unsupported method for FormData');
+        }
+      } else {
+        // If no FormData is provided, use JSON (for non-multipart requests)
+        switch (method) {
+          case HttpMethod.get:
+            response = await _dio.get(
+              endpoint,
+              queryParameters: queryParameters,
+              options: Options(headers: Map<String, dynamic>.from(headers)),
+            );
+            break;
+          case HttpMethod.post:
+            response = await _dio.post(
+              endpoint,
+              data: json.encode(data),
+              options: Options(headers: Map<String, dynamic>.from(headers)),
+            );
+            break;
+          case HttpMethod.put:
+            response = await _dio.put(
+              endpoint,
+              data: json.encode(data),
+              options: Options(headers: Map<String, dynamic>.from(headers)),
+            );
+            break;
+          case HttpMethod.delete:
+            response = await _dio.delete(
+              endpoint,
+              data: json.encode(data),
+              options: Options(headers: Map<String, dynamic>.from(headers)),
+            );
+            break;
+        }
       }
 
       if (response.data is Map<String, dynamic>) {

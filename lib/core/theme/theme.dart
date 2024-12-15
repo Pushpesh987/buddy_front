@@ -19,7 +19,7 @@ class AppTheme {
   static const TextStyle headlineLargeStyle =
       TextStyle(fontSize: 32, fontWeight: FontWeight.w600, fontFamily: 'Poppins');
   static const TextStyle headlineMediumStyle =
-      TextStyle(fontSize: 28, fontWeight: FontWeight.w600, fontFamily: 'Poppins');
+      TextStyle(fontSize: 28, fontWeight: FontWeight.w500, fontFamily: 'Poppins');
   static const TextStyle headlineSmallStyle =
       TextStyle(fontSize: 24, fontWeight: FontWeight.bold, fontFamily: 'Poppins');
   static const TextStyle headlineSmallStyle1 =
