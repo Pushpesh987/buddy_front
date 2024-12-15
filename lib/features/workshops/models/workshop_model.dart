@@ -13,7 +13,7 @@ class WorkshopModel with _$WorkshopModel {
     String? date,
     String? location,
     String? media,
-    @JsonKey(name: 'entry_fee') int? entryFee,
+    @JsonKey(name: 'entry_fee') String? entryFee,
     @JsonKey(name: 'Duration') String? duration,
     @JsonKey(name: 'instructor_info') String? instructorInfo,
     String? tags,

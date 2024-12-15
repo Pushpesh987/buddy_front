@@ -12,10 +12,12 @@ class WorkshopPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final workshopState = ref.watch(workshopNotifierProvider);
-
     return Scaffold(
       body: workshopState.when(
         data: (workshops) {
+          if (workshops.isEmpty) {
+            return const Center(child: Text('No workshops available.'));
+          }
           return ListView.builder(
             padding: const EdgeInsets.all(16.0),
             itemCount: workshops.length,
@@ -25,7 +27,7 @@ class WorkshopPage extends ConsumerWidget {
                 text: workshop.title,
                 imagePath: workshop.media,
                 description: workshop.description,
-                tags: workshop.tags,
+                // tags: workshop.tags,
                 id: workshop.id,
               );
             },

@@ -2,16 +2,18 @@ import 'dart:io';
 
 import 'package:buddy_front/core/theme/app_pallete.dart';
 import 'package:flutter/material.dart';
-import '../pages/workshop_details_page.dart';
 
-class WorkshopCards extends StatelessWidget {
+import '../../../../core/theme/theme.dart';
+import '../pages/project_details_page.dart';
+
+class ProjectCards extends StatelessWidget {
   final String? text;
   final String? description;
   final String? imagePath;
   final String? tags;
   final String? id;
 
-  const WorkshopCards({
+  const ProjectCards({
     super.key,
     this.text,
     this.description,
@@ -42,7 +44,7 @@ class WorkshopCards extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => WorkshopDetailsPage(workshopId: id!),
+            builder: (context) => ProjectDetailsPage(projectId: id!),
           ),
         );
       },
@@ -52,34 +54,37 @@ class WorkshopCards extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
         ),
         child: SizedBox(
-          height: 220,
+          height: 180,
           child: Row(
             children: [
-              if (imagePath != null)
-                Container(
-                  width: 120,
-                  height: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    image: DecorationImage(
-                      image: (imagePath != null && imagePath!.isNotEmpty && imagePath != "null")
-                          ? (imagePath!.startsWith('http') || imagePath!.startsWith('https'))
-                              ? NetworkImage(imagePath!)
-                              : FileImage(File(imagePath!))
-                          : const AssetImage('assets/images/workshop.jpg') as ImageProvider,
-                      fit: BoxFit.contain,
-                    ),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 15),
+                width: 120,
+                height: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  image: DecorationImage(
+                    image: (imagePath != null && imagePath!.isNotEmpty && imagePath != "null")
+                        ? (imagePath!.startsWith('http') || imagePath!.startsWith('https'))
+                            ? NetworkImage(imagePath!)
+                            : FileImage(File(imagePath!))
+                        : const AssetImage('assets/images/workshop.jpg') as ImageProvider,
+                    fit: BoxFit.contain,
                   ),
                 ),
+              ),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      SizedBox(
+                        height: 5,
+                      ),
                       if (tagList.isNotEmpty)
                         Wrap(
-                          spacing: 6,
+                          spacing: 10,
                           children: tagList
                               .map((tag) => Text(
                                     tag,
@@ -91,13 +96,11 @@ class WorkshopCards extends StatelessWidget {
                                   ))
                               .toList(),
                         ),
-                      const SizedBox(height: 6),
+                      const SizedBox(height: 8),
                       Text(
                         text ?? 'No Title Available',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                        style: AppTheme.titleMediumStyle.copyWith(
+                          color: AppTheme.lightThemeMode.colorScheme.onSecondary,
                         ),
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
@@ -118,7 +121,7 @@ class WorkshopCards extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => WorkshopDetailsPage(workshopId: id!),
+                              builder: (context) => ProjectDetailsPage(projectId: id!),
                             ),
                           );
                         },

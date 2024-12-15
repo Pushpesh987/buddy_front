@@ -1,37 +1,35 @@
+import 'package:buddy_front/features/projects/views/widgets/project_textfield.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import '../../../../core/theme/theme.dart';
-import '../../models/create_workshop_model.dart';
-import '../../viewmodel/workshop_create_notifier.dart';
-import '../widgets/workshop_textfield.dart';
 import 'package:buddy_front/core/theme/app_pallete.dart';
 
-class CreateWorkshopEvent extends ConsumerStatefulWidget {
-  const CreateWorkshopEvent({super.key});
+import '../../models/create_project_model.dart';
+import '../../viewmodels/profile_create_notifier.dart';
+
+class CreateProjectEvent extends ConsumerStatefulWidget {
+  const CreateProjectEvent({super.key});
 
   @override
-  _CreateWorkshopEventState createState() => _CreateWorkshopEventState();
+  _CreateProjectEventState createState() => _CreateProjectEventState();
 }
 
-class _CreateWorkshopEventState extends ConsumerState<CreateWorkshopEvent> {
+class _CreateProjectEventState extends ConsumerState<CreateProjectEvent> {
   final _formKey = GlobalKey<FormState>();
 
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
   final _locationController = TextEditingController();
-  final _entryFeeController = TextEditingController();
-  final _instructorInfoController = TextEditingController();
   final _tagsController = TextEditingController();
-  final _participantLimitController = TextEditingController();
-  final _registrationLinkController = TextEditingController();
+  final _sponsorsController = TextEditingController();
+  final _projectLinkController = TextEditingController();
+  final _goalsController = TextEditingController();
+  final _domainController = TextEditingController();
 
-  String? _selectedDate;
-
-  final _hoursController = TextEditingController();
-  final _minutesController = TextEditingController();
+  String? _startDate;
+  String? _endDate;
 
   bool _isFormValid = false;
 
@@ -50,6 +48,55 @@ class _CreateWorkshopEventState extends ConsumerState<CreateWorkshopEvent> {
     }
   }
 
+  Future<void> _selectStartDate(BuildContext context) async {
+    final DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2101),
+    );
+
+    if (pickedDate != null) {
+      setState(() {
+        _startDate = DateFormat('yyyy-MM-dd').format(pickedDate) + 'T00:00:00Z';
+      });
+      _checkFormValidity();
+    }
+  }
+
+  Future<void> _selectEndDate(BuildContext context) async {
+    final DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2101),
+    );
+
+    if (pickedDate != null) {
+      setState(() {
+        _endDate = DateFormat('yyyy-MM-dd').format(pickedDate) + 'T00:00:00Z';
+      });
+      _checkFormValidity();
+    }
+  }
+
+  void _checkFormValidity() {
+    final isFormValid = _titleController.text.isNotEmpty &&
+        _descriptionController.text.isNotEmpty &&
+        _locationController.text.isNotEmpty &&
+        _startDate != null &&
+        _endDate != null &&
+        _tagsController.text.isNotEmpty &&
+        _sponsorsController.text.isNotEmpty &&
+        _projectLinkController.text.isNotEmpty &&
+        _goalsController.text.isNotEmpty &&
+        _domainController.text.isNotEmpty;
+
+    setState(() {
+      _isFormValid = isFormValid;
+    });
+  }
+
   String _getWorkshopStatus(String? selectedDate) {
     if (selectedDate == null) return 'Upcoming';
 
@@ -60,52 +107,16 @@ class _CreateWorkshopEventState extends ConsumerState<CreateWorkshopEvent> {
 
     if (selectedDateTime.isAtSameMomentAs(todayAtMidnight)) {
       return 'Ongoing';
-    } else if (selectedDateTime.isAfter(todayAtMidnight)) {
-      return 'Upcoming';
     } else {
       return 'Completed';
     }
-  }
-
-  Future<void> _selectDate(BuildContext context) async {
-    final DateTime? pickedDate = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2101),
-    );
-
-    if (pickedDate != null) {
-      setState(() {
-        _selectedDate = DateFormat('yyyy-MM-dd').format(pickedDate) + 'T00:00:00Z';
-      });
-      _checkFormValidity();
-    }
-  }
-
-  void _checkFormValidity() {
-    final isFormValid = _titleController.text.isNotEmpty &&
-        _descriptionController.text.isNotEmpty &&
-        _locationController.text.isNotEmpty &&
-        _entryFeeController.text.isNotEmpty &&
-        _selectedDate != null &&
-        _hoursController.text.isNotEmpty &&
-        _minutesController.text.isNotEmpty &&
-        _instructorInfoController.text.isNotEmpty &&
-        _tagsController.text.isNotEmpty &&
-        _participantLimitController.text.isNotEmpty &&
-        _registrationLinkController.text.isNotEmpty;
-
-    setState(() {
-      _isFormValid = isFormValid;
-    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Create Workshop Event'),
+        title: const Text('Create Project'),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
@@ -115,19 +126,19 @@ class _CreateWorkshopEventState extends ConsumerState<CreateWorkshopEvent> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 20),
-              WorkshopTextfield(
+              ProjectTextfield(
                 controller: _titleController,
-                labelText: 'Event Title',
+                labelText: 'Project Title',
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Event Title is required';
+                    return 'Project Title is required';
                   }
                   return null;
                 },
                 onChanged: (_) => _checkFormValidity(),
               ),
               const SizedBox(height: 16),
-              WorkshopTextfield(
+              ProjectTextfield(
                 controller: _descriptionController,
                 labelText: 'Description',
                 maxLines: 4,
@@ -141,14 +152,14 @@ class _CreateWorkshopEventState extends ConsumerState<CreateWorkshopEvent> {
               ),
               const SizedBox(height: 16),
               GestureDetector(
-                onTap: () => _selectDate(context),
+                onTap: () => _selectStartDate(context),
                 child: AbsorbPointer(
-                  child: WorkshopTextfield(
-                    controller: TextEditingController(text: _selectedDate),
-                    labelText: 'Date',
+                  child: ProjectTextfield(
+                    controller: TextEditingController(text: _startDate),
+                    labelText: 'Start Date',
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Date is required';
+                        return 'Start Date is required';
                       }
                       return null;
                     },
@@ -157,7 +168,24 @@ class _CreateWorkshopEventState extends ConsumerState<CreateWorkshopEvent> {
                 ),
               ),
               const SizedBox(height: 16),
-              WorkshopTextfield(
+              GestureDetector(
+                onTap: () => _selectEndDate(context),
+                child: AbsorbPointer(
+                  child: ProjectTextfield(
+                    controller: TextEditingController(text: _endDate),
+                    labelText: 'End Date',
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'End Date is required';
+                      }
+                      return null;
+                    },
+                    onChanged: (_) => _checkFormValidity(),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+              ProjectTextfield(
                 controller: _locationController,
                 labelText: 'Location',
                 validator: (value) {
@@ -169,73 +197,7 @@ class _CreateWorkshopEventState extends ConsumerState<CreateWorkshopEvent> {
                 onChanged: (_) => _checkFormValidity(),
               ),
               const SizedBox(height: 16),
-              WorkshopTextfield(
-                controller: _entryFeeController,
-                labelText: 'Entry Fee (INR)',
-                keyboardType: TextInputType.number,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Entry Fee is required';
-                  }
-                  return null;
-                },
-                onChanged: (_) => _checkFormValidity(),
-              ),
-              const SizedBox(height: 30),
-              Text(
-                'Duration of the Workshop',
-                style: AppTheme.titleMediumStyle.copyWith(
-                  color: AppTheme.lightThemeMode.colorScheme.onSecondary,
-                ),
-              ),
-              const SizedBox(height: 16),
-              Row(
-                children: [
-                  Expanded(
-                    child: WorkshopTextfield(
-                      controller: _hoursController,
-                      labelText: 'Hours',
-                      keyboardType: TextInputType.number,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Hours are required';
-                        }
-                        return null;
-                      },
-                      onChanged: (_) => _checkFormValidity(),
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: WorkshopTextfield(
-                      controller: _minutesController,
-                      labelText: 'Minutes',
-                      keyboardType: TextInputType.number,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Minutes are required';
-                        }
-                        return null;
-                      },
-                      onChanged: (_) => _checkFormValidity(),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16),
-              WorkshopTextfield(
-                controller: _instructorInfoController,
-                labelText: 'Instructor Info',
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Instructor Info is required';
-                  }
-                  return null;
-                },
-                onChanged: (_) => _checkFormValidity(),
-              ),
-              const SizedBox(height: 16),
-              WorkshopTextfield(
+              ProjectTextfield(
                 controller: _tagsController,
                 labelText: 'Tags',
                 validator: (value) {
@@ -247,25 +209,48 @@ class _CreateWorkshopEventState extends ConsumerState<CreateWorkshopEvent> {
                 onChanged: (_) => _checkFormValidity(),
               ),
               const SizedBox(height: 16),
-              WorkshopTextfield(
-                controller: _participantLimitController,
-                labelText: 'Participant Limit',
-                keyboardType: TextInputType.number,
+              ProjectTextfield(
+                controller: _sponsorsController,
+                labelText: 'Sponsors',
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Participant Limit is required';
+                    return 'Sponsors are required';
                   }
                   return null;
                 },
                 onChanged: (_) => _checkFormValidity(),
               ),
               const SizedBox(height: 16),
-              WorkshopTextfield(
-                controller: _registrationLinkController,
-                labelText: 'Registration Link',
+              ProjectTextfield(
+                controller: _projectLinkController,
+                labelText: 'Project Link',
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Registration Link is required';
+                    return 'Project Link is required';
+                  }
+                  return null;
+                },
+                onChanged: (_) => _checkFormValidity(),
+              ),
+              const SizedBox(height: 16),
+              ProjectTextfield(
+                controller: _goalsController,
+                labelText: 'Goals',
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Goals are required';
+                  }
+                  return null;
+                },
+                onChanged: (_) => _checkFormValidity(),
+              ),
+              const SizedBox(height: 16),
+              ProjectTextfield(
+                controller: _domainController,
+                labelText: 'Domain',
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Domain is required';
                   }
                   return null;
                 },
@@ -274,7 +259,7 @@ class _CreateWorkshopEventState extends ConsumerState<CreateWorkshopEvent> {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _pickImage,
-                child: const Text('Select Workshop Image'),
+                child: const Text('Select Project Image'),
               ),
               if (_selectedImage != null)
                 Padding(
@@ -290,35 +275,30 @@ class _CreateWorkshopEventState extends ConsumerState<CreateWorkshopEvent> {
               ElevatedButton(
                 onPressed: _isFormValid
                     ? () async {
-                        final duration =
-                            '${_hoursController.text.padLeft(2, '0')}:${_minutesController.text.padLeft(2, '0')}:00';
-
-                        final workshopEvent = CreateWorkshopModel(
+                        final newProject = CreateProjectModel(
                           title: _titleController.text,
                           description: _descriptionController.text,
-                          date: _selectedDate,
+                          startDate: _startDate,
+                          endDate: _endDate,
                           location: _locationController.text,
-                          entryFee: int.tryParse(_entryFeeController.text) ?? 0,
-                          duration: duration,
                           media: _selectedImage?.path,
-                          instructorInfo: _instructorInfoController.text,
                           tags: _tagsController.text,
-                          participantLimit: int.tryParse(_participantLimitController.text) ?? 0,
-                          registrationLink: _registrationLinkController.text,
-                          status: _getWorkshopStatus(_selectedDate),
+                          sponsors: _sponsorsController.text,
+                          projectLink: _projectLinkController.text,
+                          goals: _goalsController.text,
+                          domain: _domainController.text,
+                          status: _getWorkshopStatus(_startDate),
                         );
-                        final createWorkshopNotifier = ref.watch(workshopCreateNotifierProvider.notifier);
+
+                        final profileCreateNotifier = ref.read(profileCreateNotifierProvider.notifier);
 
                         try {
-                          await createWorkshopNotifier.createWorkshop(workshopEvent, imageFile: _selectedImage);
-
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Event created successfully!')),
-                          );
+                          await profileCreateNotifier.createProjects(newProject, imageFile: _selectedImage);
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(SnackBar(content: Text('Project Created Successfully')));
                         } catch (e) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text('Error creating event: $e')),
-                          );
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(SnackBar(content: Text('Error creating project: $e')));
                         }
                       }
                     : null,
@@ -331,7 +311,7 @@ class _CreateWorkshopEventState extends ConsumerState<CreateWorkshopEvent> {
                 ),
                 child: const Center(
                   child: Text(
-                    'Create Workshop Event',
+                    'Create Project Event',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,

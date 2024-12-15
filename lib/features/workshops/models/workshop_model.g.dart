@@ -14,7 +14,7 @@ _$WorkshopModelImpl _$$WorkshopModelImplFromJson(Map<String, dynamic> json) => _
       date: json['date'] as String?,
       location: json['location'] as String?,
       media: json['media'] as String?,
-      entryFee: (json['entry_fee'] as num?)?.toInt(),
+      entryFee: json['entry_fee'] as String?,
       duration: json['Duration'] as String?,
       instructorInfo: json['instructor_info'] as String?,
       tags: json['tags'] as String?,

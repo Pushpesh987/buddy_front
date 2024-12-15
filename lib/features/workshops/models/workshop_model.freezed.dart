@@ -28,7 +28,7 @@ mixin _$WorkshopModel {
   String? get location => throw _privateConstructorUsedError;
   String? get media => throw _privateConstructorUsedError;
   @JsonKey(name: 'entry_fee')
-  int? get entryFee => throw _privateConstructorUsedError;
+  String? get entryFee => throw _privateConstructorUsedError;
   @JsonKey(name: 'Duration')
   String? get duration => throw _privateConstructorUsedError;
   @JsonKey(name: 'instructor_info')
@@ -62,7 +62,7 @@ abstract class $WorkshopModelCopyWith<$Res> {
       String? date,
       String? location,
       String? media,
-      @JsonKey(name: 'entry_fee') int? entryFee,
+      @JsonKey(name: 'entry_fee') String? entryFee,
       @JsonKey(name: 'Duration') String? duration,
       @JsonKey(name: 'instructor_info') String? instructorInfo,
       String? tags,
@@ -132,7 +132,7 @@ class _$WorkshopModelCopyWithImpl<$Res, $Val extends WorkshopModel> implements $
       entryFee: freezed == entryFee
           ? _value.entryFee
           : entryFee // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       duration: freezed == duration
           ? _value.duration
           : duration // ignore: cast_nullable_to_non_nullable
@@ -175,7 +175,7 @@ abstract class _$$WorkshopModelImplCopyWith<$Res> implements $WorkshopModelCopyW
       String? date,
       String? location,
       String? media,
-      @JsonKey(name: 'entry_fee') int? entryFee,
+      @JsonKey(name: 'entry_fee') String? entryFee,
       @JsonKey(name: 'Duration') String? duration,
       @JsonKey(name: 'instructor_info') String? instructorInfo,
       String? tags,
@@ -242,7 +242,7 @@ class __$$WorkshopModelImplCopyWithImpl<$Res> extends _$WorkshopModelCopyWithImp
       entryFee: freezed == entryFee
           ? _value.entryFee
           : entryFee // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       duration: freezed == duration
           ? _value.duration
           : duration // ignore: cast_nullable_to_non_nullable
@@ -308,7 +308,7 @@ class _$WorkshopModelImpl implements _WorkshopModel {
   final String? media;
   @override
   @JsonKey(name: 'entry_fee')
-  final int? entryFee;
+  final String? entryFee;
   @override
   @JsonKey(name: 'Duration')
   final String? duration;
@@ -382,7 +382,7 @@ abstract class _WorkshopModel implements WorkshopModel {
       final String? date,
       final String? location,
       final String? media,
-      @JsonKey(name: 'entry_fee') final int? entryFee,
+      @JsonKey(name: 'entry_fee') final String? entryFee,
       @JsonKey(name: 'Duration') final String? duration,
       @JsonKey(name: 'instructor_info') final String? instructorInfo,
       final String? tags,
@@ -408,7 +408,7 @@ abstract class _WorkshopModel implements WorkshopModel {
   String? get media;
   @override
   @JsonKey(name: 'entry_fee')
-  int? get entryFee;
+  String? get entryFee;
   @override
   @JsonKey(name: 'Duration')
   String? get duration;
