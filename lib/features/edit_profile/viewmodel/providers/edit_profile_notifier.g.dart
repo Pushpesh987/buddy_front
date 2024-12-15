@@ -6,7 +6,7 @@ part of 'edit_profile_notifier.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$editProfileNotifierHash() => r'717948f89eb7785bc1bc75b0cbb257d08854b497';
+String _$editProfileNotifierHash() => r'15783786fca454753f9efd164b3b204520bd3e91';
 
 /// See also [EditProfileNotifier].
 @ProviderFor(EditProfileNotifier)

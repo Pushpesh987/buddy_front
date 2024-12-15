@@ -7,7 +7,8 @@ class EditProfileMultiSelectDropdown extends StatefulWidget {
   final List<String> options;
   final List<String> selectedValues;
   final Widget? icon;
-  final Function(List<String>) onChanged;
+  final Function(List<String>)? onChanged;
+  final bool enabled;
 
   const EditProfileMultiSelectDropdown({
     super.key,
@@ -15,7 +16,8 @@ class EditProfileMultiSelectDropdown extends StatefulWidget {
     this.icon,
     required this.options,
     required this.selectedValues,
-    required this.onChanged,
+    this.onChanged,
+    this.enabled = true,
   });
 
   @override
@@ -35,7 +37,7 @@ class _EditProfileMultiSelectDropdownState extends State<EditProfileMultiSelectD
     setState(() {
       _selectedValues.remove(value);
     });
-    widget.onChanged(_selectedValues);
+    widget.onChanged?.call(_selectedValues);
   }
 
   @override
@@ -44,53 +46,55 @@ class _EditProfileMultiSelectDropdownState extends State<EditProfileMultiSelectD
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         GestureDetector(
-          onTap: () async {
-            final result = await showDialog<List<String>>(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: Text(widget.hintText),
-                  content: SingleChildScrollView(
-                    child: Column(
-                      children: widget.options.map((String option) {
-                        return StatefulBuilder(
-                          builder: (context, setState) {
-                            return CheckboxListTile(
-                              title: Text(option),
-                              value: _selectedValues.contains(option),
-                              onChanged: (bool? isSelected) {
-                                setState(() {
-                                  if (isSelected ?? false) {
-                                    _selectedValues.add(option);
-                                  } else {
-                                    _selectedValues.remove(option);
-                                  }
-                                });
-                              },
-                            );
-                          },
-                        );
-                      }).toList(),
-                    ),
-                  ),
-                  actions: <Widget>[
-                    TextButton(
-                      onPressed: () {
-                        Navigator.pop(context, _selectedValues);
-                      },
-                      child: const Text('Done'),
-                    ),
-                  ],
-                );
-              },
-            );
-            if (result != null) {
-              setState(() {
-                _selectedValues = result;
-              });
-              widget.onChanged(_selectedValues);
-            }
-          },
+          onTap: widget.enabled
+              ? () async {
+                  final result = await showDialog<List<String>>(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text(widget.hintText),
+                        content: SingleChildScrollView(
+                          child: Column(
+                            children: widget.options.map((String option) {
+                              return StatefulBuilder(
+                                builder: (context, setState) {
+                                  return CheckboxListTile(
+                                    title: Text(option),
+                                    value: _selectedValues.contains(option),
+                                    onChanged: (bool? isSelected) {
+                                      setState(() {
+                                        if (isSelected ?? false) {
+                                          _selectedValues.add(option);
+                                        } else {
+                                          _selectedValues.remove(option);
+                                        }
+                                      });
+                                    },
+                                  );
+                                },
+                              );
+                            }).toList(),
+                          ),
+                        ),
+                        actions: <Widget>[
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pop(context, _selectedValues);
+                            },
+                            child: const Text('Done'),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                  if (result != null) {
+                    setState(() {
+                      _selectedValues = result;
+                    });
+                    widget.onChanged?.call(_selectedValues);
+                  }
+                }
+              : null,
           child: InputDecorator(
             decoration: InputDecoration(
               suffix: widget.icon,
@@ -121,9 +125,11 @@ class _EditProfileMultiSelectDropdownState extends State<EditProfileMultiSelectD
                         size: 16,
                         color: AppPalette.redColor1,
                       ),
-                      onDeleted: () {
-                        _removeChip(value);
-                      },
+                      onDeleted: widget.enabled
+                          ? () {
+                              _removeChip(value);
+                            }
+                          : null,
                     ))
                 .toList(),
           ),

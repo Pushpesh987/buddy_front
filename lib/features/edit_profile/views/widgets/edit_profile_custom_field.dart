@@ -12,6 +12,7 @@ class EditProfileCustomField extends StatefulWidget {
   final List<String>? dropdownOptions;
   final String? selectedValue;
   final Function(String?)? onChanged;
+  final bool enabled;
 
   const EditProfileCustomField({
     super.key,
@@ -25,6 +26,7 @@ class EditProfileCustomField extends StatefulWidget {
     this.dropdownOptions,
     this.selectedValue,
     this.onChanged,
+    this.enabled = true,
   });
 
   @override
@@ -116,6 +118,7 @@ class _EditProfileCustomFieldState extends State<EditProfileCustomField> {
         color: AppTheme.lightThemeMode.colorScheme.onSurface,
       ),
       controller: widget.controller,
+      enabled: widget.enabled,
       obscureText: _isObscuredText,
       focusNode: _internalFocusNode,
       scrollController: _scrollController,

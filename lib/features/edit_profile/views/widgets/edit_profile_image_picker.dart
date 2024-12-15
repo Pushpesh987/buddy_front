@@ -9,6 +9,8 @@ class EditProfileImagePicker extends StatefulWidget {
   final String defaultImagePath;
   final String uploadIconPath;
   final ValueChanged<File?> onImagePicked;
+  final String? imageUrl;
+  final bool enabled;
 
   const EditProfileImagePicker({
     super.key,
@@ -16,6 +18,8 @@ class EditProfileImagePicker extends StatefulWidget {
     required this.defaultImagePath,
     required this.uploadIconPath,
     required this.onImagePicked,
+    this.imageUrl,
+    this.enabled = true,
   });
 
   @override
@@ -26,6 +30,8 @@ class _EditProfileImagePickerState extends State<EditProfileImagePicker> {
   XFile? _image;
 
   Future<void> _pickImage() async {
+    if (!widget.enabled) return;
+
     final ImagePicker picker = ImagePicker();
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
     if (image != null) {
@@ -55,15 +61,20 @@ class _EditProfileImagePickerState extends State<EditProfileImagePicker> {
             ],
             shape: BoxShape.circle,
             border: Border.all(color: AppPalette.whiteColor, width: 10),
-            image: _image != null
+            image: widget.imageUrl != null && widget.imageUrl!.isNotEmpty
                 ? DecorationImage(
-                    image: FileImage(File(_image!.path)),
+                    image: NetworkImage(widget.imageUrl!),
                     fit: BoxFit.cover,
                   )
-                : DecorationImage(
-                    image: AssetImage(widget.defaultImagePath),
-                    fit: BoxFit.cover,
-                  ),
+                : (_image != null
+                    ? DecorationImage(
+                        image: FileImage(File(_image!.path)),
+                        fit: BoxFit.cover,
+                      )
+                    : DecorationImage(
+                        image: AssetImage(widget.defaultImagePath),
+                        fit: BoxFit.cover,
+                      )),
           ),
         ),
         Positioned(
@@ -85,8 +96,8 @@ class _EditProfileImagePickerState extends State<EditProfileImagePicker> {
                 widget.uploadIconPath,
                 width: 20,
                 height: 20,
-                colorFilter: const ColorFilter.mode(
-                  AppPalette.blackColor,
+                colorFilter: ColorFilter.mode(
+                  widget.enabled ? AppPalette.blackColor : AppPalette.greyUnselectedItemColor,
                   BlendMode.srcIn,
                 ),
               ),

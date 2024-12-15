@@ -15,23 +15,47 @@ part 'edit_profile_notifier.g.dart';
 @riverpod
 class EditProfileNotifier extends AutoDisposeAsyncNotifier<EditProfileState> {
   @override
+  @override
   FutureOr<EditProfileState> build() async {
-    EditProfileState profileState = await _fetchProfile();
+    try {
+      final profileState = await _fetchProfile();
 
-    final locations = await fetchLocations();
-    final skills = await fetchSkills();
-    final interests = await fetchInterests();
-    final fieldOfStudy = await fetchFieldOfStudy();
-    final educationLevels = await fetchEducationLevels();
-    final colleges = await fetchColleges();
+      final locations = await fetchLocations();
+      final skills = await fetchSkills();
+      final interests = await fetchInterests();
+      final fieldOfStudy = await fetchFieldOfStudy();
+      final educationLevels = await fetchEducationLevels();
+      final colleges = await fetchColleges();
 
-    return profileState.copyWith(
-      locationOptions: locations,
-      skillsOptions: skills,
-      interestsOptions: interests,
-      fieldOfStudyOptions: fieldOfStudy,
-      educationLevelOptions: educationLevels,
-      collegeOptions: colleges,
+      return EditProfileState(
+        isLoading: false,
+        profile: profileState.profile,
+        locationOptions: locations,
+        skillsOptions: skills,
+        interestsOptions: interests,
+        fieldOfStudyOptions: fieldOfStudy,
+        educationLevelOptions: educationLevels,
+        collegeOptions: colleges,
+      );
+    } catch (e) {
+      return EditProfileState(isLoading: false, error: 'Error: $e');
+    }
+  }
+
+  void initializeProfile(EditProfileModel profileData) {
+    state = AsyncValue.data(
+      EditProfileState(
+        isLoading: false,
+        profile: profileData,
+        gender: profileData.gender,
+        location: profileData.location,
+        educationLevel: profileData.educationLevel,
+        fieldOfStudy: profileData.fieldOfStudy,
+        collegeName: profileData.collegeName,
+        selectedSkills: profileData.skills ?? [],
+        selectedInterests: profileData.interests ?? [],
+        profilePhotoUrl: profileData.profilePhotoUrl,
+      ),
     );
   }
 
@@ -50,6 +74,7 @@ class EditProfileNotifier extends AutoDisposeAsyncNotifier<EditProfileState> {
         },
         (data) {
           final profile = EditProfileModel.fromJson(data['data']);
+          initializeProfile(profile);
           return EditProfileState(isLoading: false, profile: profile);
         },
       );
@@ -205,7 +230,7 @@ class EditProfileNotifier extends AutoDisposeAsyncNotifier<EditProfileState> {
       if (updatedData.isNotEmpty) {
         final response = await apiService.request(
           HttpMethod.put,
-          '/api/v1/users/profile',
+          '/api/v1/users/Update-profile',
           data: updatedData,
         );
 
