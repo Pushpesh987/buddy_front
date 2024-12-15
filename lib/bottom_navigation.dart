@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'core/theme/app_pallete.dart';
 import 'core/theme/theme.dart';
 import 'features/chat/view/pages/chat_page.dart';
-import 'features/events/view/pages/search_page.dart';
+import 'features/events/view/pages/event_page.dart';
 import 'features/profile/view/pages/profile_page.dart';
 import 'features/home/view/pages/home_page.dart';
 
