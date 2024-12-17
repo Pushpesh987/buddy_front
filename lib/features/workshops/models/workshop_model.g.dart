@@ -6,7 +6,8 @@ part of 'workshop_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$WorkshopModelImpl _$$WorkshopModelImplFromJson(Map<String, dynamic> json) => _$WorkshopModelImpl(
+_$WorkshopModelImpl _$$WorkshopModelImplFromJson(Map<String, dynamic> json) =>
+    _$WorkshopModelImpl(
       id: json['id'] as String?,
       userId: json['user_id'] as String?,
       title: json['title'] as String?,
@@ -14,16 +15,17 @@ _$WorkshopModelImpl _$$WorkshopModelImplFromJson(Map<String, dynamic> json) => _
       date: json['date'] as String?,
       location: json['location'] as String?,
       media: json['media'] as String?,
-      entryFee: _stringFromDynamic(json['entry_fee']),
-      duration: json['duration'] as String?,
+      entryFee: json['entry_fee'] as String?,
+      duration: json['Duration'] as String?,
       instructorInfo: json['instructor_info'] as String?,
       tags: json['tags'] as String?,
-      participantLimit: _stringFromDynamic(json['participant_limit']),
-      status: json['status'] as String?,
+      participantLimit: (json['participant_limit'] as num?)?.toInt(),
+      status: json['status'] as String,
       registrationLink: json['registration_link'] as String?,
     );
 
-Map<String, dynamic> _$$WorkshopModelImplToJson(_$WorkshopModelImpl instance) => <String, dynamic>{
+Map<String, dynamic> _$$WorkshopModelImplToJson(_$WorkshopModelImpl instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'user_id': instance.userId,
       'title': instance.title,
@@ -32,7 +34,7 @@ Map<String, dynamic> _$$WorkshopModelImplToJson(_$WorkshopModelImpl instance) =>
       'location': instance.location,
       'media': instance.media,
       'entry_fee': instance.entryFee,
-      'duration': instance.duration,
+      'Duration': instance.duration,
       'instructor_info': instance.instructorInfo,
       'tags': instance.tags,
       'participant_limit': instance.participantLimit,

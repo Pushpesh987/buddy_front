@@ -6,14 +6,18 @@ part of 'hackathon_create_notifier.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$hackathonCreateNotifierHash() => r'bffa70a967d88be82a70e99f8d495ade9fa54818';
+String _$hackathonCreateNotifierHash() =>
+    r'018f5e18397f3188a968e86176111e6ec45e4769';
 
 /// See also [HackathonCreateNotifier].
 @ProviderFor(HackathonCreateNotifier)
-final hackathonCreateNotifierProvider = AutoDisposeAsyncNotifierProvider<HackathonCreateNotifier, void>.internal(
+final hackathonCreateNotifierProvider =
+    AutoDisposeAsyncNotifierProvider<HackathonCreateNotifier, void>.internal(
   HackathonCreateNotifier.new,
   name: r'hackathonCreateNotifierProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$hackathonCreateNotifierHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$hackathonCreateNotifierHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

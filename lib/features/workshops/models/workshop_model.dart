@@ -13,12 +13,12 @@ class WorkshopModel with _$WorkshopModel {
     String? date,
     String? location,
     String? media,
-    @JsonKey(name: 'entry_fee', fromJson: _stringFromDynamic) String? entryFee,
-    @JsonKey(name: 'duration') String? duration,
+    @JsonKey(name: 'entry_fee') String? entryFee,
+    @JsonKey(name: 'Duration') String? duration,
     @JsonKey(name: 'instructor_info') String? instructorInfo,
     String? tags,
-    @JsonKey(name: 'participant_limit', fromJson: _stringFromDynamic) String? participantLimit, // Handles mixed types
-    String? status,
+    @JsonKey(name: 'participant_limit') int? participantLimit,
+    required String status,
     @JsonKey(name: 'registration_link') String? registrationLink,
   }) = _WorkshopModel;
 

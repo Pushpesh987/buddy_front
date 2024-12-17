@@ -1,5 +1,5 @@
-import 'package:dio/dio.dart';
 import 'dart:convert';
+import 'package:dio/dio.dart';
 import 'package:fpdart/fpdart.dart';
 
 import '../server_constants/server_constants.dart';
@@ -19,7 +19,7 @@ class ApiService {
             receiveTimeout: const Duration(seconds: 10),
             followRedirects: true,
             validateStatus: (status) {
-              return status != null && (status < 500);
+              return status != null && status < 500;
             },
           ),
         ),
@@ -30,7 +30,6 @@ class ApiService {
     String endpoint, {
     Map<String, dynamic>? data,
     Map<String, dynamic>? queryParameters,
-    FormData? formData,
   }) async {
     try {
       final token = await _shared.getAuthToken();
@@ -38,73 +37,62 @@ class ApiService {
 
       Response response;
 
-      if (formData != null) {
-        switch (method) {
-          case HttpMethod.post:
-            response = await _dio.post(
-              endpoint,
-              data: formData,
-              options: Options(headers: Map<String, dynamic>.from(headers)),
-            );
-            break;
-          case HttpMethod.put:
-            response = await _dio.put(
-              endpoint,
-              data: formData,
-              options: Options(headers: Map<String, dynamic>.from(headers)),
-            );
-            break;
-          case HttpMethod.delete:
-            response = await _dio.delete(
-              endpoint,
-              data: formData,
-              options: Options(headers: Map<String, dynamic>.from(headers)),
-            );
-            break;
-          default:
-            return Left('Unsupported method for FormData');
-        }
-      } else {
-        // If no FormData is provided, use JSON (for non-multipart requests)
-        switch (method) {
-          case HttpMethod.get:
-            response = await _dio.get(
-              endpoint,
-              queryParameters: queryParameters,
-              options: Options(headers: Map<String, dynamic>.from(headers)),
-            );
-            break;
-          case HttpMethod.post:
-            response = await _dio.post(
-              endpoint,
-              data: json.encode(data),
-              options: Options(headers: Map<String, dynamic>.from(headers)),
-            );
-            break;
-          case HttpMethod.put:
-            response = await _dio.put(
-              endpoint,
-              data: json.encode(data),
-              options: Options(headers: Map<String, dynamic>.from(headers)),
-            );
-            break;
-          case HttpMethod.delete:
-            response = await _dio.delete(
-              endpoint,
-              data: json.encode(data),
-              options: Options(headers: Map<String, dynamic>.from(headers)),
-            );
-            break;
-        }
+      // Handle JSON requests (POST, PUT, DELETE, GET)
+      final jsonData = data != null ? json.encode(data) : null;
+
+      switch (method) {
+        case HttpMethod.get:
+          response = await _dio.get(
+            endpoint,
+            queryParameters: queryParameters,
+            options: Options(
+              headers: headers,
+              contentType: Headers.jsonContentType,  // Ensures JSON is sent
+            ),
+          );
+          break;
+        case HttpMethod.post:
+          response = await _dio.post(
+            endpoint,
+            data: jsonData,
+            options: Options(
+              headers: headers,
+              contentType: Headers.jsonContentType,  // Ensures JSON is sent
+            ),
+          );
+          break;
+        case HttpMethod.put:
+          response = await _dio.put(
+            endpoint,
+            data: jsonData,
+            options: Options(
+              headers: headers,
+              contentType: Headers.jsonContentType,  // Ensures JSON is sent
+            ),
+          );
+          break;
+        case HttpMethod.delete:
+          response = await _dio.delete(
+            endpoint,
+            data: jsonData,
+            options: Options(
+              headers: headers,
+              contentType: Headers.jsonContentType,  // Ensures JSON is sent
+            ),
+          );
+          break;
+        default:
+          return Left('Unsupported HTTP method');
       }
 
+      // Ensure that the response data is a Map<String, dynamic>
       if (response.data is Map<String, dynamic>) {
-        final Map<String, dynamic> responseData = Map<String, dynamic>.from(response.data);
-        return Right(responseData);
+        return Right(Map<String, dynamic>.from(response.data));
       } else {
         return Left('Unexpected response format: ${response.data}');
       }
     } catch (e) {
+      // Error handling
       if (e is DioException) {
         if (e.response != null) {
           return Left('Dio error: ${e.response?.statusCode} - ${e.response?.data}');

@@ -1,10 +1,9 @@
 import 'dart:io';
 
+import 'package:buddy_front/core/api_service/file_service.dart';
 import 'package:buddy_front/features/workshops/models/create_workshop_model.dart';
-import 'package:dio/dio.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import '../../../../core/api_service/api_service.dart';
-import '../../../core/service_provider.dart/service_provider.dart';
+import '../../../core/service_provider.dart/file_service_provider.dart';
 
 part 'workshop_create_notifier.g.dart';
 
@@ -14,40 +13,24 @@ class WorkshopCreateNotifier extends AutoDisposeAsyncNotifier<void> {
   FutureOr<void> build() {}
 
   Future<void> createWorkshop(CreateWorkshopModel newWorkshop, {File? imageFile}) async {
-    final apiService = ref.watch(apiServiceProvider);
+    final fileUploadService = ref.watch(fileUploadServiceProvider);
 
     try {
-      FormData formData = FormData();
-
       final requestBody = newWorkshop.toJson();
-      requestBody.forEach((key, value) {
-        formData.fields.add(MapEntry(key, value.toString()));
-      });
-
-      if (imageFile != null) {
-        formData.files.add(MapEntry(
-          'image',
-          await MultipartFile.fromFile(imageFile.path),
-        ));
-      }
-
-      ///TODO: check the POST workshop API
-      final response = await apiService.request(
-        HttpMethod.post,
-        '/api/v1/events/eventorkshop',
-        formData: formData,
+      final response = await fileUploadService.uploadDataWithFile(
+        HttpMethodFile.post,
+        '/api/v1/events/workshop',
+        data: requestBody,
+        file: imageFile,
+        keyName: 'media',
       );
-
       response.fold(
         (error) {
           throw Exception('Error creating workshop: $error');
         },
-        (data) {
-          print("Workshop created successfully: $data");
-        },
+        (data) {},
       );
     } catch (e) {
-      print("Error occurred while creating the workshop: $e");
       throw Exception('Error creating workshop: $e');
     }
   }

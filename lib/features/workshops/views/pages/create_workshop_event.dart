@@ -1,13 +1,9 @@
-import 'package:image_picker/image_picker.dart';
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:intl/intl.dart';
-import '../../../../core/theme/theme.dart';
-import '../../models/create_workshop_model.dart';
-import '../../viewmodel/workshop_create_notifier.dart';
+import '../../functions/workshop_function.dart';
 import '../widgets/workshop_textfield.dart';
 import 'package:buddy_front/core/theme/app_pallete.dart';
+import 'dart:io';
 
 class CreateWorkshopEvent extends ConsumerStatefulWidget {
   const CreateWorkshopEvent({super.key});
@@ -22,91 +18,79 @@ class _CreateWorkshopEventState extends ConsumerState<CreateWorkshopEvent> {
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
   final _locationController = TextEditingController();
+  final _tagsController = TextEditingController();
   final _entryFeeController = TextEditingController();
   final _instructorInfoController = TextEditingController();
-  final _tagsController = TextEditingController();
-  final _participantLimitController = TextEditingController();
   final _registrationLinkController = TextEditingController();
+  final _participantLimitController = TextEditingController();
 
   String? _selectedDate;
+  File? _imageFile;
 
   final _hoursController = TextEditingController();
   final _minutesController = TextEditingController();
 
+  // ignore: unused_field
   bool _isFormValid = false;
+  String? _durationError;
 
-  File? _selectedImage;
+  // Call the functions from workshop_functions.dart
+  Future<void> _selectDate(BuildContext context) async {
+    await selectDate(context, (pickedDate) {
+      setState(() {
+        _selectedDate = pickedDate;
+        _checkFormValidity();
+      });
+    });
+  }
 
   Future<void> _pickImage() async {
-    final ImagePicker picker = ImagePicker();
-
-    final XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);
-
-    if (pickedFile != null) {
+    final selectedImage = await pickImage();
+    if (selectedImage != null) {
       setState(() {
-        _selectedImage = File(pickedFile.path);
+        _imageFile = selectedImage;
       });
-      _checkFormValidity();
-    }
-  }
-
-  String _getWorkshopStatus(String? selectedDate) {
-    if (selectedDate == null) return 'Upcoming';
-
-    final selectedDateTime = DateTime.parse(selectedDate);
-    final today = DateTime.now();
-
-    final todayAtMidnight = DateTime(today.year, today.month, today.day);
-
-    if (selectedDateTime.isAtSameMomentAs(todayAtMidnight)) {
-      return 'Ongoing';
-    } else if (selectedDateTime.isAfter(todayAtMidnight)) {
-      return 'Upcoming';
-    } else {
-      return 'Completed';
-    }
-  }
-
-  Future<void> _selectDate(BuildContext context) async {
-    final DateTime? pickedDate = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2101),
-    );
-
-    if (pickedDate != null) {
-      setState(() {
-        _selectedDate = DateFormat('yyyy-MM-dd').format(pickedDate) + 'T00:00:00Z';
-      });
-      _checkFormValidity();
     }
   }
 
   void _checkFormValidity() {
-    final isFormValid = _titleController.text.isNotEmpty &&
-        _descriptionController.text.isNotEmpty &&
-        _locationController.text.isNotEmpty &&
-        _entryFeeController.text.isNotEmpty &&
-        _selectedDate != null &&
-        _hoursController.text.isNotEmpty &&
-        _minutesController.text.isNotEmpty &&
-        _instructorInfoController.text.isNotEmpty &&
-        _tagsController.text.isNotEmpty &&
-        _participantLimitController.text.isNotEmpty &&
-        _registrationLinkController.text.isNotEmpty;
-
     setState(() {
-      _isFormValid = isFormValid;
+      _isFormValid =
+          _titleController.text.isNotEmpty && _selectedDate != null && _descriptionController.text.isNotEmpty;
     });
+  }
+
+  void _checkDurationValidity() {
+    setState(() {
+      _durationError = validateDuration(_hoursController.text, _minutesController.text);
+    });
+  }
+
+  Future<void> _submitWorkshop(WidgetRef ref) async {
+    if (_formKey.currentState?.validate() ?? false) {
+      await submitWorkshop(
+        context, // Pass context for SnackBar and navigation
+        ref, // Pass ref for Riverpod provider access
+        _titleController,
+        _descriptionController,
+        _selectedDate,
+        _locationController,
+        _hoursController,
+        _minutesController,
+        _instructorInfoController,
+        _tagsController,
+        _registrationLinkController,
+        _entryFeeController,
+        _participantLimitController,
+        _imageFile, // Image file if selected
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Create Workshop Event'),
-      ),
+      appBar: AppBar(title: const Text('Create Workshop Event')),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -114,30 +98,57 @@ class _CreateWorkshopEventState extends ConsumerState<CreateWorkshopEvent> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 20),
               WorkshopTextfield(
                 controller: _titleController,
                 labelText: 'Event Title',
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Event Title is required';
-                  }
-                  return null;
-                },
+                validator: (value) => value!.isEmpty ? 'Event Title is required' : null,
                 onChanged: (_) => _checkFormValidity(),
               ),
               const SizedBox(height: 16),
               WorkshopTextfield(
                 controller: _descriptionController,
                 labelText: 'Description',
-                maxLines: 4,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Description is required';
-                  }
-                  return null;
-                },
+                validator: (value) => value!.isEmpty ? 'Description is required' : null,
                 onChanged: (_) => _checkFormValidity(),
+              ),
+              const SizedBox(height: 16),
+              WorkshopTextfield(
+                controller: _locationController,
+                labelText: 'Location',
+                validator: (value) => value!.isEmpty ? 'Location is required' : null,
+                onChanged: (_) => _checkFormValidity(),
+              ),
+              const SizedBox(height: 16),
+              WorkshopTextfield(
+                controller: _tagsController,
+                labelText: 'Tags',
+                validator: (value) => value!.isEmpty ? 'Tags are required' : null,
+              ),
+              const SizedBox(height: 16),
+              WorkshopTextfield(
+                controller: _entryFeeController,
+                labelText: 'Entry Fee',
+                validator: (value) => value!.isEmpty ? 'Entry Fee is required' : null,
+                keyboardType: TextInputType.number,
+              ),
+              const SizedBox(height: 16),
+              WorkshopTextfield(
+                controller: _instructorInfoController,
+                labelText: 'Instructor Info',
+                validator: (value) => value!.isEmpty ? 'Instructor Info is required' : null,
+              ),
+              const SizedBox(height: 16),
+              WorkshopTextfield(
+                controller: _registrationLinkController,
+                labelText: 'Registration Link',
+                validator: (value) => value!.isEmpty ? 'Registration Link is required' : null,
+              ),
+              const SizedBox(height: 16),
+              WorkshopTextfield(
+                controller: _participantLimitController,
+                labelText: 'Participant Limit',
+                validator: (value) => value!.isEmpty ? 'Participant Limit is required' : null,
+                keyboardType: TextInputType.number,
               ),
               const SizedBox(height: 16),
               GestureDetector(
@@ -146,46 +157,8 @@ class _CreateWorkshopEventState extends ConsumerState<CreateWorkshopEvent> {
                   child: WorkshopTextfield(
                     controller: TextEditingController(text: _selectedDate),
                     labelText: 'Date',
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Date is required';
-                      }
-                      return null;
-                    },
-                    onChanged: (_) => _checkFormValidity(),
+                    validator: (value) => value!.isEmpty ? 'Date is required' : null,
                   ),
-                ),
-              ),
-              const SizedBox(height: 16),
-              WorkshopTextfield(
-                controller: _locationController,
-                labelText: 'Location',
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Location is required';
-                  }
-                  return null;
-                },
-                onChanged: (_) => _checkFormValidity(),
-              ),
-              const SizedBox(height: 16),
-              WorkshopTextfield(
-                controller: _entryFeeController,
-                labelText: 'Entry Fee (INR)',
-                keyboardType: TextInputType.number,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Entry Fee is required';
-                  }
-                  return null;
-                },
-                onChanged: (_) => _checkFormValidity(),
-              ),
-              const SizedBox(height: 30),
-              Text(
-                'Duration of the Workshop',
-                style: AppTheme.titleMediumStyle.copyWith(
-                  color: AppTheme.lightThemeMode.colorScheme.onSecondary,
                 ),
               ),
               const SizedBox(height: 16),
@@ -195,148 +168,67 @@ class _CreateWorkshopEventState extends ConsumerState<CreateWorkshopEvent> {
                     child: WorkshopTextfield(
                       controller: _hoursController,
                       labelText: 'Hours',
+                      validator: (value) => value!.isEmpty ? 'Hours are required' : null,
+                      onChanged: (_) => _checkDurationValidity(),
                       keyboardType: TextInputType.number,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Hours are required';
-                        }
-                        return null;
-                      },
-                      onChanged: (_) => _checkFormValidity(),
                     ),
                   ),
-                  const SizedBox(width: 16),
+                  const SizedBox(width: 8),
                   Expanded(
                     child: WorkshopTextfield(
                       controller: _minutesController,
                       labelText: 'Minutes',
+                      validator: (value) => value!.isEmpty ? 'Minutes are required' : null,
+                      onChanged: (_) => _checkDurationValidity(),
                       keyboardType: TextInputType.number,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Minutes are required';
-                        }
-                        return null;
-                      },
-                      onChanged: (_) => _checkFormValidity(),
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 16),
-              WorkshopTextfield(
-                controller: _instructorInfoController,
-                labelText: 'Instructor Info',
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Instructor Info is required';
-                  }
-                  return null;
-                },
-                onChanged: (_) => _checkFormValidity(),
-              ),
-              const SizedBox(height: 16),
-              WorkshopTextfield(
-                controller: _tagsController,
-                labelText: 'Tags',
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Tags are required';
-                  }
-                  return null;
-                },
-                onChanged: (_) => _checkFormValidity(),
-              ),
-              const SizedBox(height: 16),
-              WorkshopTextfield(
-                controller: _participantLimitController,
-                labelText: 'Participant Limit',
-                keyboardType: TextInputType.number,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Participant Limit is required';
-                  }
-                  return null;
-                },
-                onChanged: (_) => _checkFormValidity(),
-              ),
-              const SizedBox(height: 16),
-              WorkshopTextfield(
-                controller: _registrationLinkController,
-                labelText: 'Registration Link',
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Registration Link is required';
-                  }
-                  return null;
-                },
-                onChanged: (_) => _checkFormValidity(),
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: _pickImage,
-                child: const Text('Select Workshop Image'),
-              ),
-              if (_selectedImage != null)
+              if (_durationError != null)
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  child: Image.file(
-                    _selectedImage!,
-                    width: 100,
-                    height: 100,
-                    fit: BoxFit.cover,
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: Text(
+                    _durationError!,
+                    style: TextStyle(color: Colors.red),
                   ),
                 ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 16),
               ElevatedButton(
-                onPressed: _isFormValid
-                    ? () async {
-                        final duration =
-                            '${_hoursController.text.padLeft(2, '0')}:${_minutesController.text.padLeft(2, '0')}:00';
-
-                        final workshopEvent = CreateWorkshopModel(
-                          title: _titleController.text,
-                          description: _descriptionController.text,
-                          date: _selectedDate,
-                          location: _locationController.text,
-                          entryFee: _entryFeeController.text,
-                          duration: duration,
-                          media: _selectedImage?.path,
-                          instructorInfo: _instructorInfoController.text,
-                          tags: _tagsController.text,
-                          participantLimit: _participantLimitController.text,
-                          registrationLink: _registrationLinkController.text,
-                          status: _getWorkshopStatus(_selectedDate),
-                        );
-                        final createWorkshopNotifier = ref.watch(workshopCreateNotifierProvider.notifier);
-
-                        try {
-                          await createWorkshopNotifier.createWorkshop(workshopEvent, imageFile: _selectedImage);
-
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Event created successfully!')),
-                          );
-                        } catch (e) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text('Error creating event: $e')),
-                          );
-                        }
-                      }
-                    : null,
+                onPressed: _pickImage,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppPalette.yellowColor,
                   padding: const EdgeInsets.symmetric(vertical: 16),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                ),
+                child: const Center(
+                  child: Text(
+                    'Pick an Image',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
                   ),
+                ),
+              ),
+              if (_imageFile != null) ...[
+                const SizedBox(height: 10),
+                Text('Selected image: ${_imageFile!.path.split('/').last}'),
+              ],
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  if (_formKey.currentState?.validate() ?? false) {
+                    // Pass ref to the submitWorkshop function
+                    _submitWorkshop(ref);
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppPalette.yellowColor,
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                 ),
                 child: const Center(
                   child: Text(
                     'Create Workshop Event',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
                   ),
                 ),
               ),

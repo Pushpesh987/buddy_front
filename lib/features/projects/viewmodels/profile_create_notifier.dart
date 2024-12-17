@@ -34,7 +34,7 @@ class ProfileCreateNotifier extends AutoDisposeAsyncNotifier<void> {
       final response = await apiService.request(
         HttpMethod.post,
         '/api/v1/events/project',
-        formData: formData,
+        // formData: formData,
       );
 
       response.fold(

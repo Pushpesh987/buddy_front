@@ -34,7 +34,7 @@ class HackathonCreateNotifier extends AutoDisposeAsyncNotifier<void> {
       final response = await apiService.request(
         HttpMethod.post,
         '/api/v1/events/event',
-        formData: formData,
+        // formData: formData,
       );
 
       response.fold(

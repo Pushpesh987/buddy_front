@@ -6,14 +6,17 @@ part of 'workshop_notifier.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$workshopNotifierHash() => r'9a33a925a49aa72438e64afde8eadd69ece02321';
+String _$workshopNotifierHash() => r'467763090897c3f9364c252bfe212f866fb6f636';
 
 /// See also [WorkshopNotifier].
 @ProviderFor(WorkshopNotifier)
-final workshopNotifierProvider = AutoDisposeAsyncNotifierProvider<WorkshopNotifier, List<WorkshopModel>>.internal(
+final workshopNotifierProvider = AutoDisposeAsyncNotifierProvider<
+    WorkshopNotifier, List<WorkshopModel>>.internal(
   WorkshopNotifier.new,
   name: r'workshopNotifierProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$workshopNotifierHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$workshopNotifierHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

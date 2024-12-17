@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart'; // Import this to use Clipboard
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../../viewmodel/workshop_notifier.dart';
 
 class WorkshopDetailsPage extends ConsumerWidget {
@@ -103,7 +103,7 @@ class WorkshopDetailsPage extends ConsumerWidget {
                         children: [
                           buildInfoRow('Date', _formatDate(workshop.date)),
                           buildInfoRow('Location', _validateField(workshop.location)),
-                          buildInfoRow('Duration', _validateField(workshop.duration)),
+                          buildInfoRow('Duration', _formatDuration(workshop.duration)), // Updated line
                           buildInfoRow('Instructor Info', _validateField(workshop.instructorInfo)),
                           buildInfoRow('Tags', _validateField(workshop.tags)),
                           buildInfoRow(
@@ -121,42 +121,33 @@ class WorkshopDetailsPage extends ConsumerWidget {
                   ),
                   const SizedBox(height: 20),
                   if (workshop.registrationLink != null && workshop.registrationLink!.isNotEmpty)
-                    GestureDetector(
-                      onTap: () async {
-                        final Uri url = Uri.parse(workshop.registrationLink!);
-                        if (await canLaunchUrl(url)) {
-                          await launchUrl(url, mode: LaunchMode.externalApplication);
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text("Unable to open the link.")),
-                          );
-                        }
-                      },
-                      child: Text(
-                        "Register: ${workshop.registrationLink!}",
-                        style: const TextStyle(
-                          fontSize: 16,
-                          color: Colors.blue,
-                          decoration: TextDecoration.underline,
-                          fontWeight: FontWeight.w500,
-                        ),
+                    Text(
+                      "Register: ${workshop.registrationLink!}",
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.blue,
+                        decoration: TextDecoration.underline,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   const SizedBox(height: 20),
                   if (workshop.registrationLink != null && workshop.registrationLink!.isNotEmpty)
                     ElevatedButton(
                       onPressed: () {
-                        print("Register for Workshop ID: ${workshop.id}");
+                        Clipboard.setData(ClipboardData(text: workshop.registrationLink!));
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text("Link copied to clipboard")),
+                        );
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.orange,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 50),
                       ),
                       child: const Text(
-                        'Register Now',
+                        'Copy Registration Link',
                         style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
                       ),
                     ),
@@ -218,4 +209,35 @@ class WorkshopDetailsPage extends ConsumerWidget {
   String _twoDigits(int number) {
     return number.toString().padLeft(2, '0');
   }
+}
+
+String _formatDuration(String? duration) {
+  if (duration == null || duration.trim().isEmpty) {
+    return 'NA';
+  }
+
+  try {
+    final parts = duration.split(':');
+    final hours = int.tryParse(parts[0]);
+    final minutes = parts.length > 1 ? int.tryParse(parts[1]) : 0;
+
+    String formattedDuration = '';
+    if (hours != null && hours > 0) {
+      formattedDuration += '${_twoDigits(hours)} hrs';
+    }
+    if (minutes != null && minutes > 0) {
+      if (formattedDuration.isNotEmpty) {
+        formattedDuration += ' ';
+      }
+      formattedDuration += '${_twoDigits(minutes)} minutes';
+    }
+
+    return formattedDuration.isEmpty ? 'NA' : formattedDuration;
+  } catch (e) {
+    return 'NA';
+  }
+}
+
+String _twoDigits(int number) {
+  return number.toString().padLeft(2, '0');
 }
