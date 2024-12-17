@@ -27,7 +27,7 @@ class WorkshopPage extends ConsumerWidget {
                 text: workshop.title,
                 imagePath: workshop.media,
                 description: workshop.description,
-                // tags: workshop.tags,
+                tags: workshop.tags,
                 id: workshop.id,
               );
             },

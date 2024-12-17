@@ -28,20 +28,35 @@ class WorkshopNotifier extends AutoDisposeAsyncNotifier<List<WorkshopModel>> {
         HttpMethod.get,
         '/api/v1/events/workshopsfeed',
       );
-
       return response.fold(
         (error) {
+          print("API Error:::>>>>> $error");
           throw Exception('Error fetching workshops: $error');
         },
         (data) {
-          final workshops = (data['data'] as List).map((item) {
-            return WorkshopModel.fromJson(item);
-          }).toList();
-
-          return workshops;
+          print("Raw API response:::>>> $data");
+          if (data['data'] == null || (data['data'] as List).isEmpty) {
+            print("No workshops found in API response.");
+            return [];
+          }
+          final workshops = (data['data'] as List)
+              .map((item) {
+                print("Mapping item:::>>> $item");
+                try {
+                  return WorkshopModel.fromJson(item);
+                } catch (e) {
+                  print("Error parsing item: $item, Error: $e");
+                  return null; // Handle invalid items gracefully
+                }
+              })
+              .where((workshop) => workshop != null)
+              .toList();
+          print("workshops:::>>>> $workshops");
+          return workshops.cast<WorkshopModel>();
         },
       );
     } catch (e) {
+      print("Exception caught:::>>> $e");
       throw Exception('Error fetching workshops: $e');
     }
   }

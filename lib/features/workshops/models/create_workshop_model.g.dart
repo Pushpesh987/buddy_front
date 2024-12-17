@@ -12,11 +12,11 @@ _$CreateWorkshopModelImpl _$$CreateWorkshopModelImplFromJson(Map<String, dynamic
       date: json['date'] as String?,
       location: json['location'] as String?,
       media: json['media'] as String?,
-      entryFee: (json['entry_fee'] as num?)?.toInt(),
+      entryFee: _stringFromDynamic(json['entry_fee']),
       duration: json['Duration'] as String?,
       instructorInfo: json['instructor_info'] as String?,
       tags: json['tags'] as String?,
-      participantLimit: (json['participant_limit'] as num?)?.toInt(),
+      participantLimit: _stringFromDynamic(json['participant_limit']),
       status: json['status'] as String?,
       registrationLink: json['registration_link'] as String?,
     );

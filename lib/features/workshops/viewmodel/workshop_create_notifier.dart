@@ -31,9 +31,10 @@ class WorkshopCreateNotifier extends AutoDisposeAsyncNotifier<void> {
         ));
       }
 
+      ///TODO: check the POST workshop API
       final response = await apiService.request(
         HttpMethod.post,
-        '/api/v1/events/workshop',
+        '/api/v1/events/eventorkshop',
         formData: formData,
       );
 

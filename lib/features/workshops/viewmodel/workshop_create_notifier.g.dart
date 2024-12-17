@@ -6,7 +6,7 @@ part of 'workshop_create_notifier.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$workshopCreateNotifierHash() => r'f305fb49ccc20486ee478f460cdca093ea94eaf3';
+String _$workshopCreateNotifierHash() => r'9fd763b7e95b7abec45a6bf7ab3a351bbb0b7f64';
 
 /// See also [WorkshopCreateNotifier].
 @ProviderFor(WorkshopCreateNotifier)

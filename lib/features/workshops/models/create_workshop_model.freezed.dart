@@ -25,15 +25,15 @@ mixin _$CreateWorkshopModel {
   String? get date => throw _privateConstructorUsedError;
   String? get location => throw _privateConstructorUsedError;
   String? get media => throw _privateConstructorUsedError;
-  @JsonKey(name: 'entry_fee')
-  int? get entryFee => throw _privateConstructorUsedError;
+  @JsonKey(name: 'entry_fee', fromJson: _stringFromDynamic)
+  String? get entryFee => throw _privateConstructorUsedError; // Handles mixed types
   @JsonKey(name: 'Duration')
   String? get duration => throw _privateConstructorUsedError;
   @JsonKey(name: 'instructor_info')
   String? get instructorInfo => throw _privateConstructorUsedError;
   String? get tags => throw _privateConstructorUsedError;
-  @JsonKey(name: 'participant_limit')
-  int? get participantLimit => throw _privateConstructorUsedError;
+  @JsonKey(name: 'participant_limit', fromJson: _stringFromDynamic)
+  String? get participantLimit => throw _privateConstructorUsedError; // Handles mixed types
   String? get status => throw _privateConstructorUsedError;
   @JsonKey(name: 'registration_link')
   String? get registrationLink => throw _privateConstructorUsedError;
@@ -58,11 +58,11 @@ abstract class $CreateWorkshopModelCopyWith<$Res> {
       String? date,
       String? location,
       String? media,
-      @JsonKey(name: 'entry_fee') int? entryFee,
+      @JsonKey(name: 'entry_fee', fromJson: _stringFromDynamic) String? entryFee,
       @JsonKey(name: 'Duration') String? duration,
       @JsonKey(name: 'instructor_info') String? instructorInfo,
       String? tags,
-      @JsonKey(name: 'participant_limit') int? participantLimit,
+      @JsonKey(name: 'participant_limit', fromJson: _stringFromDynamic) String? participantLimit,
       String? status,
       @JsonKey(name: 'registration_link') String? registrationLink});
 }
@@ -119,7 +119,7 @@ class _$CreateWorkshopModelCopyWithImpl<$Res, $Val extends CreateWorkshopModel>
       entryFee: freezed == entryFee
           ? _value.entryFee
           : entryFee // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       duration: freezed == duration
           ? _value.duration
           : duration // ignore: cast_nullable_to_non_nullable
@@ -135,7 +135,7 @@ class _$CreateWorkshopModelCopyWithImpl<$Res, $Val extends CreateWorkshopModel>
       participantLimit: freezed == participantLimit
           ? _value.participantLimit
           : participantLimit // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -161,11 +161,11 @@ abstract class _$$CreateWorkshopModelImplCopyWith<$Res> implements $CreateWorksh
       String? date,
       String? location,
       String? media,
-      @JsonKey(name: 'entry_fee') int? entryFee,
+      @JsonKey(name: 'entry_fee', fromJson: _stringFromDynamic) String? entryFee,
       @JsonKey(name: 'Duration') String? duration,
       @JsonKey(name: 'instructor_info') String? instructorInfo,
       String? tags,
-      @JsonKey(name: 'participant_limit') int? participantLimit,
+      @JsonKey(name: 'participant_limit', fromJson: _stringFromDynamic) String? participantLimit,
       String? status,
       @JsonKey(name: 'registration_link') String? registrationLink});
 }
@@ -220,7 +220,7 @@ class __$$CreateWorkshopModelImplCopyWithImpl<$Res>
       entryFee: freezed == entryFee
           ? _value.entryFee
           : entryFee // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       duration: freezed == duration
           ? _value.duration
           : duration // ignore: cast_nullable_to_non_nullable
@@ -236,7 +236,7 @@ class __$$CreateWorkshopModelImplCopyWithImpl<$Res>
       participantLimit: freezed == participantLimit
           ? _value.participantLimit
           : participantLimit // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -258,11 +258,11 @@ class _$CreateWorkshopModelImpl implements _CreateWorkshopModel {
       this.date,
       this.location,
       this.media,
-      @JsonKey(name: 'entry_fee') this.entryFee,
+      @JsonKey(name: 'entry_fee', fromJson: _stringFromDynamic) this.entryFee,
       @JsonKey(name: 'Duration') this.duration,
       @JsonKey(name: 'instructor_info') this.instructorInfo,
       this.tags,
-      @JsonKey(name: 'participant_limit') this.participantLimit,
+      @JsonKey(name: 'participant_limit', fromJson: _stringFromDynamic) this.participantLimit,
       this.status,
       @JsonKey(name: 'registration_link') this.registrationLink});
 
@@ -279,8 +279,9 @@ class _$CreateWorkshopModelImpl implements _CreateWorkshopModel {
   @override
   final String? media;
   @override
-  @JsonKey(name: 'entry_fee')
-  final int? entryFee;
+  @JsonKey(name: 'entry_fee', fromJson: _stringFromDynamic)
+  final String? entryFee;
+// Handles mixed types
   @override
   @JsonKey(name: 'Duration')
   final String? duration;
@@ -290,8 +291,9 @@ class _$CreateWorkshopModelImpl implements _CreateWorkshopModel {
   @override
   final String? tags;
   @override
-  @JsonKey(name: 'participant_limit')
-  final int? participantLimit;
+  @JsonKey(name: 'participant_limit', fromJson: _stringFromDynamic)
+  final String? participantLimit;
+// Handles mixed types
   @override
   final String? status;
   @override
@@ -350,11 +352,11 @@ abstract class _CreateWorkshopModel implements CreateWorkshopModel {
       final String? date,
       final String? location,
       final String? media,
-      @JsonKey(name: 'entry_fee') final int? entryFee,
+      @JsonKey(name: 'entry_fee', fromJson: _stringFromDynamic) final String? entryFee,
       @JsonKey(name: 'Duration') final String? duration,
       @JsonKey(name: 'instructor_info') final String? instructorInfo,
       final String? tags,
-      @JsonKey(name: 'participant_limit') final int? participantLimit,
+      @JsonKey(name: 'participant_limit', fromJson: _stringFromDynamic) final String? participantLimit,
       final String? status,
       @JsonKey(name: 'registration_link') final String? registrationLink}) = _$CreateWorkshopModelImpl;
 
@@ -371,8 +373,8 @@ abstract class _CreateWorkshopModel implements CreateWorkshopModel {
   @override
   String? get media;
   @override
-  @JsonKey(name: 'entry_fee')
-  int? get entryFee;
+  @JsonKey(name: 'entry_fee', fromJson: _stringFromDynamic)
+  String? get entryFee; // Handles mixed types
   @override
   @JsonKey(name: 'Duration')
   String? get duration;
@@ -382,8 +384,8 @@ abstract class _CreateWorkshopModel implements CreateWorkshopModel {
   @override
   String? get tags;
   @override
-  @JsonKey(name: 'participant_limit')
-  int? get participantLimit;
+  @JsonKey(name: 'participant_limit', fromJson: _stringFromDynamic)
+  String? get participantLimit; // Handles mixed types
   @override
   String? get status;
   @override
