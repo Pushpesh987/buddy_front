@@ -44,7 +44,7 @@ class HackathonCards extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => ProjectDetailsPage(projectId: id!),
+            builder: (context) => HackathonDetailsPage(projectId: id!),
           ),
         );
       },
@@ -121,7 +121,7 @@ class HackathonCards extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => ProjectDetailsPage(projectId: id!),
+                              builder: (context) => HackathonDetailsPage(projectId: id!),
                             ),
                           );
                         },

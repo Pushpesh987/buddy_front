@@ -4,10 +4,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../viewmodels/hackathon_notifier.dart';
 
-class ProjectDetailsPage extends ConsumerWidget {
+class HackathonDetailsPage extends ConsumerWidget {
   final String projectId;
 
-  const ProjectDetailsPage({super.key, required this.projectId});
+  const HackathonDetailsPage({super.key, required this.projectId});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
