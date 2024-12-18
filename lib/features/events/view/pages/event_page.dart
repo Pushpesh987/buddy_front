@@ -6,17 +6,19 @@ import '../../../projects/views/pages/project_page.dart';
 import '../../../workshops/views/pages/workshop_page.dart';
 
 class EventPage extends StatelessWidget {
-  const EventPage({super.key});
+  final int initialIndex;
 
+  const EventPage({super.key, this.initialIndex = 0});
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 3,
+      initialIndex: initialIndex,
       child: Scaffold(
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(120),
           child: Container(
-            padding: EdgeInsets.only(top: 50.0, left: 28),
+            padding: const EdgeInsets.only(top: 50.0, left: 28),
             color: AppPalette.whiteColor,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,11 +41,11 @@ class EventPage extends StatelessWidget {
             ),
           ),
         ),
-        body: TabBarView(
+        body: const TabBarView(
           children: [
-            const WorkshopPage(),
-            const HackathonPage(),
-            const ProjectPage(),
+            WorkshopPage(),
+            HackathonPage(),
+            ProjectPage(),
           ],
         ),
       ),

@@ -1,13 +1,10 @@
-import 'package:buddy_front/features/hackathons/models/create_hackathon_model.dart';
-import 'package:buddy_front/features/projects/views/widgets/project_textfield.dart';
-import 'package:image_picker/image_picker.dart';
-import 'dart:io';
+import 'package:buddy_front/features/hackathons/views/widgets/hackathon_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:intl/intl.dart';
 import 'package:buddy_front/core/theme/app_pallete.dart';
-
-import '../../viewmodels/hackathon_create_notifier.dart';
+import 'package:buddy_front/features/hackathons/viewmodels/hackathon_create_notifier.dart';
+import '../../../events/view/pages/event_page.dart';
+import '../../controllers/create_project_event_controller.dart';
 
 class CreateProjectEvent extends ConsumerStatefulWidget {
   const CreateProjectEvent({super.key});
@@ -17,98 +14,8 @@ class CreateProjectEvent extends ConsumerStatefulWidget {
 }
 
 class _CreateProjectEventState extends ConsumerState<CreateProjectEvent> {
+  final _controller = CreateProjectEventController();
   final _formKey = GlobalKey<FormState>();
-
-  final _titleController = TextEditingController();
-  final _themeController = TextEditingController();
-  final _descriptionController = TextEditingController();
-  final _locationController = TextEditingController();
-  final _tagsController = TextEditingController();
-
-  String? _startDate;
-  String? _registrationDeadline;
-
-  bool _isFormValid = false;
-
-  File? _selectedImage;
-
-  // Helper function to determine the status based on the dates
-  String _getHackathonStatus(String? startDate, String? registrationDeadline) {
-    if (startDate == null || registrationDeadline == null) {
-      return 'Upcoming'; // If any of the dates is null, assume the hackathon is upcoming
-    }
-
-    final now = DateTime.now();
-    final start = DateTime.parse(startDate);
-    final registrationDeadlineDate = DateTime.parse(registrationDeadline);
-
-    if (now.isBefore(start)) {
-      return 'Upcoming'; // Start date is in the future, so it's an upcoming hackathon
-    } else if (now.isBefore(registrationDeadlineDate)) {
-      return 'Ongoing'; // The registration deadline hasn't passed yet, it's ongoing
-    } else {
-      return 'Completed'; // The registration deadline has passed, so it's completed
-    }
-  }
-
-  Future<void> _pickImage() async {
-    final ImagePicker picker = ImagePicker();
-
-    final XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);
-
-    if (pickedFile != null) {
-      setState(() {
-        _selectedImage = File(pickedFile.path);
-      });
-      _checkFormValidity();
-    }
-  }
-
-  Future<void> _selectStartDate(BuildContext context) async {
-    final DateTime? pickedDate = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2101),
-    );
-
-    if (pickedDate != null) {
-      setState(() {
-        _startDate = DateFormat('yyyy-MM-dd').format(pickedDate) + 'T00:00:00Z';
-      });
-      _checkFormValidity();
-    }
-  }
-
-  Future<void> _selectRegistrationDeadline(BuildContext context) async {
-    final DateTime? pickedDate = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2101),
-    );
-
-    if (pickedDate != null) {
-      setState(() {
-        _registrationDeadline = DateFormat('yyyy-MM-dd').format(pickedDate) + 'T00:00:00Z';
-      });
-      _checkFormValidity();
-    }
-  }
-
-  void _checkFormValidity() {
-    final isFormValid = _titleController.text.isNotEmpty &&
-        _themeController.text.isNotEmpty &&
-        _descriptionController.text.isNotEmpty &&
-        _locationController.text.isNotEmpty &&
-        _tagsController.text.isNotEmpty &&
-        _startDate != null &&
-        _registrationDeadline != null;
-
-    setState(() {
-      _isFormValid = isFormValid;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -124,48 +31,61 @@ class _CreateProjectEventState extends ConsumerState<CreateProjectEvent> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 20),
-              ProjectTextfield(
-                controller: _titleController,
+              HackathonTextfield(
+                controller: TextEditingController(text: _controller.title),
                 labelText: 'Hackathon Title',
+                onChanged: (value) => _controller.title = value,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Hackathon Title is required';
                   }
                   return null;
                 },
-                onChanged: (_) => _checkFormValidity(),
               ),
               const SizedBox(height: 16),
-              ProjectTextfield(
-                controller: _themeController,
+              HackathonTextfield(
+                controller: TextEditingController(text: _controller.theme),
                 labelText: 'Theme',
+                onChanged: (value) => _controller.theme = value,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Theme is required';
                   }
                   return null;
                 },
-                onChanged: (_) => _checkFormValidity(),
               ),
               const SizedBox(height: 16),
-              ProjectTextfield(
-                controller: _descriptionController,
+              HackathonTextfield(
+                controller: TextEditingController(text: _controller.description),
                 labelText: 'Description',
                 maxLines: 4,
+                onChanged: (value) => _controller.description = value,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Description is required';
                   }
                   return null;
                 },
-                onChanged: (_) => _checkFormValidity(),
               ),
               const SizedBox(height: 16),
               GestureDetector(
-                onTap: () => _selectStartDate(context),
+                onTap: () async {
+                  final DateTime now = DateTime.now();
+                  final DateTime tomorrow = now.add(Duration(days: 1));
+                  final pickedDate = await showDatePicker(
+                    context: context,
+                    initialDate: tomorrow,
+                    firstDate: tomorrow,
+                    lastDate: DateTime(2101),
+                  );
+                  if (pickedDate != null) {
+                    _controller.selectStartDate(pickedDate);
+                    setState(() {});
+                  }
+                },
                 child: AbsorbPointer(
-                  child: ProjectTextfield(
-                    controller: TextEditingController(text: _startDate),
+                  child: HackathonTextfield(
+                    controller: TextEditingController(text: _controller.startDate),
                     labelText: 'Start Date',
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -173,16 +93,41 @@ class _CreateProjectEventState extends ConsumerState<CreateProjectEvent> {
                       }
                       return null;
                     },
-                    onChanged: (_) => _checkFormValidity(),
                   ),
                 ),
               ),
               const SizedBox(height: 16),
               GestureDetector(
-                onTap: () => _selectRegistrationDeadline(context),
+                onTap: () async {
+                  if (_controller.startDate == null) {
+                    ScaffoldMessenger.of(context)
+                        .showSnackBar(SnackBar(content: Text('Please select a Start Date first')));
+                    return;
+                  }
+
+                  final DateTime startDate = DateTime.parse(_controller.startDate!);
+                  final DateTime minRegistrationDeadline = startDate.add(Duration(days: 2));
+
+                  final pickedDate = await showDatePicker(
+                    context: context,
+                    initialDate: minRegistrationDeadline,
+                    firstDate: minRegistrationDeadline,
+                    lastDate: DateTime(2101),
+                  );
+
+                  if (pickedDate != null) {
+                    if (pickedDate.isAtSameMomentAs(startDate)) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Registration Deadline cannot be the same as Start Date')));
+                    } else {
+                      _controller.selectRegistrationDeadline(pickedDate);
+                      setState(() {});
+                    }
+                  }
+                },
                 child: AbsorbPointer(
-                  child: ProjectTextfield(
-                    controller: TextEditingController(text: _registrationDeadline),
+                  child: HackathonTextfield(
+                    controller: TextEditingController(text: _controller.registrationDeadline),
                     labelText: 'Registration Deadline',
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -190,75 +135,151 @@ class _CreateProjectEventState extends ConsumerState<CreateProjectEvent> {
                       }
                       return null;
                     },
-                    onChanged: (_) => _checkFormValidity(),
                   ),
                 ),
               ),
               const SizedBox(height: 16),
-              ProjectTextfield(
-                controller: _locationController,
+              HackathonTextfield(
+                controller: TextEditingController(text: _controller.location),
                 labelText: 'Location',
+                onChanged: (value) => _controller.location = value,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Location is required';
                   }
                   return null;
                 },
-                onChanged: (_) => _checkFormValidity(),
               ),
               const SizedBox(height: 16),
-              ProjectTextfield(
-                controller: _tagsController,
+              HackathonTextfield(
+                controller: TextEditingController(text: _controller.tags),
                 labelText: 'Tags',
+                onChanged: (value) => _controller.tags = value,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Tags are required';
                   }
                   return null;
                 },
-                onChanged: (_) => _checkFormValidity(),
+              ),
+              // Add new fields below
+              const SizedBox(height: 16),
+              HackathonTextfield(
+                controller: TextEditingController(text: _controller.entryFee),
+                labelText: 'Entry Fee',
+                keyboardType: TextInputType.number,
+                onChanged: (value) => _controller.entryFee = value,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Entry Fee is required';
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 16),
+              HackathonTextfield(
+                controller: TextEditingController(text: _controller.prizePool),
+                labelText: 'Prize Pool',
+                keyboardType: TextInputType.number,
+                onChanged: (value) => _controller.prizePool = value,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Prize Pool is required';
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 16),
+              HackathonTextfield(
+                controller: TextEditingController(text: _controller.organizerContact),
+                labelText: 'Organizer Contact',
+                keyboardType: TextInputType.phone,
+                onChanged: (value) => _controller.organizerContact = value,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Organizer Contact is required';
+                  }
+                  if (value.length != 10 || !RegExp(r'^\d{10}$').hasMatch(value)) {
+                    return 'Please enter a valid 10-digit phone number';
+                  }
+                  return null;
+                },
+              ),
+
+              const SizedBox(height: 16),
+              HackathonTextfield(
+                controller: TextEditingController(text: _controller.attendeeCount),
+                labelText: 'Attendee Count',
+                keyboardType: TextInputType.number,
+                onChanged: (value) => _controller.attendeeCount = value,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Attendee Count is required';
+                  }
+                  if (int.tryParse(value) == null) {
+                    return 'Please enter a valid integer';
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 16),
+              HackathonTextfield(
+                controller: TextEditingController(text: _controller.organizerName),
+                labelText: 'Organizer Name',
+                onChanged: (value) => _controller.organizerName = value,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Organizer Name is required';
+                  }
+                  return null;
+                },
               ),
               const SizedBox(height: 20),
               ElevatedButton(
-                onPressed: _pickImage,
-                child: const Text('Select Hackathon Image'),
+                onPressed: () {
+                  _controller.pickImage(() => setState(() {}));
+                },
+                child: const Text('Select Image'),
               ),
-              if (_selectedImage != null)
+              if (_controller.selectedImage != null)
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   child: Image.file(
-                    _selectedImage!,
+                    _controller.selectedImage!,
                     width: 100,
                     height: 100,
                     fit: BoxFit.cover,
                   ),
                 ),
+
               const SizedBox(height: 20),
               ElevatedButton(
-                onPressed: _isFormValid
+                onPressed: _controller.isFormValid
                     ? () async {
-                        final hackathonStatus = _getHackathonStatus(_startDate, _registrationDeadline);
-                        final newHackathon = CreateHackathonModel(
-                          title: _titleController.text,
-                          theme: _themeController.text,
-                          description: _descriptionController.text,
-                          date: _startDate,
-                          location: _locationController.text,
-                          media: _selectedImage?.path,
-                          registrationDeadline: _registrationDeadline,
-                          tags: _tagsController.text,
-                          status: hackathonStatus, // Adding the status here
-                        );
-
+                        final newHackathon = _controller.buildHackathon();
                         final hackathonCreateNotifier = ref.read(hackathonCreateNotifierProvider.notifier);
 
                         try {
-                          await hackathonCreateNotifier.createHackathon(newHackathon, imageFile: _selectedImage);
-                          ScaffoldMessenger.of(context)
-                              .showSnackBar(SnackBar(content: Text('Hackathon Created Successfully')));
+                          await hackathonCreateNotifier.createHackathon(
+                            newHackathon,
+                            imageFile: _controller.selectedImage,
+                          );
+
+                          // Show success message
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Hackathon Created Successfully')),
+                          );
+
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const EventPage(initialIndex: 1),
+                            ),
+                          );
                         } catch (e) {
-                          ScaffoldMessenger.of(context)
-                              .showSnackBar(SnackBar(content: Text('Error creating hackathon: $e')));
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('Error creating hackathon: $e')),
+                          );
                         }
                       }
                     : null,

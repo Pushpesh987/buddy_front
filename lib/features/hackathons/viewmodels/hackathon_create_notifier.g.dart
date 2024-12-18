@@ -7,7 +7,7 @@ part of 'hackathon_create_notifier.dart';
 // **************************************************************************
 
 String _$hackathonCreateNotifierHash() =>
-    r'018f5e18397f3188a968e86176111e6ec45e4769';
+    r'b79a6bfc19de6e4c65bd2463d69189c19fd9b577';
 
 /// See also [HackathonCreateNotifier].
 @ProviderFor(HackathonCreateNotifier)

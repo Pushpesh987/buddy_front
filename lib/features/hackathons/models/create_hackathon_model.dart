@@ -11,14 +11,13 @@ class CreateHackathonModel with _$CreateHackathonModel {
     String? description,
     String? date,
     String? location,
-    @JsonKey(name: 'entry_fee') int? entryFee,
-    @JsonKey(name: 'prize_pool') int? prizePool,
-    String? media,
+    @JsonKey(name: 'entry_fee') String? entryFee,
+    @JsonKey(name: 'prize_pool') String? prizePool,
     @JsonKey(name: 'registration_deadline') String? registrationDeadline,
     @JsonKey(name: 'organizer_name') String? organizerName,
     @JsonKey(name: 'organizer_contact') String? organizerContact,
     String? tags,
-    @JsonKey(name: 'attendee_count') int? attendeeCount,
+    @JsonKey(name: 'attendee_count') String? attendeeCount,
     String? status,
   }) = _CreateHackathonModel;
 

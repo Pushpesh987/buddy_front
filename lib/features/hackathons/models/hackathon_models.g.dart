@@ -6,7 +6,9 @@ part of 'hackathon_models.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$HackathonModelsImpl _$$HackathonModelsImplFromJson(Map<String, dynamic> json) => _$HackathonModelsImpl(
+_$HackathonModelsImpl _$$HackathonModelsImplFromJson(
+        Map<String, dynamic> json) =>
+    _$HackathonModelsImpl(
       id: json['id'] as String?,
       userId: json['user_id'] as String?,
       title: json['title'] as String?,
@@ -14,8 +16,8 @@ _$HackathonModelsImpl _$$HackathonModelsImplFromJson(Map<String, dynamic> json) 
       description: json['description'] as String?,
       date: json['date'] as String?,
       location: json['location'] as String?,
-      entryFee: (json['entry_fee'] as num?)?.toInt(),
-      prizePool: (json['prize_pool'] as num?)?.toInt(),
+      entryFee: (json['entry_fee'] as num?)?.toDouble(),
+      prizePool: (json['prize_pool'] as num?)?.toDouble(),
       media: json['media'] as String?,
       registrationDeadline: json['registration_deadline'] as String?,
       organizerName: json['organizer_name'] as String?,
@@ -25,7 +27,9 @@ _$HackathonModelsImpl _$$HackathonModelsImplFromJson(Map<String, dynamic> json) 
       status: json['status'] as String?,
     );
 
-Map<String, dynamic> _$$HackathonModelsImplToJson(_$HackathonModelsImpl instance) => <String, dynamic>{
+Map<String, dynamic> _$$HackathonModelsImplToJson(
+        _$HackathonModelsImpl instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'user_id': instance.userId,
       'title': instance.title,

@@ -26,10 +26,9 @@ mixin _$CreateHackathonModel {
   String? get date => throw _privateConstructorUsedError;
   String? get location => throw _privateConstructorUsedError;
   @JsonKey(name: 'entry_fee')
-  int? get entryFee => throw _privateConstructorUsedError;
+  String? get entryFee => throw _privateConstructorUsedError;
   @JsonKey(name: 'prize_pool')
-  int? get prizePool => throw _privateConstructorUsedError;
-  String? get media => throw _privateConstructorUsedError;
+  String? get prizePool => throw _privateConstructorUsedError;
   @JsonKey(name: 'registration_deadline')
   String? get registrationDeadline => throw _privateConstructorUsedError;
   @JsonKey(name: 'organizer_name')
@@ -38,7 +37,7 @@ mixin _$CreateHackathonModel {
   String? get organizerContact => throw _privateConstructorUsedError;
   String? get tags => throw _privateConstructorUsedError;
   @JsonKey(name: 'attendee_count')
-  int? get attendeeCount => throw _privateConstructorUsedError;
+  String? get attendeeCount => throw _privateConstructorUsedError;
   String? get status => throw _privateConstructorUsedError;
 
   /// Serializes this CreateHackathonModel to a JSON map.
@@ -47,12 +46,14 @@ mixin _$CreateHackathonModel {
   /// Create a copy of CreateHackathonModel
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $CreateHackathonModelCopyWith<CreateHackathonModel> get copyWith => throw _privateConstructorUsedError;
+  $CreateHackathonModelCopyWith<CreateHackathonModel> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $CreateHackathonModelCopyWith<$Res> {
-  factory $CreateHackathonModelCopyWith(CreateHackathonModel value, $Res Function(CreateHackathonModel) then) =
+  factory $CreateHackathonModelCopyWith(CreateHackathonModel value,
+          $Res Function(CreateHackathonModel) then) =
       _$CreateHackathonModelCopyWithImpl<$Res, CreateHackathonModel>;
   @useResult
   $Res call(
@@ -61,19 +62,19 @@ abstract class $CreateHackathonModelCopyWith<$Res> {
       String? description,
       String? date,
       String? location,
-      @JsonKey(name: 'entry_fee') int? entryFee,
-      @JsonKey(name: 'prize_pool') int? prizePool,
-      String? media,
+      @JsonKey(name: 'entry_fee') String? entryFee,
+      @JsonKey(name: 'prize_pool') String? prizePool,
       @JsonKey(name: 'registration_deadline') String? registrationDeadline,
       @JsonKey(name: 'organizer_name') String? organizerName,
       @JsonKey(name: 'organizer_contact') String? organizerContact,
       String? tags,
-      @JsonKey(name: 'attendee_count') int? attendeeCount,
+      @JsonKey(name: 'attendee_count') String? attendeeCount,
       String? status});
 }
 
 /// @nodoc
-class _$CreateHackathonModelCopyWithImpl<$Res, $Val extends CreateHackathonModel>
+class _$CreateHackathonModelCopyWithImpl<$Res,
+        $Val extends CreateHackathonModel>
     implements $CreateHackathonModelCopyWith<$Res> {
   _$CreateHackathonModelCopyWithImpl(this._value, this._then);
 
@@ -94,7 +95,6 @@ class _$CreateHackathonModelCopyWithImpl<$Res, $Val extends CreateHackathonModel
     Object? location = freezed,
     Object? entryFee = freezed,
     Object? prizePool = freezed,
-    Object? media = freezed,
     Object? registrationDeadline = freezed,
     Object? organizerName = freezed,
     Object? organizerContact = freezed,
@@ -126,14 +126,10 @@ class _$CreateHackathonModelCopyWithImpl<$Res, $Val extends CreateHackathonModel
       entryFee: freezed == entryFee
           ? _value.entryFee
           : entryFee // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       prizePool: freezed == prizePool
           ? _value.prizePool
           : prizePool // ignore: cast_nullable_to_non_nullable
-              as int?,
-      media: freezed == media
-          ? _value.media
-          : media // ignore: cast_nullable_to_non_nullable
               as String?,
       registrationDeadline: freezed == registrationDeadline
           ? _value.registrationDeadline
@@ -154,7 +150,7 @@ class _$CreateHackathonModelCopyWithImpl<$Res, $Val extends CreateHackathonModel
       attendeeCount: freezed == attendeeCount
           ? _value.attendeeCount
           : attendeeCount // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -164,9 +160,10 @@ class _$CreateHackathonModelCopyWithImpl<$Res, $Val extends CreateHackathonModel
 }
 
 /// @nodoc
-abstract class _$$CreateHackathonModelImplCopyWith<$Res> implements $CreateHackathonModelCopyWith<$Res> {
-  factory _$$CreateHackathonModelImplCopyWith(
-          _$CreateHackathonModelImpl value, $Res Function(_$CreateHackathonModelImpl) then) =
+abstract class _$$CreateHackathonModelImplCopyWith<$Res>
+    implements $CreateHackathonModelCopyWith<$Res> {
+  factory _$$CreateHackathonModelImplCopyWith(_$CreateHackathonModelImpl value,
+          $Res Function(_$CreateHackathonModelImpl) then) =
       __$$CreateHackathonModelImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -176,14 +173,13 @@ abstract class _$$CreateHackathonModelImplCopyWith<$Res> implements $CreateHacka
       String? description,
       String? date,
       String? location,
-      @JsonKey(name: 'entry_fee') int? entryFee,
-      @JsonKey(name: 'prize_pool') int? prizePool,
-      String? media,
+      @JsonKey(name: 'entry_fee') String? entryFee,
+      @JsonKey(name: 'prize_pool') String? prizePool,
       @JsonKey(name: 'registration_deadline') String? registrationDeadline,
       @JsonKey(name: 'organizer_name') String? organizerName,
       @JsonKey(name: 'organizer_contact') String? organizerContact,
       String? tags,
-      @JsonKey(name: 'attendee_count') int? attendeeCount,
+      @JsonKey(name: 'attendee_count') String? attendeeCount,
       String? status});
 }
 
@@ -191,8 +187,8 @@ abstract class _$$CreateHackathonModelImplCopyWith<$Res> implements $CreateHacka
 class __$$CreateHackathonModelImplCopyWithImpl<$Res>
     extends _$CreateHackathonModelCopyWithImpl<$Res, _$CreateHackathonModelImpl>
     implements _$$CreateHackathonModelImplCopyWith<$Res> {
-  __$$CreateHackathonModelImplCopyWithImpl(
-      _$CreateHackathonModelImpl _value, $Res Function(_$CreateHackathonModelImpl) _then)
+  __$$CreateHackathonModelImplCopyWithImpl(_$CreateHackathonModelImpl _value,
+      $Res Function(_$CreateHackathonModelImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of CreateHackathonModel
@@ -207,7 +203,6 @@ class __$$CreateHackathonModelImplCopyWithImpl<$Res>
     Object? location = freezed,
     Object? entryFee = freezed,
     Object? prizePool = freezed,
-    Object? media = freezed,
     Object? registrationDeadline = freezed,
     Object? organizerName = freezed,
     Object? organizerContact = freezed,
@@ -239,14 +234,10 @@ class __$$CreateHackathonModelImplCopyWithImpl<$Res>
       entryFee: freezed == entryFee
           ? _value.entryFee
           : entryFee // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       prizePool: freezed == prizePool
           ? _value.prizePool
           : prizePool // ignore: cast_nullable_to_non_nullable
-              as int?,
-      media: freezed == media
-          ? _value.media
-          : media // ignore: cast_nullable_to_non_nullable
               as String?,
       registrationDeadline: freezed == registrationDeadline
           ? _value.registrationDeadline
@@ -267,7 +258,7 @@ class __$$CreateHackathonModelImplCopyWithImpl<$Res>
       attendeeCount: freezed == attendeeCount
           ? _value.attendeeCount
           : attendeeCount // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -287,7 +278,6 @@ class _$CreateHackathonModelImpl implements _CreateHackathonModel {
       this.location,
       @JsonKey(name: 'entry_fee') this.entryFee,
       @JsonKey(name: 'prize_pool') this.prizePool,
-      this.media,
       @JsonKey(name: 'registration_deadline') this.registrationDeadline,
       @JsonKey(name: 'organizer_name') this.organizerName,
       @JsonKey(name: 'organizer_contact') this.organizerContact,
@@ -295,7 +285,8 @@ class _$CreateHackathonModelImpl implements _CreateHackathonModel {
       @JsonKey(name: 'attendee_count') this.attendeeCount,
       this.status});
 
-  factory _$CreateHackathonModelImpl.fromJson(Map<String, dynamic> json) => _$$CreateHackathonModelImplFromJson(json);
+  factory _$CreateHackathonModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CreateHackathonModelImplFromJson(json);
 
   @override
   final String? title;
@@ -309,12 +300,10 @@ class _$CreateHackathonModelImpl implements _CreateHackathonModel {
   final String? location;
   @override
   @JsonKey(name: 'entry_fee')
-  final int? entryFee;
+  final String? entryFee;
   @override
   @JsonKey(name: 'prize_pool')
-  final int? prizePool;
-  @override
-  final String? media;
+  final String? prizePool;
   @override
   @JsonKey(name: 'registration_deadline')
   final String? registrationDeadline;
@@ -328,13 +317,13 @@ class _$CreateHackathonModelImpl implements _CreateHackathonModel {
   final String? tags;
   @override
   @JsonKey(name: 'attendee_count')
-  final int? attendeeCount;
+  final String? attendeeCount;
   @override
   final String? status;
 
   @override
   String toString() {
-    return 'CreateHackathonModel(title: $title, theme: $theme, description: $description, date: $date, location: $location, entryFee: $entryFee, prizePool: $prizePool, media: $media, registrationDeadline: $registrationDeadline, organizerName: $organizerName, organizerContact: $organizerContact, tags: $tags, attendeeCount: $attendeeCount, status: $status)';
+    return 'CreateHackathonModel(title: $title, theme: $theme, description: $description, date: $date, location: $location, entryFee: $entryFee, prizePool: $prizePool, registrationDeadline: $registrationDeadline, organizerName: $organizerName, organizerContact: $organizerContact, tags: $tags, attendeeCount: $attendeeCount, status: $status)';
   }
 
   @override
@@ -344,33 +333,54 @@ class _$CreateHackathonModelImpl implements _CreateHackathonModel {
             other is _$CreateHackathonModelImpl &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.theme, theme) || other.theme == theme) &&
-            (identical(other.description, description) || other.description == description) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
             (identical(other.date, date) || other.date == date) &&
-            (identical(other.location, location) || other.location == location) &&
-            (identical(other.entryFee, entryFee) || other.entryFee == entryFee) &&
-            (identical(other.prizePool, prizePool) || other.prizePool == prizePool) &&
-            (identical(other.media, media) || other.media == media) &&
+            (identical(other.location, location) ||
+                other.location == location) &&
+            (identical(other.entryFee, entryFee) ||
+                other.entryFee == entryFee) &&
+            (identical(other.prizePool, prizePool) ||
+                other.prizePool == prizePool) &&
             (identical(other.registrationDeadline, registrationDeadline) ||
                 other.registrationDeadline == registrationDeadline) &&
-            (identical(other.organizerName, organizerName) || other.organizerName == organizerName) &&
-            (identical(other.organizerContact, organizerContact) || other.organizerContact == organizerContact) &&
+            (identical(other.organizerName, organizerName) ||
+                other.organizerName == organizerName) &&
+            (identical(other.organizerContact, organizerContact) ||
+                other.organizerContact == organizerContact) &&
             (identical(other.tags, tags) || other.tags == tags) &&
-            (identical(other.attendeeCount, attendeeCount) || other.attendeeCount == attendeeCount) &&
+            (identical(other.attendeeCount, attendeeCount) ||
+                other.attendeeCount == attendeeCount) &&
             (identical(other.status, status) || other.status == status));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, title, theme, description, date, location, entryFee, prizePool, media,
-      registrationDeadline, organizerName, organizerContact, tags, attendeeCount, status);
+  int get hashCode => Object.hash(
+      runtimeType,
+      title,
+      theme,
+      description,
+      date,
+      location,
+      entryFee,
+      prizePool,
+      registrationDeadline,
+      organizerName,
+      organizerContact,
+      tags,
+      attendeeCount,
+      status);
 
   /// Create a copy of CreateHackathonModel
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$CreateHackathonModelImplCopyWith<_$CreateHackathonModelImpl> get copyWith =>
-      __$$CreateHackathonModelImplCopyWithImpl<_$CreateHackathonModelImpl>(this, _$identity);
+  _$$CreateHackathonModelImplCopyWith<_$CreateHackathonModelImpl>
+      get copyWith =>
+          __$$CreateHackathonModelImplCopyWithImpl<_$CreateHackathonModelImpl>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -387,17 +397,18 @@ abstract class _CreateHackathonModel implements CreateHackathonModel {
       final String? description,
       final String? date,
       final String? location,
-      @JsonKey(name: 'entry_fee') final int? entryFee,
-      @JsonKey(name: 'prize_pool') final int? prizePool,
-      final String? media,
-      @JsonKey(name: 'registration_deadline') final String? registrationDeadline,
+      @JsonKey(name: 'entry_fee') final String? entryFee,
+      @JsonKey(name: 'prize_pool') final String? prizePool,
+      @JsonKey(name: 'registration_deadline')
+      final String? registrationDeadline,
       @JsonKey(name: 'organizer_name') final String? organizerName,
       @JsonKey(name: 'organizer_contact') final String? organizerContact,
       final String? tags,
-      @JsonKey(name: 'attendee_count') final int? attendeeCount,
+      @JsonKey(name: 'attendee_count') final String? attendeeCount,
       final String? status}) = _$CreateHackathonModelImpl;
 
-  factory _CreateHackathonModel.fromJson(Map<String, dynamic> json) = _$CreateHackathonModelImpl.fromJson;
+  factory _CreateHackathonModel.fromJson(Map<String, dynamic> json) =
+      _$CreateHackathonModelImpl.fromJson;
 
   @override
   String? get title;
@@ -411,12 +422,10 @@ abstract class _CreateHackathonModel implements CreateHackathonModel {
   String? get location;
   @override
   @JsonKey(name: 'entry_fee')
-  int? get entryFee;
+  String? get entryFee;
   @override
   @JsonKey(name: 'prize_pool')
-  int? get prizePool;
-  @override
-  String? get media;
+  String? get prizePool;
   @override
   @JsonKey(name: 'registration_deadline')
   String? get registrationDeadline;
@@ -430,7 +439,7 @@ abstract class _CreateHackathonModel implements CreateHackathonModel {
   String? get tags;
   @override
   @JsonKey(name: 'attendee_count')
-  int? get attendeeCount;
+  String? get attendeeCount;
   @override
   String? get status;
 
@@ -438,5 +447,6 @@ abstract class _CreateHackathonModel implements CreateHackathonModel {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$CreateHackathonModelImplCopyWith<_$CreateHackathonModelImpl> get copyWith => throw _privateConstructorUsedError;
+  _$$CreateHackathonModelImplCopyWith<_$CreateHackathonModelImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

@@ -1,9 +1,8 @@
 import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import '../../../../core/api_service/api_service.dart';
-import '../../../core/service_provider.dart/service_provider.dart';
+import '../../../core/api_service/file_service.dart';
+import '../../../core/service_provider.dart/file_service_provider.dart';
 import '../models/create_hackathon_model.dart';
 
 part 'hackathon_create_notifier.g.dart';
@@ -14,40 +13,42 @@ class HackathonCreateNotifier extends AutoDisposeAsyncNotifier<void> {
   FutureOr<void> build() {}
 
   Future<void> createHackathon(CreateHackathonModel newHackathon, {File? imageFile}) async {
-    final apiService = ref.watch(apiServiceProvider);
+    final fileUploadService = ref.watch(fileUploadServiceProvider);
 
     try {
+      final requestBody = newHackathon.toJson();
       FormData formData = FormData();
 
-      final requestBody = newHackathon.toJson();
       requestBody.forEach((key, value) {
         formData.fields.add(MapEntry(key, value.toString()));
       });
 
       if (imageFile != null) {
         formData.files.add(MapEntry(
-          'image',
+          'media',
           await MultipartFile.fromFile(imageFile.path),
         ));
       }
 
-      final response = await apiService.request(
-        HttpMethod.post,
+      final response = await fileUploadService.uploadDataWithFile(
+        HttpMethodFile.post,
         '/api/v1/events/event',
-        // formData: formData,
+        data: requestBody,
+        file: imageFile,
+        keyName: 'media',
       );
 
       response.fold(
         (error) {
-          throw Exception('Error creating project: $error');
+          throw Exception('Error creating hackathon: $error');
         },
         (data) {
-          print("project created successfully: $data");
+          print("Hackathon created successfully: $data");
         },
       );
     } catch (e) {
-      print("Error occurred while creating the project: $e");
-      throw Exception('Error creating project: $e');
+      print("Error occurred while creating the hackathon: $e");
+      throw Exception('Error creating hackathon: $e');
     }
   }
 }
