@@ -6,8 +6,7 @@ part of 'create_hackathon_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$CreateHackathonModelImpl _$$CreateHackathonModelImplFromJson(
-        Map<String, dynamic> json) =>
+_$CreateHackathonModelImpl _$$CreateHackathonModelImplFromJson(Map<String, dynamic> json) =>
     _$CreateHackathonModelImpl(
       title: json['title'] as String?,
       theme: json['theme'] as String?,
@@ -24,9 +23,7 @@ _$CreateHackathonModelImpl _$$CreateHackathonModelImplFromJson(
       status: json['status'] as String?,
     );
 
-Map<String, dynamic> _$$CreateHackathonModelImplToJson(
-        _$CreateHackathonModelImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$$CreateHackathonModelImplToJson(_$CreateHackathonModelImpl instance) => <String, dynamic>{
       'title': instance.title,
       'theme': instance.theme,
       'description': instance.description,

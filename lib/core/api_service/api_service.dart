@@ -47,7 +47,7 @@ class ApiService {
             queryParameters: queryParameters,
             options: Options(
               headers: headers,
-              contentType: Headers.jsonContentType,  // Ensures JSON is sent
+              contentType: Headers.jsonContentType, // Ensures JSON is sent
             ),
           );
           break;
@@ -57,7 +57,7 @@ class ApiService {
             data: jsonData,
             options: Options(
               headers: headers,
-              contentType: Headers.jsonContentType,  // Ensures JSON is sent
+              contentType: Headers.jsonContentType, // Ensures JSON is sent
             ),
           );
           break;
@@ -67,7 +67,7 @@ class ApiService {
             data: jsonData,
             options: Options(
               headers: headers,
-              contentType: Headers.jsonContentType,  // Ensures JSON is sent
+              contentType: Headers.jsonContentType, // Ensures JSON is sent
             ),
           );
           break;
@@ -77,7 +77,7 @@ class ApiService {
             data: jsonData,
             options: Options(
               headers: headers,
-              contentType: Headers.jsonContentType,  // Ensures JSON is sent
+              contentType: Headers.jsonContentType, // Ensures JSON is sent
             ),
           );
           break;

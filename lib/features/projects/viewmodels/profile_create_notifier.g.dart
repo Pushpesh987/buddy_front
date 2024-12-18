@@ -6,18 +6,14 @@ part of 'profile_create_notifier.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$profileCreateNotifierHash() =>
-    r'94ad2058b75bbb9671b3b62135b9d92992edbe0d';
+String _$profileCreateNotifierHash() => r'94ad2058b75bbb9671b3b62135b9d92992edbe0d';
 
 /// See also [ProfileCreateNotifier].
 @ProviderFor(ProfileCreateNotifier)
-final profileCreateNotifierProvider =
-    AutoDisposeAsyncNotifierProvider<ProfileCreateNotifier, void>.internal(
+final profileCreateNotifierProvider = AutoDisposeAsyncNotifierProvider<ProfileCreateNotifier, void>.internal(
   ProfileCreateNotifier.new,
   name: r'profileCreateNotifierProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$profileCreateNotifierHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$profileCreateNotifierHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

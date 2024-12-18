@@ -6,9 +6,7 @@ part of 'hackathon_models.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$HackathonModelsImpl _$$HackathonModelsImplFromJson(
-        Map<String, dynamic> json) =>
-    _$HackathonModelsImpl(
+_$HackathonModelsImpl _$$HackathonModelsImplFromJson(Map<String, dynamic> json) => _$HackathonModelsImpl(
       id: json['id'] as String?,
       userId: json['user_id'] as String?,
       title: json['title'] as String?,
@@ -27,9 +25,7 @@ _$HackathonModelsImpl _$$HackathonModelsImplFromJson(
       status: json['status'] as String?,
     );
 
-Map<String, dynamic> _$$HackathonModelsImplToJson(
-        _$HackathonModelsImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$$HackathonModelsImplToJson(_$HackathonModelsImpl instance) => <String, dynamic>{
       'id': instance.id,
       'user_id': instance.userId,
       'title': instance.title,

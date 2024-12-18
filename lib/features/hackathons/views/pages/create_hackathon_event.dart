@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:buddy_front/core/theme/app_pallete.dart';
 import 'package:buddy_front/features/hackathons/viewmodels/hackathon_create_notifier.dart';
 import '../../../events/view/pages/event_page.dart';
-import '../../controllers/create_project_event_controller.dart';
+import '../../controllers/create_hackathon_event_controller.dart';
 
 class CreateProjectEvent extends ConsumerStatefulWidget {
   const CreateProjectEvent({super.key});

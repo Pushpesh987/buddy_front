@@ -6,9 +6,7 @@ part of 'create_workshop_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$CreateWorkshopModelImpl _$$CreateWorkshopModelImplFromJson(
-        Map<String, dynamic> json) =>
-    _$CreateWorkshopModelImpl(
+_$CreateWorkshopModelImpl _$$CreateWorkshopModelImplFromJson(Map<String, dynamic> json) => _$CreateWorkshopModelImpl(
       title: json['title'] as String,
       description: json['description'] as String?,
       date: json['date'] as String?,
@@ -22,9 +20,7 @@ _$CreateWorkshopModelImpl _$$CreateWorkshopModelImplFromJson(
       registrationLink: json['registration_link'] as String?,
     );
 
-Map<String, dynamic> _$$CreateWorkshopModelImplToJson(
-        _$CreateWorkshopModelImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$$CreateWorkshopModelImplToJson(_$CreateWorkshopModelImpl instance) => <String, dynamic>{
       'title': instance.title,
       'description': instance.description,
       'date': instance.date,

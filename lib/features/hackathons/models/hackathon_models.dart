@@ -6,7 +6,7 @@ part 'hackathon_models.g.dart';
 @freezed
 class HackathonModels with _$HackathonModels {
   factory HackathonModels({
-    String? id, 
+    String? id,
     @JsonKey(name: 'user_id') String? userId,
     String? title,
     String? theme,

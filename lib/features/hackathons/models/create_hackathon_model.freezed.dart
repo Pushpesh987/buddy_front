@@ -46,14 +46,12 @@ mixin _$CreateHackathonModel {
   /// Create a copy of CreateHackathonModel
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $CreateHackathonModelCopyWith<CreateHackathonModel> get copyWith =>
-      throw _privateConstructorUsedError;
+  $CreateHackathonModelCopyWith<CreateHackathonModel> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $CreateHackathonModelCopyWith<$Res> {
-  factory $CreateHackathonModelCopyWith(CreateHackathonModel value,
-          $Res Function(CreateHackathonModel) then) =
+  factory $CreateHackathonModelCopyWith(CreateHackathonModel value, $Res Function(CreateHackathonModel) then) =
       _$CreateHackathonModelCopyWithImpl<$Res, CreateHackathonModel>;
   @useResult
   $Res call(
@@ -73,8 +71,7 @@ abstract class $CreateHackathonModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$CreateHackathonModelCopyWithImpl<$Res,
-        $Val extends CreateHackathonModel>
+class _$CreateHackathonModelCopyWithImpl<$Res, $Val extends CreateHackathonModel>
     implements $CreateHackathonModelCopyWith<$Res> {
   _$CreateHackathonModelCopyWithImpl(this._value, this._then);
 
@@ -160,10 +157,9 @@ class _$CreateHackathonModelCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$CreateHackathonModelImplCopyWith<$Res>
-    implements $CreateHackathonModelCopyWith<$Res> {
-  factory _$$CreateHackathonModelImplCopyWith(_$CreateHackathonModelImpl value,
-          $Res Function(_$CreateHackathonModelImpl) then) =
+abstract class _$$CreateHackathonModelImplCopyWith<$Res> implements $CreateHackathonModelCopyWith<$Res> {
+  factory _$$CreateHackathonModelImplCopyWith(
+          _$CreateHackathonModelImpl value, $Res Function(_$CreateHackathonModelImpl) then) =
       __$$CreateHackathonModelImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -187,8 +183,8 @@ abstract class _$$CreateHackathonModelImplCopyWith<$Res>
 class __$$CreateHackathonModelImplCopyWithImpl<$Res>
     extends _$CreateHackathonModelCopyWithImpl<$Res, _$CreateHackathonModelImpl>
     implements _$$CreateHackathonModelImplCopyWith<$Res> {
-  __$$CreateHackathonModelImplCopyWithImpl(_$CreateHackathonModelImpl _value,
-      $Res Function(_$CreateHackathonModelImpl) _then)
+  __$$CreateHackathonModelImplCopyWithImpl(
+      _$CreateHackathonModelImpl _value, $Res Function(_$CreateHackathonModelImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of CreateHackathonModel
@@ -285,8 +281,7 @@ class _$CreateHackathonModelImpl implements _CreateHackathonModel {
       @JsonKey(name: 'attendee_count') this.attendeeCount,
       this.status});
 
-  factory _$CreateHackathonModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$CreateHackathonModelImplFromJson(json);
+  factory _$CreateHackathonModelImpl.fromJson(Map<String, dynamic> json) => _$$CreateHackathonModelImplFromJson(json);
 
   @override
   final String? title;
@@ -333,54 +328,32 @@ class _$CreateHackathonModelImpl implements _CreateHackathonModel {
             other is _$CreateHackathonModelImpl &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.theme, theme) || other.theme == theme) &&
-            (identical(other.description, description) ||
-                other.description == description) &&
+            (identical(other.description, description) || other.description == description) &&
             (identical(other.date, date) || other.date == date) &&
-            (identical(other.location, location) ||
-                other.location == location) &&
-            (identical(other.entryFee, entryFee) ||
-                other.entryFee == entryFee) &&
-            (identical(other.prizePool, prizePool) ||
-                other.prizePool == prizePool) &&
+            (identical(other.location, location) || other.location == location) &&
+            (identical(other.entryFee, entryFee) || other.entryFee == entryFee) &&
+            (identical(other.prizePool, prizePool) || other.prizePool == prizePool) &&
             (identical(other.registrationDeadline, registrationDeadline) ||
                 other.registrationDeadline == registrationDeadline) &&
-            (identical(other.organizerName, organizerName) ||
-                other.organizerName == organizerName) &&
-            (identical(other.organizerContact, organizerContact) ||
-                other.organizerContact == organizerContact) &&
+            (identical(other.organizerName, organizerName) || other.organizerName == organizerName) &&
+            (identical(other.organizerContact, organizerContact) || other.organizerContact == organizerContact) &&
             (identical(other.tags, tags) || other.tags == tags) &&
-            (identical(other.attendeeCount, attendeeCount) ||
-                other.attendeeCount == attendeeCount) &&
+            (identical(other.attendeeCount, attendeeCount) || other.attendeeCount == attendeeCount) &&
             (identical(other.status, status) || other.status == status));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      title,
-      theme,
-      description,
-      date,
-      location,
-      entryFee,
-      prizePool,
-      registrationDeadline,
-      organizerName,
-      organizerContact,
-      tags,
-      attendeeCount,
-      status);
+  int get hashCode => Object.hash(runtimeType, title, theme, description, date, location, entryFee, prizePool,
+      registrationDeadline, organizerName, organizerContact, tags, attendeeCount, status);
 
   /// Create a copy of CreateHackathonModel
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$CreateHackathonModelImplCopyWith<_$CreateHackathonModelImpl>
-      get copyWith =>
-          __$$CreateHackathonModelImplCopyWithImpl<_$CreateHackathonModelImpl>(
-              this, _$identity);
+  _$$CreateHackathonModelImplCopyWith<_$CreateHackathonModelImpl> get copyWith =>
+      __$$CreateHackathonModelImplCopyWithImpl<_$CreateHackathonModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -399,16 +372,14 @@ abstract class _CreateHackathonModel implements CreateHackathonModel {
       final String? location,
       @JsonKey(name: 'entry_fee') final String? entryFee,
       @JsonKey(name: 'prize_pool') final String? prizePool,
-      @JsonKey(name: 'registration_deadline')
-      final String? registrationDeadline,
+      @JsonKey(name: 'registration_deadline') final String? registrationDeadline,
       @JsonKey(name: 'organizer_name') final String? organizerName,
       @JsonKey(name: 'organizer_contact') final String? organizerContact,
       final String? tags,
       @JsonKey(name: 'attendee_count') final String? attendeeCount,
       final String? status}) = _$CreateHackathonModelImpl;
 
-  factory _CreateHackathonModel.fromJson(Map<String, dynamic> json) =
-      _$CreateHackathonModelImpl.fromJson;
+  factory _CreateHackathonModel.fromJson(Map<String, dynamic> json) = _$CreateHackathonModelImpl.fromJson;
 
   @override
   String? get title;
@@ -447,6 +418,5 @@ abstract class _CreateHackathonModel implements CreateHackathonModel {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$CreateHackathonModelImplCopyWith<_$CreateHackathonModelImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$CreateHackathonModelImplCopyWith<_$CreateHackathonModelImpl> get copyWith => throw _privateConstructorUsedError;
 }

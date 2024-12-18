@@ -6,18 +6,14 @@ part of 'edit_profile_notifier.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$editProfileNotifierHash() =>
-    r'15783786fca454753f9efd164b3b204520bd3e91';
+String _$editProfileNotifierHash() => r'15783786fca454753f9efd164b3b204520bd3e91';
 
 /// See also [EditProfileNotifier].
 @ProviderFor(EditProfileNotifier)
-final editProfileNotifierProvider = AutoDisposeAsyncNotifierProvider<
-    EditProfileNotifier, EditProfileState>.internal(
+final editProfileNotifierProvider = AutoDisposeAsyncNotifierProvider<EditProfileNotifier, EditProfileState>.internal(
   EditProfileNotifier.new,
   name: r'editProfileNotifierProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$editProfileNotifierHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$editProfileNotifierHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

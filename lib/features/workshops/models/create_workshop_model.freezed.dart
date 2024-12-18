@@ -42,14 +42,12 @@ mixin _$CreateWorkshopModel {
   /// Create a copy of CreateWorkshopModel
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $CreateWorkshopModelCopyWith<CreateWorkshopModel> get copyWith =>
-      throw _privateConstructorUsedError;
+  $CreateWorkshopModelCopyWith<CreateWorkshopModel> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $CreateWorkshopModelCopyWith<$Res> {
-  factory $CreateWorkshopModelCopyWith(
-          CreateWorkshopModel value, $Res Function(CreateWorkshopModel) then) =
+  factory $CreateWorkshopModelCopyWith(CreateWorkshopModel value, $Res Function(CreateWorkshopModel) then) =
       _$CreateWorkshopModelCopyWithImpl<$Res, CreateWorkshopModel>;
   @useResult
   $Res call(
@@ -143,10 +141,9 @@ class _$CreateWorkshopModelCopyWithImpl<$Res, $Val extends CreateWorkshopModel>
 }
 
 /// @nodoc
-abstract class _$$CreateWorkshopModelImplCopyWith<$Res>
-    implements $CreateWorkshopModelCopyWith<$Res> {
-  factory _$$CreateWorkshopModelImplCopyWith(_$CreateWorkshopModelImpl value,
-          $Res Function(_$CreateWorkshopModelImpl) then) =
+abstract class _$$CreateWorkshopModelImplCopyWith<$Res> implements $CreateWorkshopModelCopyWith<$Res> {
+  factory _$$CreateWorkshopModelImplCopyWith(
+          _$CreateWorkshopModelImpl value, $Res Function(_$CreateWorkshopModelImpl) then) =
       __$$CreateWorkshopModelImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -168,8 +165,8 @@ abstract class _$$CreateWorkshopModelImplCopyWith<$Res>
 class __$$CreateWorkshopModelImplCopyWithImpl<$Res>
     extends _$CreateWorkshopModelCopyWithImpl<$Res, _$CreateWorkshopModelImpl>
     implements _$$CreateWorkshopModelImplCopyWith<$Res> {
-  __$$CreateWorkshopModelImplCopyWithImpl(_$CreateWorkshopModelImpl _value,
-      $Res Function(_$CreateWorkshopModelImpl) _then)
+  __$$CreateWorkshopModelImplCopyWithImpl(
+      _$CreateWorkshopModelImpl _value, $Res Function(_$CreateWorkshopModelImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of CreateWorkshopModel
@@ -254,8 +251,7 @@ class _$CreateWorkshopModelImpl implements _CreateWorkshopModel {
       required this.status,
       @JsonKey(name: 'registration_link') this.registrationLink});
 
-  factory _$CreateWorkshopModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$CreateWorkshopModelImplFromJson(json);
+  factory _$CreateWorkshopModelImpl.fromJson(Map<String, dynamic> json) => _$$CreateWorkshopModelImplFromJson(json);
 
   @override
   final String title;
@@ -295,40 +291,22 @@ class _$CreateWorkshopModelImpl implements _CreateWorkshopModel {
         (other.runtimeType == runtimeType &&
             other is _$CreateWorkshopModelImpl &&
             (identical(other.title, title) || other.title == title) &&
-            (identical(other.description, description) ||
-                other.description == description) &&
+            (identical(other.description, description) || other.description == description) &&
             (identical(other.date, date) || other.date == date) &&
-            (identical(other.location, location) ||
-                other.location == location) &&
-            (identical(other.entryFee, entryFee) ||
-                other.entryFee == entryFee) &&
-            (identical(other.duration, duration) ||
-                other.duration == duration) &&
-            (identical(other.instructorInfo, instructorInfo) ||
-                other.instructorInfo == instructorInfo) &&
+            (identical(other.location, location) || other.location == location) &&
+            (identical(other.entryFee, entryFee) || other.entryFee == entryFee) &&
+            (identical(other.duration, duration) || other.duration == duration) &&
+            (identical(other.instructorInfo, instructorInfo) || other.instructorInfo == instructorInfo) &&
             (identical(other.tags, tags) || other.tags == tags) &&
-            (identical(other.participantLimit, participantLimit) ||
-                other.participantLimit == participantLimit) &&
+            (identical(other.participantLimit, participantLimit) || other.participantLimit == participantLimit) &&
             (identical(other.status, status) || other.status == status) &&
-            (identical(other.registrationLink, registrationLink) ||
-                other.registrationLink == registrationLink));
+            (identical(other.registrationLink, registrationLink) || other.registrationLink == registrationLink));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      title,
-      description,
-      date,
-      location,
-      entryFee,
-      duration,
-      instructorInfo,
-      tags,
-      participantLimit,
-      status,
-      registrationLink);
+  int get hashCode => Object.hash(runtimeType, title, description, date, location, entryFee, duration, instructorInfo,
+      tags, participantLimit, status, registrationLink);
 
   /// Create a copy of CreateWorkshopModel
   /// with the given fields replaced by the non-null parameter values.
@@ -336,8 +314,7 @@ class _$CreateWorkshopModelImpl implements _CreateWorkshopModel {
   @override
   @pragma('vm:prefer-inline')
   _$$CreateWorkshopModelImplCopyWith<_$CreateWorkshopModelImpl> get copyWith =>
-      __$$CreateWorkshopModelImplCopyWithImpl<_$CreateWorkshopModelImpl>(
-          this, _$identity);
+      __$$CreateWorkshopModelImplCopyWithImpl<_$CreateWorkshopModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -349,21 +326,19 @@ class _$CreateWorkshopModelImpl implements _CreateWorkshopModel {
 
 abstract class _CreateWorkshopModel implements CreateWorkshopModel {
   factory _CreateWorkshopModel(
-          {required final String title,
-          final String? description,
-          required final String? date,
-          final String? location,
-          @JsonKey(name: 'entry_fee') final String? entryFee,
-          final String? duration,
-          @JsonKey(name: 'instructor_info') final String? instructorInfo,
-          final String? tags,
-          @JsonKey(name: 'participant_limit') final int? participantLimit,
-          required final String status,
-          @JsonKey(name: 'registration_link') final String? registrationLink}) =
-      _$CreateWorkshopModelImpl;
+      {required final String title,
+      final String? description,
+      required final String? date,
+      final String? location,
+      @JsonKey(name: 'entry_fee') final String? entryFee,
+      final String? duration,
+      @JsonKey(name: 'instructor_info') final String? instructorInfo,
+      final String? tags,
+      @JsonKey(name: 'participant_limit') final int? participantLimit,
+      required final String status,
+      @JsonKey(name: 'registration_link') final String? registrationLink}) = _$CreateWorkshopModelImpl;
 
-  factory _CreateWorkshopModel.fromJson(Map<String, dynamic> json) =
-      _$CreateWorkshopModelImpl.fromJson;
+  factory _CreateWorkshopModel.fromJson(Map<String, dynamic> json) = _$CreateWorkshopModelImpl.fromJson;
 
   @override
   String get title;
@@ -396,6 +371,5 @@ abstract class _CreateWorkshopModel implements CreateWorkshopModel {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$CreateWorkshopModelImplCopyWith<_$CreateWorkshopModelImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$CreateWorkshopModelImplCopyWith<_$CreateWorkshopModelImpl> get copyWith => throw _privateConstructorUsedError;
 }
