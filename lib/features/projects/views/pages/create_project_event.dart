@@ -5,9 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:buddy_front/core/theme/app_pallete.dart';
-
 import '../../models/create_project_model.dart';
-import '../../viewmodels/profile_create_notifier.dart';
+import '../../viewmodels/project_create_notifier.dart';
 
 class CreateProjectEvent extends ConsumerStatefulWidget {
   const CreateProjectEvent({super.key});
@@ -27,6 +26,7 @@ class _CreateProjectEventState extends ConsumerState<CreateProjectEvent> {
   final _projectLinkController = TextEditingController();
   final _goalsController = TextEditingController();
   final _domainController = TextEditingController();
+  final _teamMembersController = TextEditingController(); // Added teamMembers controller
 
   String? _startDate;
   String? _endDate;
@@ -90,7 +90,8 @@ class _CreateProjectEventState extends ConsumerState<CreateProjectEvent> {
         _sponsorsController.text.isNotEmpty &&
         _projectLinkController.text.isNotEmpty &&
         _goalsController.text.isNotEmpty &&
-        _domainController.text.isNotEmpty;
+        _domainController.text.isNotEmpty &&
+        _teamMembersController.text.isNotEmpty; // Include teamMembers
 
     setState(() {
       _isFormValid = isFormValid;
@@ -256,6 +257,18 @@ class _CreateProjectEventState extends ConsumerState<CreateProjectEvent> {
                 },
                 onChanged: (_) => _checkFormValidity(),
               ),
+              const SizedBox(height: 16),
+              ProjectTextfield(
+                controller: _teamMembersController, // Added text field for team members
+                labelText: 'Team Members (comma separated)',
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Team Members are required';
+                  }
+                  return null;
+                },
+                onChanged: (_) => _checkFormValidity(),
+              ),
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _pickImage,
@@ -281,12 +294,12 @@ class _CreateProjectEventState extends ConsumerState<CreateProjectEvent> {
                           startDate: _startDate,
                           endDate: _endDate,
                           location: _locationController.text,
-                          media: _selectedImage?.path,
                           tags: _tagsController.text,
                           sponsors: _sponsorsController.text,
                           projectLink: _projectLinkController.text,
                           goals: _goalsController.text,
                           domain: _domainController.text,
+                          teamMembers: _teamMembersController.text, // Added team members
                           status: _getWorkshopStatus(_startDate),
                         );
 

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:buddy_front/core/theme/app_pallete.dart';
 import 'package:buddy_front/features/hackathons/viewmodels/hackathon_create_notifier.dart';
-import '../../../events/view/pages/event_page.dart';
 import '../../controllers/create_hackathon_event_controller.dart';
 
 class CreateProjectEvent extends ConsumerStatefulWidget {
@@ -268,13 +267,6 @@ class _CreateProjectEventState extends ConsumerState<CreateProjectEvent> {
                           // Show success message
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(content: Text('Hackathon Created Successfully')),
-                          );
-
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const EventPage(initialIndex: 1),
-                            ),
                           );
                         } catch (e) {
                           ScaffoldMessenger.of(context).showSnackBar(

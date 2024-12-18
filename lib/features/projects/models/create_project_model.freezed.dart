@@ -22,21 +22,20 @@ CreateProjectModel _$CreateProjectModelFromJson(Map<String, dynamic> json) {
 mixin _$CreateProjectModel {
   String? get title => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
+  String? get domain => throw _privateConstructorUsedError;
   @JsonKey(name: 'start_date')
   String? get startDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'end_date')
   String? get endDate => throw _privateConstructorUsedError;
   String? get location => throw _privateConstructorUsedError;
-  String? get media => throw _privateConstructorUsedError;
   String? get tags => throw _privateConstructorUsedError;
+  @JsonKey(name: 'team_members')
   String? get teamMembers => throw _privateConstructorUsedError;
   String? get status => throw _privateConstructorUsedError;
   String? get sponsors => throw _privateConstructorUsedError;
   @JsonKey(name: 'project_link')
   String? get projectLink => throw _privateConstructorUsedError;
   String? get goals => throw _privateConstructorUsedError;
-  @JsonKey(name: 'domain')
-  String? get domain => throw _privateConstructorUsedError;
 
   /// Serializes this CreateProjectModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -55,17 +54,16 @@ abstract class $CreateProjectModelCopyWith<$Res> {
   $Res call(
       {String? title,
       String? description,
+      String? domain,
       @JsonKey(name: 'start_date') String? startDate,
       @JsonKey(name: 'end_date') String? endDate,
       String? location,
-      String? media,
       String? tags,
-      String? teamMembers,
+      @JsonKey(name: 'team_members') String? teamMembers,
       String? status,
       String? sponsors,
       @JsonKey(name: 'project_link') String? projectLink,
-      String? goals,
-      @JsonKey(name: 'domain') String? domain});
+      String? goals});
 }
 
 /// @nodoc
@@ -85,17 +83,16 @@ class _$CreateProjectModelCopyWithImpl<$Res, $Val extends CreateProjectModel>
   $Res call({
     Object? title = freezed,
     Object? description = freezed,
+    Object? domain = freezed,
     Object? startDate = freezed,
     Object? endDate = freezed,
     Object? location = freezed,
-    Object? media = freezed,
     Object? tags = freezed,
     Object? teamMembers = freezed,
     Object? status = freezed,
     Object? sponsors = freezed,
     Object? projectLink = freezed,
     Object? goals = freezed,
-    Object? domain = freezed,
   }) {
     return _then(_value.copyWith(
       title: freezed == title
@@ -105,6 +102,10 @@ class _$CreateProjectModelCopyWithImpl<$Res, $Val extends CreateProjectModel>
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      domain: freezed == domain
+          ? _value.domain
+          : domain // ignore: cast_nullable_to_non_nullable
               as String?,
       startDate: freezed == startDate
           ? _value.startDate
@@ -117,10 +118,6 @@ class _$CreateProjectModelCopyWithImpl<$Res, $Val extends CreateProjectModel>
       location: freezed == location
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
-              as String?,
-      media: freezed == media
-          ? _value.media
-          : media // ignore: cast_nullable_to_non_nullable
               as String?,
       tags: freezed == tags
           ? _value.tags
@@ -146,10 +143,6 @@ class _$CreateProjectModelCopyWithImpl<$Res, $Val extends CreateProjectModel>
           ? _value.goals
           : goals // ignore: cast_nullable_to_non_nullable
               as String?,
-      domain: freezed == domain
-          ? _value.domain
-          : domain // ignore: cast_nullable_to_non_nullable
-              as String?,
     ) as $Val);
   }
 }
@@ -164,17 +157,16 @@ abstract class _$$CreateProjectModelImplCopyWith<$Res> implements $CreateProject
   $Res call(
       {String? title,
       String? description,
+      String? domain,
       @JsonKey(name: 'start_date') String? startDate,
       @JsonKey(name: 'end_date') String? endDate,
       String? location,
-      String? media,
       String? tags,
-      String? teamMembers,
+      @JsonKey(name: 'team_members') String? teamMembers,
       String? status,
       String? sponsors,
       @JsonKey(name: 'project_link') String? projectLink,
-      String? goals,
-      @JsonKey(name: 'domain') String? domain});
+      String? goals});
 }
 
 /// @nodoc
@@ -192,17 +184,16 @@ class __$$CreateProjectModelImplCopyWithImpl<$Res>
   $Res call({
     Object? title = freezed,
     Object? description = freezed,
+    Object? domain = freezed,
     Object? startDate = freezed,
     Object? endDate = freezed,
     Object? location = freezed,
-    Object? media = freezed,
     Object? tags = freezed,
     Object? teamMembers = freezed,
     Object? status = freezed,
     Object? sponsors = freezed,
     Object? projectLink = freezed,
     Object? goals = freezed,
-    Object? domain = freezed,
   }) {
     return _then(_$CreateProjectModelImpl(
       title: freezed == title
@@ -212,6 +203,10 @@ class __$$CreateProjectModelImplCopyWithImpl<$Res>
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      domain: freezed == domain
+          ? _value.domain
+          : domain // ignore: cast_nullable_to_non_nullable
               as String?,
       startDate: freezed == startDate
           ? _value.startDate
@@ -224,10 +219,6 @@ class __$$CreateProjectModelImplCopyWithImpl<$Res>
       location: freezed == location
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
-              as String?,
-      media: freezed == media
-          ? _value.media
-          : media // ignore: cast_nullable_to_non_nullable
               as String?,
       tags: freezed == tags
           ? _value.tags
@@ -253,10 +244,6 @@ class __$$CreateProjectModelImplCopyWithImpl<$Res>
           ? _value.goals
           : goals // ignore: cast_nullable_to_non_nullable
               as String?,
-      domain: freezed == domain
-          ? _value.domain
-          : domain // ignore: cast_nullable_to_non_nullable
-              as String?,
     ));
   }
 }
@@ -267,17 +254,16 @@ class _$CreateProjectModelImpl implements _CreateProjectModel {
   _$CreateProjectModelImpl(
       {this.title,
       this.description,
+      this.domain,
       @JsonKey(name: 'start_date') this.startDate,
       @JsonKey(name: 'end_date') this.endDate,
       this.location,
-      this.media,
       this.tags,
-      this.teamMembers,
+      @JsonKey(name: 'team_members') this.teamMembers,
       this.status,
       this.sponsors,
       @JsonKey(name: 'project_link') this.projectLink,
-      this.goals,
-      @JsonKey(name: 'domain') this.domain});
+      this.goals});
 
   factory _$CreateProjectModelImpl.fromJson(Map<String, dynamic> json) => _$$CreateProjectModelImplFromJson(json);
 
@@ -285,6 +271,8 @@ class _$CreateProjectModelImpl implements _CreateProjectModel {
   final String? title;
   @override
   final String? description;
+  @override
+  final String? domain;
   @override
   @JsonKey(name: 'start_date')
   final String? startDate;
@@ -294,10 +282,9 @@ class _$CreateProjectModelImpl implements _CreateProjectModel {
   @override
   final String? location;
   @override
-  final String? media;
-  @override
   final String? tags;
   @override
+  @JsonKey(name: 'team_members')
   final String? teamMembers;
   @override
   final String? status;
@@ -308,13 +295,10 @@ class _$CreateProjectModelImpl implements _CreateProjectModel {
   final String? projectLink;
   @override
   final String? goals;
-  @override
-  @JsonKey(name: 'domain')
-  final String? domain;
 
   @override
   String toString() {
-    return 'CreateProjectModel(title: $title, description: $description, startDate: $startDate, endDate: $endDate, location: $location, media: $media, tags: $tags, teamMembers: $teamMembers, status: $status, sponsors: $sponsors, projectLink: $projectLink, goals: $goals, domain: $domain)';
+    return 'CreateProjectModel(title: $title, description: $description, domain: $domain, startDate: $startDate, endDate: $endDate, location: $location, tags: $tags, teamMembers: $teamMembers, status: $status, sponsors: $sponsors, projectLink: $projectLink, goals: $goals)';
   }
 
   @override
@@ -324,23 +308,22 @@ class _$CreateProjectModelImpl implements _CreateProjectModel {
             other is _$CreateProjectModelImpl &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.description, description) || other.description == description) &&
+            (identical(other.domain, domain) || other.domain == domain) &&
             (identical(other.startDate, startDate) || other.startDate == startDate) &&
             (identical(other.endDate, endDate) || other.endDate == endDate) &&
             (identical(other.location, location) || other.location == location) &&
-            (identical(other.media, media) || other.media == media) &&
             (identical(other.tags, tags) || other.tags == tags) &&
             (identical(other.teamMembers, teamMembers) || other.teamMembers == teamMembers) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.sponsors, sponsors) || other.sponsors == sponsors) &&
             (identical(other.projectLink, projectLink) || other.projectLink == projectLink) &&
-            (identical(other.goals, goals) || other.goals == goals) &&
-            (identical(other.domain, domain) || other.domain == domain));
+            (identical(other.goals, goals) || other.goals == goals));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, title, description, startDate, endDate, location, media, tags,
-      teamMembers, status, sponsors, projectLink, goals, domain);
+  int get hashCode => Object.hash(runtimeType, title, description, domain, startDate, endDate, location, tags,
+      teamMembers, status, sponsors, projectLink, goals);
 
   /// Create a copy of CreateProjectModel
   /// with the given fields replaced by the non-null parameter values.
@@ -362,17 +345,16 @@ abstract class _CreateProjectModel implements CreateProjectModel {
   factory _CreateProjectModel(
       {final String? title,
       final String? description,
+      final String? domain,
       @JsonKey(name: 'start_date') final String? startDate,
       @JsonKey(name: 'end_date') final String? endDate,
       final String? location,
-      final String? media,
       final String? tags,
-      final String? teamMembers,
+      @JsonKey(name: 'team_members') final String? teamMembers,
       final String? status,
       final String? sponsors,
       @JsonKey(name: 'project_link') final String? projectLink,
-      final String? goals,
-      @JsonKey(name: 'domain') final String? domain}) = _$CreateProjectModelImpl;
+      final String? goals}) = _$CreateProjectModelImpl;
 
   factory _CreateProjectModel.fromJson(Map<String, dynamic> json) = _$CreateProjectModelImpl.fromJson;
 
@@ -380,6 +362,8 @@ abstract class _CreateProjectModel implements CreateProjectModel {
   String? get title;
   @override
   String? get description;
+  @override
+  String? get domain;
   @override
   @JsonKey(name: 'start_date')
   String? get startDate;
@@ -389,10 +373,9 @@ abstract class _CreateProjectModel implements CreateProjectModel {
   @override
   String? get location;
   @override
-  String? get media;
-  @override
   String? get tags;
   @override
+  @JsonKey(name: 'team_members')
   String? get teamMembers;
   @override
   String? get status;
@@ -403,9 +386,6 @@ abstract class _CreateProjectModel implements CreateProjectModel {
   String? get projectLink;
   @override
   String? get goals;
-  @override
-  @JsonKey(name: 'domain')
-  String? get domain;
 
   /// Create a copy of CreateProjectModel
   /// with the given fields replaced by the non-null parameter values.
