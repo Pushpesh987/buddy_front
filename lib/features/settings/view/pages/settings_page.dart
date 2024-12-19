@@ -1,4 +1,3 @@
-import 'package:buddy_front/features/edit_profile/views/pages/edit_profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/theme/theme.dart';
@@ -28,17 +27,6 @@ class SettingsPage extends ConsumerWidget {
             child: ListView(
               padding: const EdgeInsets.all(16.0),
               children: [
-                ListTile(
-                  leading: Icon(Icons.account_circle, color: AppTheme.lightThemeMode.primaryColor),
-                  title: const Text("Edit Profile"),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const EditProfilePage()),
-                    );
-                  },
-                ),
-                const Divider(),
                 ListTile(
                   leading: Icon(Icons.lock, color: AppTheme.lightThemeMode.primaryColor),
                   title: const Text("Privacy Settings"),

@@ -1,16 +1,16 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'edit_profile_model.dart';
+part of 'profile_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$EditProfileModelImpl _$$EditProfileModelImplFromJson(Map<String, dynamic> json) => _$EditProfileModelImpl(
+_$ProfileModelImpl _$$ProfileModelImplFromJson(Map<String, dynamic> json) => _$ProfileModelImpl(
       firstName: json['first_name'] as String?,
       lastName: json['last_name'] as String?,
       username: json['username'] as String?,
-      profilePhotoUrl: json['profile_photo_url'] as String?,
+      profilePhotoUrl: json['profile_pic_url'] as String?,
       age: (json['age'] as num?)?.toInt(),
       dob: json['dob'] as String?,
       gender: json['gender'] as String?,
@@ -24,11 +24,11 @@ _$EditProfileModelImpl _$$EditProfileModelImplFromJson(Map<String, dynamic> json
       interests: (json['interests'] as List<dynamic>?)?.map((e) => e as String).toList(),
     );
 
-Map<String, dynamic> _$$EditProfileModelImplToJson(_$EditProfileModelImpl instance) => <String, dynamic>{
+Map<String, dynamic> _$$ProfileModelImplToJson(_$ProfileModelImpl instance) => <String, dynamic>{
       'first_name': instance.firstName,
       'last_name': instance.lastName,
       'username': instance.username,
-      'profile_photo_url': instance.profilePhotoUrl,
+      'profile_pic_url': instance.profilePhotoUrl,
       'age': instance.age,
       'dob': instance.dob,
       'gender': instance.gender,

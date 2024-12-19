@@ -1,16 +1,16 @@
 // ignore_for_file: invalid_annotation_target
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'edit_profile_model.freezed.dart';
-part 'edit_profile_model.g.dart';
+part 'profile_model.freezed.dart';
+part 'profile_model.g.dart';
 
 @freezed
-class EditProfileModel with _$EditProfileModel {
-  factory EditProfileModel({
+class ProfileModel with _$ProfileModel {
+  factory ProfileModel({
     @JsonKey(name: 'first_name') String? firstName,
     @JsonKey(name: 'last_name') String? lastName,
     @JsonKey(name: 'username') String? username,
-    @JsonKey(name: 'profile_photo_url') String? profilePhotoUrl,
+    @JsonKey(name: 'profile_pic_url') String? profilePhotoUrl,
     @JsonKey(name: 'age') int? age,
     @JsonKey(name: 'dob') String? dob,
     @JsonKey(name: 'gender') String? gender,
@@ -22,7 +22,7 @@ class EditProfileModel with _$EditProfileModel {
     @JsonKey(name: 'college_name') String? collegeName,
     List<String>? skills,
     List<String>? interests,
-  }) = _EditProfileModel;
+  }) = _ProfileModel;
 
-  factory EditProfileModel.fromJson(Map<String, dynamic> json) => _$EditProfileModelFromJson(json);
+  factory ProfileModel.fromJson(Map<String, dynamic> json) => _$ProfileModelFromJson(json);
 }

@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'edit_profile_model.dart';
+part of 'profile_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,19 +14,19 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-EditProfileModel _$EditProfileModelFromJson(Map<String, dynamic> json) {
-  return _EditProfileModel.fromJson(json);
+ProfileModel _$ProfileModelFromJson(Map<String, dynamic> json) {
+  return _ProfileModel.fromJson(json);
 }
 
 /// @nodoc
-mixin _$EditProfileModel {
+mixin _$ProfileModel {
   @JsonKey(name: 'first_name')
   String? get firstName => throw _privateConstructorUsedError;
   @JsonKey(name: 'last_name')
   String? get lastName => throw _privateConstructorUsedError;
   @JsonKey(name: 'username')
   String? get username => throw _privateConstructorUsedError;
-  @JsonKey(name: 'profile_photo_url')
+  @JsonKey(name: 'profile_pic_url')
   String? get profilePhotoUrl => throw _privateConstructorUsedError;
   @JsonKey(name: 'age')
   int? get age => throw _privateConstructorUsedError;
@@ -49,25 +49,25 @@ mixin _$EditProfileModel {
   List<String>? get skills => throw _privateConstructorUsedError;
   List<String>? get interests => throw _privateConstructorUsedError;
 
-  /// Serializes this EditProfileModel to a JSON map.
+  /// Serializes this ProfileModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
-  /// Create a copy of EditProfileModel
+  /// Create a copy of ProfileModel
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $EditProfileModelCopyWith<EditProfileModel> get copyWith => throw _privateConstructorUsedError;
+  $ProfileModelCopyWith<ProfileModel> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $EditProfileModelCopyWith<$Res> {
-  factory $EditProfileModelCopyWith(EditProfileModel value, $Res Function(EditProfileModel) then) =
-      _$EditProfileModelCopyWithImpl<$Res, EditProfileModel>;
+abstract class $ProfileModelCopyWith<$Res> {
+  factory $ProfileModelCopyWith(ProfileModel value, $Res Function(ProfileModel) then) =
+      _$ProfileModelCopyWithImpl<$Res, ProfileModel>;
   @useResult
   $Res call(
       {@JsonKey(name: 'first_name') String? firstName,
       @JsonKey(name: 'last_name') String? lastName,
       @JsonKey(name: 'username') String? username,
-      @JsonKey(name: 'profile_photo_url') String? profilePhotoUrl,
+      @JsonKey(name: 'profile_pic_url') String? profilePhotoUrl,
       @JsonKey(name: 'age') int? age,
       @JsonKey(name: 'dob') String? dob,
       @JsonKey(name: 'gender') String? gender,
@@ -82,15 +82,15 @@ abstract class $EditProfileModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$EditProfileModelCopyWithImpl<$Res, $Val extends EditProfileModel> implements $EditProfileModelCopyWith<$Res> {
-  _$EditProfileModelCopyWithImpl(this._value, this._then);
+class _$ProfileModelCopyWithImpl<$Res, $Val extends ProfileModel> implements $ProfileModelCopyWith<$Res> {
+  _$ProfileModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of EditProfileModel
+  /// Create a copy of ProfileModel
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -177,16 +177,16 @@ class _$EditProfileModelCopyWithImpl<$Res, $Val extends EditProfileModel> implem
 }
 
 /// @nodoc
-abstract class _$$EditProfileModelImplCopyWith<$Res> implements $EditProfileModelCopyWith<$Res> {
-  factory _$$EditProfileModelImplCopyWith(_$EditProfileModelImpl value, $Res Function(_$EditProfileModelImpl) then) =
-      __$$EditProfileModelImplCopyWithImpl<$Res>;
+abstract class _$$ProfileModelImplCopyWith<$Res> implements $ProfileModelCopyWith<$Res> {
+  factory _$$ProfileModelImplCopyWith(_$ProfileModelImpl value, $Res Function(_$ProfileModelImpl) then) =
+      __$$ProfileModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {@JsonKey(name: 'first_name') String? firstName,
       @JsonKey(name: 'last_name') String? lastName,
       @JsonKey(name: 'username') String? username,
-      @JsonKey(name: 'profile_photo_url') String? profilePhotoUrl,
+      @JsonKey(name: 'profile_pic_url') String? profilePhotoUrl,
       @JsonKey(name: 'age') int? age,
       @JsonKey(name: 'dob') String? dob,
       @JsonKey(name: 'gender') String? gender,
@@ -201,12 +201,12 @@ abstract class _$$EditProfileModelImplCopyWith<$Res> implements $EditProfileMode
 }
 
 /// @nodoc
-class __$$EditProfileModelImplCopyWithImpl<$Res> extends _$EditProfileModelCopyWithImpl<$Res, _$EditProfileModelImpl>
-    implements _$$EditProfileModelImplCopyWith<$Res> {
-  __$$EditProfileModelImplCopyWithImpl(_$EditProfileModelImpl _value, $Res Function(_$EditProfileModelImpl) _then)
+class __$$ProfileModelImplCopyWithImpl<$Res> extends _$ProfileModelCopyWithImpl<$Res, _$ProfileModelImpl>
+    implements _$$ProfileModelImplCopyWith<$Res> {
+  __$$ProfileModelImplCopyWithImpl(_$ProfileModelImpl _value, $Res Function(_$ProfileModelImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of EditProfileModel
+  /// Create a copy of ProfileModel
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -227,7 +227,7 @@ class __$$EditProfileModelImplCopyWithImpl<$Res> extends _$EditProfileModelCopyW
     Object? skills = freezed,
     Object? interests = freezed,
   }) {
-    return _then(_$EditProfileModelImpl(
+    return _then(_$ProfileModelImpl(
       firstName: freezed == firstName
           ? _value.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
@@ -294,12 +294,12 @@ class __$$EditProfileModelImplCopyWithImpl<$Res> extends _$EditProfileModelCopyW
 
 /// @nodoc
 @JsonSerializable()
-class _$EditProfileModelImpl implements _EditProfileModel {
-  _$EditProfileModelImpl(
+class _$ProfileModelImpl implements _ProfileModel {
+  _$ProfileModelImpl(
       {@JsonKey(name: 'first_name') this.firstName,
       @JsonKey(name: 'last_name') this.lastName,
       @JsonKey(name: 'username') this.username,
-      @JsonKey(name: 'profile_photo_url') this.profilePhotoUrl,
+      @JsonKey(name: 'profile_pic_url') this.profilePhotoUrl,
       @JsonKey(name: 'age') this.age,
       @JsonKey(name: 'dob') this.dob,
       @JsonKey(name: 'gender') this.gender,
@@ -314,7 +314,7 @@ class _$EditProfileModelImpl implements _EditProfileModel {
       : _skills = skills,
         _interests = interests;
 
-  factory _$EditProfileModelImpl.fromJson(Map<String, dynamic> json) => _$$EditProfileModelImplFromJson(json);
+  factory _$ProfileModelImpl.fromJson(Map<String, dynamic> json) => _$$ProfileModelImplFromJson(json);
 
   @override
   @JsonKey(name: 'first_name')
@@ -326,7 +326,7 @@ class _$EditProfileModelImpl implements _EditProfileModel {
   @JsonKey(name: 'username')
   final String? username;
   @override
-  @JsonKey(name: 'profile_photo_url')
+  @JsonKey(name: 'profile_pic_url')
   final String? profilePhotoUrl;
   @override
   @JsonKey(name: 'age')
@@ -377,14 +377,14 @@ class _$EditProfileModelImpl implements _EditProfileModel {
 
   @override
   String toString() {
-    return 'EditProfileModel(firstName: $firstName, lastName: $lastName, username: $username, profilePhotoUrl: $profilePhotoUrl, age: $age, dob: $dob, gender: $gender, phone: $phone, email: $email, location: $location, educationLevel: $educationLevel, fieldOfStudy: $fieldOfStudy, collegeName: $collegeName, skills: $skills, interests: $interests)';
+    return 'ProfileModel(firstName: $firstName, lastName: $lastName, username: $username, profilePhotoUrl: $profilePhotoUrl, age: $age, dob: $dob, gender: $gender, phone: $phone, email: $email, location: $location, educationLevel: $educationLevel, fieldOfStudy: $fieldOfStudy, collegeName: $collegeName, skills: $skills, interests: $interests)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$EditProfileModelImpl &&
+            other is _$ProfileModelImpl &&
             (identical(other.firstName, firstName) || other.firstName == firstName) &&
             (identical(other.lastName, lastName) || other.lastName == lastName) &&
             (identical(other.username, username) || other.username == username) &&
@@ -422,28 +422,28 @@ class _$EditProfileModelImpl implements _EditProfileModel {
       const DeepCollectionEquality().hash(_skills),
       const DeepCollectionEquality().hash(_interests));
 
-  /// Create a copy of EditProfileModel
+  /// Create a copy of ProfileModel
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$EditProfileModelImplCopyWith<_$EditProfileModelImpl> get copyWith =>
-      __$$EditProfileModelImplCopyWithImpl<_$EditProfileModelImpl>(this, _$identity);
+  _$$ProfileModelImplCopyWith<_$ProfileModelImpl> get copyWith =>
+      __$$ProfileModelImplCopyWithImpl<_$ProfileModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$EditProfileModelImplToJson(
+    return _$$ProfileModelImplToJson(
       this,
     );
   }
 }
 
-abstract class _EditProfileModel implements EditProfileModel {
-  factory _EditProfileModel(
+abstract class _ProfileModel implements ProfileModel {
+  factory _ProfileModel(
       {@JsonKey(name: 'first_name') final String? firstName,
       @JsonKey(name: 'last_name') final String? lastName,
       @JsonKey(name: 'username') final String? username,
-      @JsonKey(name: 'profile_photo_url') final String? profilePhotoUrl,
+      @JsonKey(name: 'profile_pic_url') final String? profilePhotoUrl,
       @JsonKey(name: 'age') final int? age,
       @JsonKey(name: 'dob') final String? dob,
       @JsonKey(name: 'gender') final String? gender,
@@ -454,9 +454,9 @@ abstract class _EditProfileModel implements EditProfileModel {
       @JsonKey(name: 'field_of_study') final String? fieldOfStudy,
       @JsonKey(name: 'college_name') final String? collegeName,
       final List<String>? skills,
-      final List<String>? interests}) = _$EditProfileModelImpl;
+      final List<String>? interests}) = _$ProfileModelImpl;
 
-  factory _EditProfileModel.fromJson(Map<String, dynamic> json) = _$EditProfileModelImpl.fromJson;
+  factory _ProfileModel.fromJson(Map<String, dynamic> json) = _$ProfileModelImpl.fromJson;
 
   @override
   @JsonKey(name: 'first_name')
@@ -468,7 +468,7 @@ abstract class _EditProfileModel implements EditProfileModel {
   @JsonKey(name: 'username')
   String? get username;
   @override
-  @JsonKey(name: 'profile_photo_url')
+  @JsonKey(name: 'profile_pic_url')
   String? get profilePhotoUrl;
   @override
   @JsonKey(name: 'age')
@@ -502,9 +502,9 @@ abstract class _EditProfileModel implements EditProfileModel {
   @override
   List<String>? get interests;
 
-  /// Create a copy of EditProfileModel
+  /// Create a copy of ProfileModel
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$EditProfileModelImplCopyWith<_$EditProfileModelImpl> get copyWith => throw _privateConstructorUsedError;
+  _$$ProfileModelImplCopyWith<_$ProfileModelImpl> get copyWith => throw _privateConstructorUsedError;
 }
