@@ -6,6 +6,16 @@ part of 'profile_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+_$BadgeImpl _$$BadgeImplFromJson(Map<String, dynamic> json) => _$BadgeImpl(
+      badgeId: (json['badge_id'] as num?)?.toInt(),
+      badgeName: json['badge_name'] as String?,
+    );
+
+Map<String, dynamic> _$$BadgeImplToJson(_$BadgeImpl instance) => <String, dynamic>{
+      'badge_id': instance.badgeId,
+      'badge_name': instance.badgeName,
+    };
+
 _$ProfileModelImpl _$$ProfileModelImplFromJson(Map<String, dynamic> json) => _$ProfileModelImpl(
       firstName: json['first_name'] as String?,
       lastName: json['last_name'] as String?,
@@ -22,6 +32,7 @@ _$ProfileModelImpl _$$ProfileModelImplFromJson(Map<String, dynamic> json) => _$P
       collegeName: json['college_name'] as String?,
       skills: (json['skills'] as List<dynamic>?)?.map((e) => e as String).toList(),
       interests: (json['interests'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      badges: (json['badges'] as List<dynamic>?)?.map((e) => Badge.fromJson(e as Map<String, dynamic>)).toList(),
     );
 
 Map<String, dynamic> _$$ProfileModelImplToJson(_$ProfileModelImpl instance) => <String, dynamic>{
@@ -40,4 +51,5 @@ Map<String, dynamic> _$$ProfileModelImplToJson(_$ProfileModelImpl instance) => <
       'college_name': instance.collegeName,
       'skills': instance.skills,
       'interests': instance.interests,
+      'badges': instance.badges,
     };

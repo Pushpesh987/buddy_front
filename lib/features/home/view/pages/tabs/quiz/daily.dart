@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:buddy_front/features/home/viewmodel/daily_question_notifier.dart';
+import 'package:buddy_front/features/home/viewmodel/question_vm/daily_question_notifier.dart';
 
 import '../../../../../../core/theme/theme.dart';
-import '../../../../viewmodel/quiz_attempt_notifier.dart';
+import '../../../../viewmodel/question_vm/quiz_attempt_notifier.dart';
 
 class DailyPage extends ConsumerStatefulWidget {
   const DailyPage({super.key});

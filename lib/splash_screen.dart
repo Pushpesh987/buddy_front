@@ -107,9 +107,7 @@ class _SplashScreenState extends State<SplashScreen> {
                         );
                       }
                     }
-                  }).catchError((error) {
-                    print("Error reading token: $error");
-                  });
+                  }).catchError((error) {});
                 },
               ),
           ],

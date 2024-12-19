@@ -1,7 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import '../../../../core/api_service/api_service.dart';
-import '../../../core/service_provider.dart/service_provider.dart';
-import '../models/question_model.dart';
+import '../../../../../core/api_service/api_service.dart';
+import '../../../../core/service_provider.dart/service_provider.dart';
+import '../../models/question_model.dart';
 
 part 'daily_question_notifier.g.dart';
 

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../viewmodel/quiz_attempt_notifier.dart';
-import '../../../../viewmodel/bonus_question_notifier.dart';
+import '../../../../viewmodel/question_vm/quiz_attempt_notifier.dart';
+import '../../../../viewmodel/question_vm/bonus_question_notifier.dart';
 
 class BonusPage extends ConsumerStatefulWidget {
   const BonusPage({super.key});

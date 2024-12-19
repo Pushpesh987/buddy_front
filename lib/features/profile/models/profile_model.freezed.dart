@@ -14,6 +14,165 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
+Badge _$BadgeFromJson(Map<String, dynamic> json) {
+  return _Badge.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Badge {
+  @JsonKey(name: 'badge_id')
+  int? get badgeId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'badge_name')
+  String? get badgeName => throw _privateConstructorUsedError;
+
+  /// Serializes this Badge to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of Badge
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $BadgeCopyWith<Badge> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $BadgeCopyWith<$Res> {
+  factory $BadgeCopyWith(Badge value, $Res Function(Badge) then) = _$BadgeCopyWithImpl<$Res, Badge>;
+  @useResult
+  $Res call({@JsonKey(name: 'badge_id') int? badgeId, @JsonKey(name: 'badge_name') String? badgeName});
+}
+
+/// @nodoc
+class _$BadgeCopyWithImpl<$Res, $Val extends Badge> implements $BadgeCopyWith<$Res> {
+  _$BadgeCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of Badge
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? badgeId = freezed,
+    Object? badgeName = freezed,
+  }) {
+    return _then(_value.copyWith(
+      badgeId: freezed == badgeId
+          ? _value.badgeId
+          : badgeId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      badgeName: freezed == badgeName
+          ? _value.badgeName
+          : badgeName // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$BadgeImplCopyWith<$Res> implements $BadgeCopyWith<$Res> {
+  factory _$$BadgeImplCopyWith(_$BadgeImpl value, $Res Function(_$BadgeImpl) then) = __$$BadgeImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({@JsonKey(name: 'badge_id') int? badgeId, @JsonKey(name: 'badge_name') String? badgeName});
+}
+
+/// @nodoc
+class __$$BadgeImplCopyWithImpl<$Res> extends _$BadgeCopyWithImpl<$Res, _$BadgeImpl>
+    implements _$$BadgeImplCopyWith<$Res> {
+  __$$BadgeImplCopyWithImpl(_$BadgeImpl _value, $Res Function(_$BadgeImpl) _then) : super(_value, _then);
+
+  /// Create a copy of Badge
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? badgeId = freezed,
+    Object? badgeName = freezed,
+  }) {
+    return _then(_$BadgeImpl(
+      badgeId: freezed == badgeId
+          ? _value.badgeId
+          : badgeId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      badgeName: freezed == badgeName
+          ? _value.badgeName
+          : badgeName // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$BadgeImpl implements _Badge {
+  _$BadgeImpl({@JsonKey(name: 'badge_id') this.badgeId, @JsonKey(name: 'badge_name') this.badgeName});
+
+  factory _$BadgeImpl.fromJson(Map<String, dynamic> json) => _$$BadgeImplFromJson(json);
+
+  @override
+  @JsonKey(name: 'badge_id')
+  final int? badgeId;
+  @override
+  @JsonKey(name: 'badge_name')
+  final String? badgeName;
+
+  @override
+  String toString() {
+    return 'Badge(badgeId: $badgeId, badgeName: $badgeName)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BadgeImpl &&
+            (identical(other.badgeId, badgeId) || other.badgeId == badgeId) &&
+            (identical(other.badgeName, badgeName) || other.badgeName == badgeName));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, badgeId, badgeName);
+
+  /// Create a copy of Badge
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BadgeImplCopyWith<_$BadgeImpl> get copyWith => __$$BadgeImplCopyWithImpl<_$BadgeImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$BadgeImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Badge implements Badge {
+  factory _Badge(
+      {@JsonKey(name: 'badge_id') final int? badgeId,
+      @JsonKey(name: 'badge_name') final String? badgeName}) = _$BadgeImpl;
+
+  factory _Badge.fromJson(Map<String, dynamic> json) = _$BadgeImpl.fromJson;
+
+  @override
+  @JsonKey(name: 'badge_id')
+  int? get badgeId;
+  @override
+  @JsonKey(name: 'badge_name')
+  String? get badgeName;
+
+  /// Create a copy of Badge
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BadgeImplCopyWith<_$BadgeImpl> get copyWith => throw _privateConstructorUsedError;
+}
+
 ProfileModel _$ProfileModelFromJson(Map<String, dynamic> json) {
   return _ProfileModel.fromJson(json);
 }
@@ -48,6 +207,7 @@ mixin _$ProfileModel {
   String? get collegeName => throw _privateConstructorUsedError;
   List<String>? get skills => throw _privateConstructorUsedError;
   List<String>? get interests => throw _privateConstructorUsedError;
+  List<Badge>? get badges => throw _privateConstructorUsedError;
 
   /// Serializes this ProfileModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -78,7 +238,8 @@ abstract class $ProfileModelCopyWith<$Res> {
       @JsonKey(name: 'field_of_study') String? fieldOfStudy,
       @JsonKey(name: 'college_name') String? collegeName,
       List<String>? skills,
-      List<String>? interests});
+      List<String>? interests,
+      List<Badge>? badges});
 }
 
 /// @nodoc
@@ -110,6 +271,7 @@ class _$ProfileModelCopyWithImpl<$Res, $Val extends ProfileModel> implements $Pr
     Object? collegeName = freezed,
     Object? skills = freezed,
     Object? interests = freezed,
+    Object? badges = freezed,
   }) {
     return _then(_value.copyWith(
       firstName: freezed == firstName
@@ -172,6 +334,10 @@ class _$ProfileModelCopyWithImpl<$Res, $Val extends ProfileModel> implements $Pr
           ? _value.interests
           : interests // ignore: cast_nullable_to_non_nullable
               as List<String>?,
+      badges: freezed == badges
+          ? _value.badges
+          : badges // ignore: cast_nullable_to_non_nullable
+              as List<Badge>?,
     ) as $Val);
   }
 }
@@ -197,7 +363,8 @@ abstract class _$$ProfileModelImplCopyWith<$Res> implements $ProfileModelCopyWit
       @JsonKey(name: 'field_of_study') String? fieldOfStudy,
       @JsonKey(name: 'college_name') String? collegeName,
       List<String>? skills,
-      List<String>? interests});
+      List<String>? interests,
+      List<Badge>? badges});
 }
 
 /// @nodoc
@@ -226,6 +393,7 @@ class __$$ProfileModelImplCopyWithImpl<$Res> extends _$ProfileModelCopyWithImpl<
     Object? collegeName = freezed,
     Object? skills = freezed,
     Object? interests = freezed,
+    Object? badges = freezed,
   }) {
     return _then(_$ProfileModelImpl(
       firstName: freezed == firstName
@@ -288,6 +456,10 @@ class __$$ProfileModelImplCopyWithImpl<$Res> extends _$ProfileModelCopyWithImpl<
           ? _value._interests
           : interests // ignore: cast_nullable_to_non_nullable
               as List<String>?,
+      badges: freezed == badges
+          ? _value._badges
+          : badges // ignore: cast_nullable_to_non_nullable
+              as List<Badge>?,
     ));
   }
 }
@@ -310,9 +482,11 @@ class _$ProfileModelImpl implements _ProfileModel {
       @JsonKey(name: 'field_of_study') this.fieldOfStudy,
       @JsonKey(name: 'college_name') this.collegeName,
       final List<String>? skills,
-      final List<String>? interests})
+      final List<String>? interests,
+      final List<Badge>? badges})
       : _skills = skills,
-        _interests = interests;
+        _interests = interests,
+        _badges = badges;
 
   factory _$ProfileModelImpl.fromJson(Map<String, dynamic> json) => _$$ProfileModelImplFromJson(json);
 
@@ -375,9 +549,19 @@ class _$ProfileModelImpl implements _ProfileModel {
     return EqualUnmodifiableListView(value);
   }
 
+  final List<Badge>? _badges;
+  @override
+  List<Badge>? get badges {
+    final value = _badges;
+    if (value == null) return null;
+    if (_badges is EqualUnmodifiableListView) return _badges;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   String toString() {
-    return 'ProfileModel(firstName: $firstName, lastName: $lastName, username: $username, profilePhotoUrl: $profilePhotoUrl, age: $age, dob: $dob, gender: $gender, phone: $phone, email: $email, location: $location, educationLevel: $educationLevel, fieldOfStudy: $fieldOfStudy, collegeName: $collegeName, skills: $skills, interests: $interests)';
+    return 'ProfileModel(firstName: $firstName, lastName: $lastName, username: $username, profilePhotoUrl: $profilePhotoUrl, age: $age, dob: $dob, gender: $gender, phone: $phone, email: $email, location: $location, educationLevel: $educationLevel, fieldOfStudy: $fieldOfStudy, collegeName: $collegeName, skills: $skills, interests: $interests, badges: $badges)';
   }
 
   @override
@@ -399,7 +583,8 @@ class _$ProfileModelImpl implements _ProfileModel {
             (identical(other.fieldOfStudy, fieldOfStudy) || other.fieldOfStudy == fieldOfStudy) &&
             (identical(other.collegeName, collegeName) || other.collegeName == collegeName) &&
             const DeepCollectionEquality().equals(other._skills, _skills) &&
-            const DeepCollectionEquality().equals(other._interests, _interests));
+            const DeepCollectionEquality().equals(other._interests, _interests) &&
+            const DeepCollectionEquality().equals(other._badges, _badges));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -420,7 +605,8 @@ class _$ProfileModelImpl implements _ProfileModel {
       fieldOfStudy,
       collegeName,
       const DeepCollectionEquality().hash(_skills),
-      const DeepCollectionEquality().hash(_interests));
+      const DeepCollectionEquality().hash(_interests),
+      const DeepCollectionEquality().hash(_badges));
 
   /// Create a copy of ProfileModel
   /// with the given fields replaced by the non-null parameter values.
@@ -454,7 +640,8 @@ abstract class _ProfileModel implements ProfileModel {
       @JsonKey(name: 'field_of_study') final String? fieldOfStudy,
       @JsonKey(name: 'college_name') final String? collegeName,
       final List<String>? skills,
-      final List<String>? interests}) = _$ProfileModelImpl;
+      final List<String>? interests,
+      final List<Badge>? badges}) = _$ProfileModelImpl;
 
   factory _ProfileModel.fromJson(Map<String, dynamic> json) = _$ProfileModelImpl.fromJson;
 
@@ -501,6 +688,8 @@ abstract class _ProfileModel implements ProfileModel {
   List<String>? get skills;
   @override
   List<String>? get interests;
+  @override
+  List<Badge>? get badges;
 
   /// Create a copy of ProfileModel
   /// with the given fields replaced by the non-null parameter values.

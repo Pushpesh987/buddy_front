@@ -5,6 +5,16 @@ part 'profile_model.freezed.dart';
 part 'profile_model.g.dart';
 
 @freezed
+class Badge with _$Badge {
+  factory Badge({
+    @JsonKey(name: 'badge_id') int? badgeId,
+    @JsonKey(name: 'badge_name') String? badgeName,
+  }) = _Badge;
+
+  factory Badge.fromJson(Map<String, dynamic> json) => _$BadgeFromJson(json);
+}
+
+@freezed
 class ProfileModel with _$ProfileModel {
   factory ProfileModel({
     @JsonKey(name: 'first_name') String? firstName,
@@ -22,6 +32,7 @@ class ProfileModel with _$ProfileModel {
     @JsonKey(name: 'college_name') String? collegeName,
     List<String>? skills,
     List<String>? interests,
+    List<Badge>? badges,
   }) = _ProfileModel;
 
   factory ProfileModel.fromJson(Map<String, dynamic> json) => _$ProfileModelFromJson(json);

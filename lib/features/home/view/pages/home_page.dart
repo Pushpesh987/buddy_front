@@ -1,6 +1,9 @@
+import 'package:buddy_front/features/home/view/pages/create_post.dart';
+import 'package:buddy_front/features/home/view/widgets/feed_post_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/theme/app_pallete.dart';
+import '../../viewmodel/home_vm/feed_page_notifier.dart';
 import 'tabs/quiz_section.dart';
 
 class HomePage extends ConsumerWidget {
@@ -8,6 +11,8 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final homePageState = ref.watch(feedPageProvider);
+
     return DefaultTabController(
       length: 3,
       child: Scaffold(
@@ -21,27 +26,38 @@ class HomePage extends ConsumerWidget {
             ),
           ),
         ),
-        body: Column(
-          children: [
-            const QuizSection(),
-            Divider(
-              thickness: 1.3,
-              height: 8,
-              color: AppPalette.blackColor,
-            ),
-            const Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Text(
-                'This is some dummy text. Here you can add more content or instructions.',
-                style: TextStyle(fontSize: 16),
-              ),
-            ),
-          ],
+        body: homePageState.when(
+          data: (homePageData) {
+            return Column(
+              children: [
+                const QuizSection(),
+                Divider(
+                  thickness: 1.3,
+                  height: 8,
+                  color: AppPalette.blackColor,
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: homePageData.length,
+                    itemBuilder: (context, index) {
+                      final post = homePageData[index];
+                      return FeedPostCard(post: post);
+                    },
+                  ),
+                ),
+              ],
+            );
+          },
+          loading: () => const Center(child: CircularProgressIndicator()),
+          error: (error, stackTrace) => Center(
+            child: Text('Error: $error', style: const TextStyle(color: Colors.red)),
+          ),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Floating Action Button Pressed!')),
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const CreatePostPage()),
             );
           },
           child: const Icon(Icons.add),

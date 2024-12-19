@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../../core/theme/theme.dart';
-import '../../../../viewmodel/quiz_attempt_notifier.dart';
-import '../../../../viewmodel/skill_question_notifier.dart';
+import '../../../../viewmodel/question_vm/quiz_attempt_notifier.dart';
+import '../../../../viewmodel/question_vm/skill_question_notifier.dart';
 
 class SkillPage extends ConsumerStatefulWidget {
   const SkillPage({super.key});
