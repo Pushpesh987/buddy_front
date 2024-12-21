@@ -22,14 +22,11 @@ class ProfileNotifier extends AutoDisposeAsyncNotifier<ProfileModel> {
           throw Exception('Error fetching profile: $error');
         },
         (data) {
-          print("data::>>>${data}");
           final profileData = data['data'];
 
           if (profileData == null) {
             throw Exception('Profile data is missing');
           }
-
-          print("profileData:::>>>>${profileData}");
 
           return ProfileModel.fromJson(profileData);
         },

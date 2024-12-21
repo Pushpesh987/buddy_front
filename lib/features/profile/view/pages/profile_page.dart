@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../notification/views/pages/notification_page.dart';
 import '../../../settings/view/widgets/logout_confirmation_dialog.dart';
 import '../../../settings/view/widgets/settings_button.dart';
 import '../../../settings/viewmodel/settings_view_model.dart';
@@ -14,7 +15,6 @@ class ProfilePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final profileState = ref.watch(profileNotifierProvider);
 
-    // Badge ID to Image Mapping
     final badgeImages = {
       1: 'assets/images/1.png',
       2: 'assets/images/2.png',
@@ -27,6 +27,19 @@ class ProfilePage extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Profile"),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.notifications),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const NotificationPage(),
+                ),
+              );
+            },
+          ),
+        ],
       ),
       body: profileState.when(
         loading: () => const Center(child: CircularProgressIndicator()),
@@ -38,7 +51,6 @@ class ProfilePage extends ConsumerWidget {
             padding: const EdgeInsets.all(16.0),
             child: Column(
               children: [
-                // Profile Picture with Badge
                 Stack(
                   alignment: Alignment.center,
                   children: [
@@ -80,7 +92,6 @@ class ProfilePage extends ConsumerWidget {
                   ),
                 ),
                 const SizedBox(height: 8),
-                // Username
                 Text(
                   '@${profile.username}',
                   style: TextStyle(
@@ -89,7 +100,6 @@ class ProfilePage extends ConsumerWidget {
                   ),
                 ),
                 const Divider(thickness: 1.5, height: 30),
-                // View Profile Details Section
                 GestureDetector(
                   onTap: () {
                     Navigator.push(

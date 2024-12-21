@@ -26,9 +26,11 @@ class PostCreateNotifier extends AutoDisposeAsyncNotifier<void> {
       );
       response.fold(
         (error) {
+          print("error:::>${error}");
           throw Exception('Error creating post: $error');
         },
         (data) {
+          print("data:::>${data}");
           print("successfull sendned");
         },
       );

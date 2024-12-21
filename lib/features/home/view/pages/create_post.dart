@@ -111,7 +111,12 @@ class _CreatePostPageState extends State<CreatePostPage> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-                    child: createPostState.isLoading ? const CircularProgressIndicator() : const Text('Create Post'),
+                    child: createPostState.isLoading
+                        ? const CircularProgressIndicator()
+                        : const Text(
+                            'Create Post',
+                            style: TextStyle(color: AppPalette.blackColor),
+                          ),
                   );
                 },
               ),
