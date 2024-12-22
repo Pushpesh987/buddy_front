@@ -1,9 +1,8 @@
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
-import 'package:intl/intl.dart';
 import 'package:buddy_front/features/hackathons/models/create_hackathon_model.dart';
 
-class CreateProjectEventController {
+class CreateHackathonEventController {
   File? selectedImage;
   String? startDate;
   String? registrationDeadline;
@@ -13,8 +12,6 @@ class CreateProjectEventController {
   String? description;
   String? location;
   String? tags;
-
-  // New fields
   String? entryFee;
   String? prizePool;
   String? organizerContact;
@@ -52,16 +49,6 @@ class CreateProjectEventController {
     }
   }
 
-  Future<void> selectStartDate(DateTime pickedDate) async {
-    startDate = '${DateFormat('yyyy-MM-dd').format(pickedDate)}T00:00:00Z';
-    checkFormValidity();
-  }
-
-  Future<void> selectRegistrationDeadline(DateTime pickedDate) async {
-    registrationDeadline = '${DateFormat('yyyy-MM-dd').format(pickedDate)}T00:00:00Z';
-    checkFormValidity();
-  }
-
   void checkFormValidity() {
     isFormValid = title != null &&
         theme != null &&
@@ -74,7 +61,8 @@ class CreateProjectEventController {
         prizePool != null &&
         organizerContact != null &&
         attendeeCount != null &&
-        organizerName != null;
+        organizerName != null &&
+        selectedImage != null;
   }
 
   CreateHackathonModel buildHackathon() {
@@ -93,5 +81,21 @@ class CreateProjectEventController {
       attendeeCount: attendeeCount,
       organizerName: organizerName,
     );
+  }
+
+  void resetForm() {
+    title = null;
+    theme = null;
+    description = null;
+    location = null;
+    tags = null;
+    entryFee = null;
+    prizePool = null;
+    organizerContact = null;
+    attendeeCount = null;
+    organizerName = null;
+    startDate = null;
+    registrationDeadline = null;
+    selectedImage = null;
   }
 }

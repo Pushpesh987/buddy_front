@@ -118,7 +118,8 @@ class WorkshopCards extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                           ),
                           const Spacer(),
-                          Center(
+                          Align(
+                            alignment: Alignment.bottomRight,
                             child: ElevatedButton(
                               onPressed: () {
                                 Navigator.push(

@@ -38,6 +38,8 @@ class HackathonCreateNotifier extends AutoDisposeAsyncNotifier<void> {
         keyName: 'media',
       );
 
+      print('respose::::::>>>>>${response}');
+
       response.fold(
         (error) {
           throw Exception('Error creating hackathon: $error');

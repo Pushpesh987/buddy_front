@@ -1,20 +1,89 @@
-import 'package:buddy_front/features/hackathons/views/widgets/hackathon_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:buddy_front/core/theme/app_pallete.dart';
-import 'package:buddy_front/features/hackathons/viewmodels/hackathon_create_notifier.dart';
+import 'package:intl/intl.dart';
 import '../../controllers/create_hackathon_event_controller.dart';
+import '../../models/create_hackathon_model.dart';
+import '../../viewmodels/hackathon_create_notifier.dart';
+import '../widgets/hackathon_button.dart';
+import '../widgets/hackathon_textfield.dart';
 
-class CreateProjectEvent extends ConsumerStatefulWidget {
-  const CreateProjectEvent({super.key});
+class CreateHackathonEvent extends ConsumerStatefulWidget {
+  const CreateHackathonEvent({super.key});
 
   @override
-  _CreateProjectEventState createState() => _CreateProjectEventState();
+  _CreateHackathonEventState createState() => _CreateHackathonEventState();
 }
 
-class _CreateProjectEventState extends ConsumerState<CreateProjectEvent> {
-  final _controller = CreateProjectEventController();
+class _CreateHackathonEventState extends ConsumerState<CreateHackathonEvent> {
+  final _controller = CreateHackathonEventController();
   final _formKey = GlobalKey<FormState>();
+  final DateFormat _dateFormat = DateFormat('yyyy-MM-dd');
+  bool _isLoading = false;
+
+  Future<void> _selectDate(BuildContext context, String type) async {
+    DateTime initialDate = type == 'startDate'
+        ? DateTime.now().add(Duration(days: 1))
+        : DateTime.parse(_controller.startDate!).add(Duration(days: 1));
+
+    final DateTime? selectedDate = await showDatePicker(
+      context: context,
+      initialDate: initialDate,
+      firstDate: initialDate,
+      lastDate: DateTime(2101),
+    );
+
+    if (selectedDate != null) {
+      setState(() {
+        if (type == 'startDate') {
+          _controller.startDate = _dateFormat.format(selectedDate);
+        } else if (type == 'registrationDeadline') {
+          _controller.registrationDeadline = _dateFormat.format(selectedDate);
+        }
+      });
+    }
+  }
+
+  void _handleCreateHackathon() async {
+    if (_formKey.currentState?.validate() ?? false) {
+      setState(() {
+        _isLoading = true;
+      });
+
+      CreateHackathonModel newHackathon = CreateHackathonModel(
+        title: _controller.title,
+        theme: _controller.theme,
+        description: _controller.description,
+        date: _controller.startDate,
+        location: _controller.location,
+        entryFee: _controller.entryFee,
+        prizePool: _controller.prizePool,
+        registrationDeadline: _controller.registrationDeadline,
+        organizerName: _controller.organizerName,
+        organizerContact: _controller.organizerContact,
+        tags: _controller.tags,
+        status: 'Upcoming',
+        attendeeCount: _controller.attendeeCount,
+      );
+
+      final notifier = ref.read(hackathonCreateNotifierProvider.notifier);
+
+      try {
+        await notifier.createHackathon(newHackathon, imageFile: _controller.selectedImage);
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Hackathon created successfully!')),
+        );
+        Navigator.pop(context);
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error creating hackathon: $e')),
+        );
+      } finally {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,269 +98,123 @@ class _CreateProjectEventState extends ConsumerState<CreateProjectEvent> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 20),
               HackathonTextfield(
                 controller: TextEditingController(text: _controller.title),
                 labelText: 'Hackathon Title',
                 onChanged: (value) => _controller.title = value,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Hackathon Title is required';
-                  }
-                  return null;
-                },
+                validator: (value) => value?.isEmpty ?? true ? 'Hackathon Title is required' : null,
               ),
               const SizedBox(height: 16),
               HackathonTextfield(
                 controller: TextEditingController(text: _controller.theme),
                 labelText: 'Theme',
                 onChanged: (value) => _controller.theme = value,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Theme is required';
-                  }
-                  return null;
-                },
+                validator: (value) => value?.isEmpty ?? true ? 'Theme is required' : null,
               ),
               const SizedBox(height: 16),
               HackathonTextfield(
                 controller: TextEditingController(text: _controller.description),
                 labelText: 'Description',
-                maxLines: 4,
+                maxLines: 3,
                 onChanged: (value) => _controller.description = value,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Description is required';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 16),
-              GestureDetector(
-                onTap: () async {
-                  final DateTime now = DateTime.now();
-                  final DateTime tomorrow = now.add(Duration(days: 1));
-                  final pickedDate = await showDatePicker(
-                    context: context,
-                    initialDate: tomorrow,
-                    firstDate: tomorrow,
-                    lastDate: DateTime(2101),
-                  );
-                  if (pickedDate != null) {
-                    _controller.selectStartDate(pickedDate);
-                    setState(() {});
-                  }
-                },
-                child: AbsorbPointer(
-                  child: HackathonTextfield(
-                    controller: TextEditingController(text: _controller.startDate),
-                    labelText: 'Start Date',
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Start Date is required';
-                      }
-                      return null;
-                    },
-                  ),
-                ),
-              ),
-              const SizedBox(height: 16),
-              GestureDetector(
-                onTap: () async {
-                  if (_controller.startDate == null) {
-                    ScaffoldMessenger.of(context)
-                        .showSnackBar(SnackBar(content: Text('Please select a Start Date first')));
-                    return;
-                  }
-
-                  final DateTime startDate = DateTime.parse(_controller.startDate!);
-                  final DateTime minRegistrationDeadline = startDate.add(Duration(days: 2));
-
-                  final pickedDate = await showDatePicker(
-                    context: context,
-                    initialDate: minRegistrationDeadline,
-                    firstDate: minRegistrationDeadline,
-                    lastDate: DateTime(2101),
-                  );
-
-                  if (pickedDate != null) {
-                    if (pickedDate.isAtSameMomentAs(startDate)) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Registration Deadline cannot be the same as Start Date')));
-                    } else {
-                      _controller.selectRegistrationDeadline(pickedDate);
-                      setState(() {});
-                    }
-                  }
-                },
-                child: AbsorbPointer(
-                  child: HackathonTextfield(
-                    controller: TextEditingController(text: _controller.registrationDeadline),
-                    labelText: 'Registration Deadline',
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Registration Deadline is required';
-                      }
-                      return null;
-                    },
-                  ),
-                ),
+                validator: (value) => value?.isEmpty ?? true ? 'Description is required' : null,
               ),
               const SizedBox(height: 16),
               HackathonTextfield(
                 controller: TextEditingController(text: _controller.location),
                 labelText: 'Location',
                 onChanged: (value) => _controller.location = value,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Location is required';
-                  }
-                  return null;
-                },
+                validator: (value) => value?.isEmpty ?? true ? 'Location is required' : null,
               ),
               const SizedBox(height: 16),
               HackathonTextfield(
                 controller: TextEditingController(text: _controller.tags),
                 labelText: 'Tags',
                 onChanged: (value) => _controller.tags = value,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Tags are required';
-                  }
-                  return null;
-                },
+                validator: (value) => value?.isEmpty ?? true ? 'Tags are required' : null,
               ),
-              // Add new fields below
               const SizedBox(height: 16),
               HackathonTextfield(
                 controller: TextEditingController(text: _controller.entryFee),
                 labelText: 'Entry Fee',
-                keyboardType: TextInputType.number,
                 onChanged: (value) => _controller.entryFee = value,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Entry Fee is required';
-                  }
-                  return null;
-                },
+                validator: (value) => value?.isEmpty ?? true ? 'Entry Fee is required' : null,
               ),
               const SizedBox(height: 16),
               HackathonTextfield(
                 controller: TextEditingController(text: _controller.prizePool),
                 labelText: 'Prize Pool',
-                keyboardType: TextInputType.number,
                 onChanged: (value) => _controller.prizePool = value,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Prize Pool is required';
-                  }
-                  return null;
-                },
+                validator: (value) => value?.isEmpty ?? true ? 'Prize Pool is required' : null,
               ),
               const SizedBox(height: 16),
               HackathonTextfield(
                 controller: TextEditingController(text: _controller.organizerContact),
                 labelText: 'Organizer Contact',
-                keyboardType: TextInputType.phone,
                 onChanged: (value) => _controller.organizerContact = value,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Organizer Contact is required';
-                  }
-                  if (value.length != 10 || !RegExp(r'^\d{10}$').hasMatch(value)) {
-                    return 'Please enter a valid 10-digit phone number';
-                  }
-                  return null;
-                },
+                validator: (value) => value?.isEmpty ?? true ? 'Organizer Contact is required' : null,
               ),
-
               const SizedBox(height: 16),
               HackathonTextfield(
                 controller: TextEditingController(text: _controller.attendeeCount),
                 labelText: 'Attendee Count',
-                keyboardType: TextInputType.number,
                 onChanged: (value) => _controller.attendeeCount = value,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Attendee Count is required';
-                  }
-                  if (int.tryParse(value) == null) {
-                    return 'Please enter a valid integer';
-                  }
-                  return null;
-                },
+                validator: (value) => value?.isEmpty ?? true ? 'Attendee Count is required' : null,
               ),
               const SizedBox(height: 16),
               HackathonTextfield(
                 controller: TextEditingController(text: _controller.organizerName),
                 labelText: 'Organizer Name',
                 onChanged: (value) => _controller.organizerName = value,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Organizer Name is required';
-                  }
-                  return null;
-                },
+                validator: (value) => value?.isEmpty ?? true ? 'Organizer Name is required' : null,
               ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  _controller.pickImage(() => setState(() {}));
-                },
-                child: const Text('Select Image'),
+              const SizedBox(height: 16),
+              GestureDetector(
+                onTap: () => _selectDate(context, 'startDate'),
+                child: AbsorbPointer(
+                  child: HackathonTextfield(
+                    controller: TextEditingController(text: _controller.startDate ?? ''),
+                    labelText: 'Start Date',
+                    keyboardType: TextInputType.none,
+                  ),
+                ),
               ),
+              const SizedBox(height: 16),
+              GestureDetector(
+                onTap: _controller.startDate == null ? null : () => _selectDate(context, 'registrationDeadline'),
+                child: AbsorbPointer(
+                  child: HackathonTextfield(
+                    controller: TextEditingController(text: _controller.registrationDeadline ?? ''),
+                    labelText: 'Registration Deadline',
+                    keyboardType: TextInputType.none,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
               if (_controller.selectedImage != null)
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Image.file(
                     _controller.selectedImage!,
-                    width: 100,
                     height: 100,
+                    width: 100,
                     fit: BoxFit.cover,
                   ),
                 ),
-
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: _controller.isFormValid
-                    ? () async {
-                        final newHackathon = _controller.buildHackathon();
-                        final hackathonCreateNotifier = ref.read(hackathonCreateNotifierProvider.notifier);
-
-                        try {
-                          await hackathonCreateNotifier.createHackathon(
-                            newHackathon,
-                            imageFile: _controller.selectedImage,
-                          );
-
-                          // Show success message
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Hackathon Created Successfully')),
-                          );
-                        } catch (e) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text('Error creating hackathon: $e')),
-                          );
-                        }
-                      }
-                    : null,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppPalette.yellowColor,
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: HackathonButton(
+                  buttonText: _controller.selectedImage == null ? 'Select Image' : 'Image Selected',
+                  onTap: () => _controller.pickImage(() {
+                    setState(() {});
+                  }),
                 ),
-                child: const Center(
-                  child: Text(
-                    'Create Hackathon',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
+              ),
+              const SizedBox(height: 16),
+              HackathonButton(
+                buttonText: _isLoading ? null : 'Create Hackathon',
+                isLoading: _isLoading,
+                onTap: _isLoading ? null : _handleCreateHackathon,
               ),
             ],
           ),

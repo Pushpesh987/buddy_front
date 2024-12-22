@@ -4,30 +4,25 @@ import '../../../../core/theme/app_pallete.dart';
 import 'tabs/quiz_section.dart';
 import '../../view/widgets/feed_post_card.dart';
 import '../../view/pages/create_post.dart';
-import '../../viewmodel/home_vm/feed_page_notifier.dart'; // Import the file here
+import '../../viewmodel/home_vm/feed_page_notifier.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
 
+  Future<void> _refreshFeed(WidgetRef ref) async {
+    // ignore: unused_result
+    ref.refresh(feedPageProvider);
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final homePageState = ref.watch(feedPageProvider); // Watch the provider here
+    final homePageState = ref.watch(feedPageProvider);
 
     return DefaultTabController(
       length: 3,
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Buddy'),
-          actions: [
-            // Add the reload button in the app bar
-            IconButton(
-              icon: const Icon(Icons.refresh),
-              onPressed: () {
-                // Trigger the reload of the provider
-                ref.refresh(feedPageProvider);
-              },
-            ),
-          ],
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(1.0),
             child: Container(
@@ -36,41 +31,44 @@ class HomePage extends ConsumerWidget {
             ),
           ),
         ),
-        body: Column(
-          children: [
-            const QuizSection(),
-            homePageState.when(
-              data: (homePageData) {
-                if (homePageData.isEmpty) {
-                  return Expanded(
-                    child: Center(
-                      child: Text(
-                        'No posts available',
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.grey,
+        body: RefreshIndicator(
+          onRefresh: () => _refreshFeed(ref),
+          child: Column(
+            children: [
+              const QuizSection(),
+              homePageState.when(
+                data: (homePageData) {
+                  if (homePageData.isEmpty) {
+                    return Expanded(
+                      child: Center(
+                        child: Text(
+                          'No posts available',
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.grey,
+                          ),
                         ),
                       ),
-                    ),
-                  );
-                } else {
-                  return Expanded(
-                    child: ListView.builder(
-                      itemCount: homePageData.length,
-                      itemBuilder: (context, index) {
-                        final post = homePageData[index];
-                        return FeedPostCard(post: post);
-                      },
-                    ),
-                  );
-                }
-              },
-              loading: () => const Center(child: CircularProgressIndicator()),
-              error: (error, stackTrace) => Center(
-                child: Text('Error: $error', style: const TextStyle(color: Colors.red)),
+                    );
+                  } else {
+                    return Expanded(
+                      child: ListView.builder(
+                        itemCount: homePageData.length,
+                        itemBuilder: (context, index) {
+                          final post = homePageData[index];
+                          return FeedPostCard(post: post);
+                        },
+                      ),
+                    );
+                  }
+                },
+                loading: () => const Center(child: CircularProgressIndicator()),
+                error: (error, stackTrace) => Center(
+                  child: Text('Error: $error', style: const TextStyle(color: Colors.red)),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {

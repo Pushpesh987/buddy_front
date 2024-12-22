@@ -9,48 +9,57 @@ import 'create_workshop_event.dart';
 class WorkshopPage extends ConsumerWidget {
   const WorkshopPage({super.key});
 
+  Future<void> _refreshWorkshops(WidgetRef ref) async {
+    final notifier = ref.read(workshopNotifierProvider.notifier);
+    await notifier.fetchWorkshops();
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final workshopState = ref.watch(workshopNotifierProvider);
+
     return Scaffold(
-      body: workshopState.when(
-        data: (workshops) {
-          if (workshops.isEmpty) {
-            return const Center(child: Text('No workshops available.'));
-          }
+      body: RefreshIndicator(
+        onRefresh: () => _refreshWorkshops(ref),
+        child: workshopState.when(
+          data: (workshops) {
+            if (workshops.isEmpty) {
+              return const Center(child: Text('No workshops available.'));
+            }
 
-          workshops.sort((a, b) {
-            final dateA = a.date != null ? DateTime.tryParse(a.date!) : null;
-            final dateB = b.date != null ? DateTime.tryParse(b.date!) : null;
+            workshops.sort((a, b) {
+              final dateA = a.date != null ? DateTime.tryParse(a.date!) : null;
+              final dateB = b.date != null ? DateTime.tryParse(b.date!) : null;
 
-            if (dateA == null && dateB == null) return 0;
-            if (dateA == null) return 1;
-            if (dateB == null) return -1;
+              if (dateA == null && dateB == null) return 0;
+              if (dateA == null) return 1;
+              if (dateB == null) return -1;
 
-            return dateA.compareTo(dateB);
-          });
+              return dateA.compareTo(dateB);
+            });
 
-          return ListView.builder(
-            padding: const EdgeInsets.all(16.0),
-            itemCount: workshops.length,
-            itemBuilder: (context, index) {
-              final workshop = workshops[index];
-              return WorkshopCards(
-                text: workshop.title,
-                imagePath: workshop.media,
-                description: workshop.description,
-                tags: workshop.tags,
-                id: workshop.id,
-              );
-            },
-          );
-        },
-        loading: () {
-          return const Center(child: CircularProgressIndicator());
-        },
-        error: (error, stackTrace) {
-          return Center(child: Text('Error: $error'));
-        },
+            return ListView.builder(
+              padding: const EdgeInsets.all(16.0),
+              itemCount: workshops.length,
+              itemBuilder: (context, index) {
+                final workshop = workshops[index];
+                return WorkshopCards(
+                  text: workshop.title,
+                  imagePath: workshop.media,
+                  description: workshop.description,
+                  tags: workshop.tags,
+                  id: workshop.id,
+                );
+              },
+            );
+          },
+          loading: () {
+            return const Center(child: CircularProgressIndicator());
+          },
+          error: (error, stackTrace) {
+            return Center(child: Text('Error: $error'));
+          },
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

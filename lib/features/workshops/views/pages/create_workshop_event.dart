@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import '../../controller/workshop_controller.dart';
 import '../../viewmodel/workshop_create_notifier.dart';
-import '../widgets/app_button.dart';
+import '../widgets/workshop_button.dart';
 import '../widgets/workshop_textfield.dart';
 
 class CreateWorkshopEvent extends ConsumerStatefulWidget {
@@ -29,6 +29,7 @@ class _CreateWorkshopEventState extends ConsumerState<CreateWorkshopEvent> {
   final TextEditingController dateController = TextEditingController();
 
   File? imageFile;
+  bool isLoading = false; // State variable for loading indicator
 
   Future<void> _selectDate() async {
     final pickedDate = await showDatePicker(
@@ -52,6 +53,13 @@ class _CreateWorkshopEventState extends ConsumerState<CreateWorkshopEvent> {
   }
 
   Future<void> _submitWorkshop() async {
+    // Prevent duplicate submissions
+    if (isLoading) return;
+
+    setState(() {
+      isLoading = true;
+    });
+
     final workshop = _workshopController.buildWorkshop(
       title: titleController.text,
       description: descriptionController.text,
@@ -78,6 +86,10 @@ class _CreateWorkshopEventState extends ConsumerState<CreateWorkshopEvent> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error creating event: $e')),
       );
+    } finally {
+      setState(() {
+        isLoading = false;
+      });
     }
   }
 
@@ -163,7 +175,6 @@ class _CreateWorkshopEventState extends ConsumerState<CreateWorkshopEvent> {
               ),
             ),
             const SizedBox(height: 16),
-            // Display selected image above the button
             imageFile != null
                 ? Image.file(
                     imageFile!,
@@ -171,7 +182,7 @@ class _CreateWorkshopEventState extends ConsumerState<CreateWorkshopEvent> {
                     height: 200,
                     fit: BoxFit.cover,
                   )
-                : const SizedBox.shrink(), // If no image, display nothing
+                : const SizedBox.shrink(),
             const SizedBox(height: 16),
             WorkshopButton(
               buttonText: 'Pick Image',
@@ -179,7 +190,8 @@ class _CreateWorkshopEventState extends ConsumerState<CreateWorkshopEvent> {
             ),
             const SizedBox(height: 16),
             WorkshopButton(
-              buttonText: 'Submit',
+              buttonText: isLoading ? null : 'Submit',
+              isLoading: isLoading, // Pass loading state here
               onTap: _submitWorkshop,
             ),
           ],
