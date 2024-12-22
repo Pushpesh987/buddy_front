@@ -18,6 +18,18 @@ class WorkshopPage extends ConsumerWidget {
           if (workshops.isEmpty) {
             return const Center(child: Text('No workshops available.'));
           }
+
+          workshops.sort((a, b) {
+            final dateA = a.date != null ? DateTime.tryParse(a.date!) : null;
+            final dateB = b.date != null ? DateTime.tryParse(b.date!) : null;
+
+            if (dateA == null && dateB == null) return 0;
+            if (dateA == null) return 1;
+            if (dateB == null) return -1;
+
+            return dateA.compareTo(dateB);
+          });
+
           return ListView.builder(
             padding: const EdgeInsets.all(16.0),
             itemCount: workshops.length,

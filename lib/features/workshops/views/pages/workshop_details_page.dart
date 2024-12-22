@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart'; // Import this to use Clipboard
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../viewmodel/workshop_notifier.dart';
 
@@ -103,7 +103,7 @@ class WorkshopDetailsPage extends ConsumerWidget {
                         children: [
                           buildInfoRow('Date', _formatDate(workshop.date)),
                           buildInfoRow('Location', _validateField(workshop.location)),
-                          buildInfoRow('Duration', _formatDuration(workshop.duration)), // Updated line
+                          buildInfoRow('Duration', _formatDuration(workshop.duration)),
                           buildInfoRow('Instructor Info', _validateField(workshop.instructorInfo)),
                           buildInfoRow('Tags', _validateField(workshop.tags)),
                           buildInfoRow(

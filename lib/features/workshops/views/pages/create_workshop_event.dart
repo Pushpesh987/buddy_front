@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import '../../controller/workshop_controller.dart';
 import '../../viewmodel/workshop_create_notifier.dart';
+import '../widgets/app_button.dart';
+import '../widgets/workshop_textfield.dart';
 
 class CreateWorkshopEvent extends ConsumerStatefulWidget {
   const CreateWorkshopEvent({super.key});
@@ -14,8 +16,6 @@ class CreateWorkshopEvent extends ConsumerStatefulWidget {
 
 class _CreateWorkshopEventState extends ConsumerState<CreateWorkshopEvent> {
   final WorkshopController _workshopController = WorkshopController();
-
-  // Controllers for form fields
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
   final TextEditingController locationController = TextEditingController();
@@ -26,8 +26,8 @@ class _CreateWorkshopEventState extends ConsumerState<CreateWorkshopEvent> {
   final TextEditingController registrationLinkController = TextEditingController();
   final TextEditingController entryFeeController = TextEditingController();
   final TextEditingController participantLimitController = TextEditingController();
+  final TextEditingController dateController = TextEditingController();
 
-  String? selectedDate;
   File? imageFile;
 
   Future<void> _selectDate() async {
@@ -39,9 +39,8 @@ class _CreateWorkshopEventState extends ConsumerState<CreateWorkshopEvent> {
     );
 
     if (pickedDate != null) {
-      setState(() {
-        selectedDate = '${DateFormat('yyyy-MM-dd').format(pickedDate)}T00:00:00Z';
-      });
+      final formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+      dateController.text = formattedDate;
     }
   }
 
@@ -56,7 +55,7 @@ class _CreateWorkshopEventState extends ConsumerState<CreateWorkshopEvent> {
     final workshop = _workshopController.buildWorkshop(
       title: titleController.text,
       description: descriptionController.text,
-      selectedDate: selectedDate,
+      selectedDate: dateController.text.isNotEmpty ? '${dateController.text}T00:00:00Z' : null,
       location: locationController.text,
       hours: hoursController.text,
       minutes: minutesController.text,
@@ -90,69 +89,98 @@ class _CreateWorkshopEventState extends ConsumerState<CreateWorkshopEvent> {
         padding: const EdgeInsets.all(16.0),
         child: ListView(
           children: [
-            TextField(
+            WorkshopTextfield(
               controller: titleController,
-              decoration: const InputDecoration(labelText: 'Title'),
+              labelText: 'Title',
             ),
-            TextField(
+            const SizedBox(height: 16),
+            WorkshopTextfield(
               controller: descriptionController,
-              decoration: const InputDecoration(labelText: 'Description'),
+              labelText: 'Description',
+              maxLines: 3,
             ),
-            TextField(
+            const SizedBox(height: 16),
+            WorkshopTextfield(
               controller: locationController,
-              decoration: const InputDecoration(labelText: 'Location'),
+              labelText: 'Location',
             ),
+            const SizedBox(height: 16),
             Row(
               children: [
                 Expanded(
-                  child: TextField(
+                  child: WorkshopTextfield(
                     controller: hoursController,
-                    decoration: const InputDecoration(labelText: 'Hours'),
+                    labelText: 'Hours',
+                    keyboardType: TextInputType.number,
                   ),
                 ),
                 const SizedBox(width: 16),
                 Expanded(
-                  child: TextField(
+                  child: WorkshopTextfield(
                     controller: minutesController,
-                    decoration: const InputDecoration(labelText: 'Minutes'),
+                    labelText: 'Minutes',
+                    keyboardType: TextInputType.number,
                   ),
                 ),
               ],
             ),
-            TextField(
+            const SizedBox(height: 16),
+            WorkshopTextfield(
               controller: instructorInfoController,
-              decoration: const InputDecoration(labelText: 'Instructor Info'),
+              labelText: 'Instructor Info',
             ),
-            TextField(
+            const SizedBox(height: 16),
+            WorkshopTextfield(
               controller: tagsController,
-              decoration: const InputDecoration(labelText: 'Tags'),
+              labelText: 'Tags',
             ),
-            TextField(
+            const SizedBox(height: 16),
+            WorkshopTextfield(
               controller: registrationLinkController,
-              decoration: const InputDecoration(labelText: 'Registration Link'),
+              labelText: 'Registration Link',
             ),
-            TextField(
+            const SizedBox(height: 16),
+            WorkshopTextfield(
               controller: entryFeeController,
-              decoration: const InputDecoration(labelText: 'Entry Fee'),
-            ),
-            TextField(
-              controller: participantLimitController,
-              decoration: const InputDecoration(labelText: 'Participant Limit'),
+              labelText: 'Entry Fee',
               keyboardType: TextInputType.number,
             ),
             const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: _selectDate,
-              child: const Text('Select Date'),
-            ),
-            ElevatedButton(
-              onPressed: _pickImage,
-              child: const Text('Pick Image'),
+            WorkshopTextfield(
+              controller: participantLimitController,
+              labelText: 'Participant Limit',
+              keyboardType: TextInputType.number,
             ),
             const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: _submitWorkshop,
-              child: const Text('Submit'),
+            GestureDetector(
+              onTap: _selectDate,
+              child: AbsorbPointer(
+                child: WorkshopTextfield(
+                  controller: dateController,
+                  labelText: 'Select Date',
+                  keyboardType: TextInputType.none,
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+            // Display selected image above the button
+            imageFile != null
+                ? Image.file(
+                    imageFile!,
+                    width: MediaQuery.of(context).size.width,
+                    height: 200,
+                    fit: BoxFit.cover,
+                  )
+                : const SizedBox.shrink(), // If no image, display nothing
+            const SizedBox(height: 16),
+            WorkshopButton(
+              buttonText: 'Pick Image',
+              onTap: _pickImage,
+            ),
+            const SizedBox(height: 16),
+            WorkshopButton(
+              buttonText: 'Submit',
+              onTap: _submitWorkshop,
             ),
           ],
         ),
