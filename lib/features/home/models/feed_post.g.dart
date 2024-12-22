@@ -9,6 +9,8 @@ part of 'feed_post.dart';
 _$FeedPostImpl _$$FeedPostImplFromJson(Map<String, dynamic> json) => _$FeedPostImpl(
       id: json['id'] as String,
       userId: json['user_id'] as String,
+      username: json['username'] as String,
+      profilePicUrl: json['profile_pic_url'] as String,
       content: json['content'] as String,
       mediaUrl: json['media_url'] as String,
       likesCount: (json['likes_count'] as num).toInt(),
@@ -20,6 +22,8 @@ _$FeedPostImpl _$$FeedPostImplFromJson(Map<String, dynamic> json) => _$FeedPostI
 Map<String, dynamic> _$$FeedPostImplToJson(_$FeedPostImpl instance) => <String, dynamic>{
       'id': instance.id,
       'user_id': instance.userId,
+      'username': instance.username,
+      'profile_pic_url': instance.profilePicUrl,
       'content': instance.content,
       'media_url': instance.mediaUrl,
       'likes_count': instance.likesCount,

@@ -1,22 +1,23 @@
+// ignore_for_file: unused_result
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/theme/app_pallete.dart';
+import '../../viewmodel/test_notifier/feed_post_notifier.dart';
 import 'tabs/quiz_section.dart';
 import '../../view/widgets/feed_post_card.dart';
 import '../../view/pages/create_post.dart';
-import '../../viewmodel/home_vm/feed_page_notifier.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
 
   Future<void> _refreshFeed(WidgetRef ref) async {
-    // ignore: unused_result
-    ref.refresh(feedPageProvider);
+    ref.refresh(feedPostNotifierProvider);
   }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final homePageState = ref.watch(feedPageProvider);
+    final homePageState = ref.watch(feedPostNotifierProvider);
 
     return DefaultTabController(
       length: 3,
@@ -25,9 +26,9 @@ class HomePage extends ConsumerWidget {
           title: const Text('Buddy'),
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(1.0),
-            child: Container(
+            child: Divider(
               color: AppPalette.disableButtonGreyColor,
-              height: 1.0,
+              thickness: 1.0,
             ),
           ),
         ),
@@ -63,9 +64,14 @@ class HomePage extends ConsumerWidget {
                   }
                 },
                 loading: () => const Center(child: CircularProgressIndicator()),
-                error: (error, stackTrace) => Center(
-                  child: Text('Error: $error', style: const TextStyle(color: Colors.red)),
-                ),
+                error: (error, stackTrace) {
+                  return Center(
+                    child: Text(
+                      'Error: $error',
+                      style: const TextStyle(color: Colors.red),
+                    ),
+                  );
+                },
               ),
             ],
           ),

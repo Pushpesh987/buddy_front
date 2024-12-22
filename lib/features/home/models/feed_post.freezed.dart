@@ -24,6 +24,10 @@ mixin _$FeedPost {
   String get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'user_id')
   String get userId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'username')
+  String get username => throw _privateConstructorUsedError;
+  @JsonKey(name: 'profile_pic_url')
+  String get profilePicUrl => throw _privateConstructorUsedError;
   @JsonKey(name: 'content')
   String get content => throw _privateConstructorUsedError;
   @JsonKey(name: 'media_url')
@@ -53,6 +57,8 @@ abstract class $FeedPostCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'id') String id,
       @JsonKey(name: 'user_id') String userId,
+      @JsonKey(name: 'username') String username,
+      @JsonKey(name: 'profile_pic_url') String profilePicUrl,
       @JsonKey(name: 'content') String content,
       @JsonKey(name: 'media_url') String mediaUrl,
       @JsonKey(name: 'likes_count') int likesCount,
@@ -77,6 +83,8 @@ class _$FeedPostCopyWithImpl<$Res, $Val extends FeedPost> implements $FeedPostCo
   $Res call({
     Object? id = null,
     Object? userId = null,
+    Object? username = null,
+    Object? profilePicUrl = null,
     Object? content = null,
     Object? mediaUrl = null,
     Object? likesCount = null,
@@ -92,6 +100,14 @@ class _$FeedPostCopyWithImpl<$Res, $Val extends FeedPost> implements $FeedPostCo
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      username: null == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String,
+      profilePicUrl: null == profilePicUrl
+          ? _value.profilePicUrl
+          : profilePicUrl // ignore: cast_nullable_to_non_nullable
               as String,
       content: null == content
           ? _value.content
@@ -130,6 +146,8 @@ abstract class _$$FeedPostImplCopyWith<$Res> implements $FeedPostCopyWith<$Res> 
   $Res call(
       {@JsonKey(name: 'id') String id,
       @JsonKey(name: 'user_id') String userId,
+      @JsonKey(name: 'username') String username,
+      @JsonKey(name: 'profile_pic_url') String profilePicUrl,
       @JsonKey(name: 'content') String content,
       @JsonKey(name: 'media_url') String mediaUrl,
       @JsonKey(name: 'likes_count') int likesCount,
@@ -150,6 +168,8 @@ class __$$FeedPostImplCopyWithImpl<$Res> extends _$FeedPostCopyWithImpl<$Res, _$
   $Res call({
     Object? id = null,
     Object? userId = null,
+    Object? username = null,
+    Object? profilePicUrl = null,
     Object? content = null,
     Object? mediaUrl = null,
     Object? likesCount = null,
@@ -165,6 +185,14 @@ class __$$FeedPostImplCopyWithImpl<$Res> extends _$FeedPostCopyWithImpl<$Res, _$
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      username: null == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String,
+      profilePicUrl: null == profilePicUrl
+          ? _value.profilePicUrl
+          : profilePicUrl // ignore: cast_nullable_to_non_nullable
               as String,
       content: null == content
           ? _value.content
@@ -200,6 +228,8 @@ class _$FeedPostImpl implements _FeedPost {
   _$FeedPostImpl(
       {@JsonKey(name: 'id') required this.id,
       @JsonKey(name: 'user_id') required this.userId,
+      @JsonKey(name: 'username') required this.username,
+      @JsonKey(name: 'profile_pic_url') required this.profilePicUrl,
       @JsonKey(name: 'content') required this.content,
       @JsonKey(name: 'media_url') required this.mediaUrl,
       @JsonKey(name: 'likes_count') required this.likesCount,
@@ -216,6 +246,12 @@ class _$FeedPostImpl implements _FeedPost {
   @override
   @JsonKey(name: 'user_id')
   final String userId;
+  @override
+  @JsonKey(name: 'username')
+  final String username;
+  @override
+  @JsonKey(name: 'profile_pic_url')
+  final String profilePicUrl;
   @override
   @JsonKey(name: 'content')
   final String content;
@@ -243,7 +279,7 @@ class _$FeedPostImpl implements _FeedPost {
 
   @override
   String toString() {
-    return 'FeedPost(id: $id, userId: $userId, content: $content, mediaUrl: $mediaUrl, likesCount: $likesCount, commentsCount: $commentsCount, tags: $tags, createdAt: $createdAt)';
+    return 'FeedPost(id: $id, userId: $userId, username: $username, profilePicUrl: $profilePicUrl, content: $content, mediaUrl: $mediaUrl, likesCount: $likesCount, commentsCount: $commentsCount, tags: $tags, createdAt: $createdAt)';
   }
 
   @override
@@ -253,6 +289,8 @@ class _$FeedPostImpl implements _FeedPost {
             other is _$FeedPostImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.username, username) || other.username == username) &&
+            (identical(other.profilePicUrl, profilePicUrl) || other.profilePicUrl == profilePicUrl) &&
             (identical(other.content, content) || other.content == content) &&
             (identical(other.mediaUrl, mediaUrl) || other.mediaUrl == mediaUrl) &&
             (identical(other.likesCount, likesCount) || other.likesCount == likesCount) &&
@@ -263,8 +301,8 @@ class _$FeedPostImpl implements _FeedPost {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, userId, content, mediaUrl, likesCount, commentsCount,
-      const DeepCollectionEquality().hash(_tags), createdAt);
+  int get hashCode => Object.hash(runtimeType, id, userId, username, profilePicUrl, content, mediaUrl, likesCount,
+      commentsCount, const DeepCollectionEquality().hash(_tags), createdAt);
 
   /// Create a copy of FeedPost
   /// with the given fields replaced by the non-null parameter values.
@@ -286,6 +324,8 @@ abstract class _FeedPost implements FeedPost {
   factory _FeedPost(
       {@JsonKey(name: 'id') required final String id,
       @JsonKey(name: 'user_id') required final String userId,
+      @JsonKey(name: 'username') required final String username,
+      @JsonKey(name: 'profile_pic_url') required final String profilePicUrl,
       @JsonKey(name: 'content') required final String content,
       @JsonKey(name: 'media_url') required final String mediaUrl,
       @JsonKey(name: 'likes_count') required final int likesCount,
@@ -301,6 +341,12 @@ abstract class _FeedPost implements FeedPost {
   @override
   @JsonKey(name: 'user_id')
   String get userId;
+  @override
+  @JsonKey(name: 'username')
+  String get username;
+  @override
+  @JsonKey(name: 'profile_pic_url')
+  String get profilePicUrl;
   @override
   @JsonKey(name: 'content')
   String get content;

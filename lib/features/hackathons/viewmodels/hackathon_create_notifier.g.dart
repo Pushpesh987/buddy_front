@@ -6,7 +6,7 @@ part of 'hackathon_create_notifier.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$hackathonCreateNotifierHash() => r'b79a6bfc19de6e4c65bd2463d69189c19fd9b577';
+String _$hackathonCreateNotifierHash() => r'60f065ac49ea5d1398d52c413284881b936c30e6';
 
 /// See also [HackathonCreateNotifier].
 @ProviderFor(HackathonCreateNotifier)

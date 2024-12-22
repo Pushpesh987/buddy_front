@@ -30,31 +30,28 @@ class FeedPostCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              //   Row(
-              //     children: [
-              //       CircleAvatar(
-              //         // backgroundImage: NetworkImage(post.userProfileUrl),
-              //         backgroundImage: NetworkImage(
-              //             'https://wallpapers.com/images/featured/cool-profile-picture-87h46gcobjl5e4xu.webp'),
-              //         radius: 20.0,
-              //       ),
-              //       const SizedBox(width: 8.0),
-              //       Text(
-              //         "ppk profile",
-              //         // post.userName,
-              //         style: const TextStyle(
-              //           fontSize: 16,
-              //           fontWeight: FontWeight.w500,
-              //         ),
-              //       ),
-              //     ],
-              //   ),
-              //   const SizedBox(height: 8.0),
-              //   const Divider(
-              //     thickness: 1.0,
-              //     color: Colors.grey,
-              //   ),
-              //   const SizedBox(height: 8.0),
+              Row(
+                children: [
+                  CircleAvatar(
+                    backgroundImage: NetworkImage(post.profilePicUrl),
+                    radius: 20.0,
+                  ),
+                  const SizedBox(width: 8.0),
+                  Text(
+                    post.username,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8.0),
+              const Divider(
+                thickness: 1.0,
+                color: Colors.grey,
+              ),
+              const SizedBox(height: 8.0),
               Text(
                 post.content,
                 style: const TextStyle(
