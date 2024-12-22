@@ -1,12 +1,13 @@
-import 'package:buddy_front/features/projects/views/widgets/project_textfield.dart';
-import 'package:image_picker/image_picker.dart';
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 import 'package:intl/intl.dart';
-import 'package:buddy_front/core/theme/app_pallete.dart';
+
 import '../../models/create_project_model.dart';
 import '../../viewmodels/project_create_notifier.dart';
+import '../widgets/project_button.dart';
+import '../widgets/project_textfield.dart';
 
 class CreateProjectEvent extends ConsumerStatefulWidget {
   const CreateProjectEvent({super.key});
@@ -26,12 +27,13 @@ class _CreateProjectEventState extends ConsumerState<CreateProjectEvent> {
   final _projectLinkController = TextEditingController();
   final _goalsController = TextEditingController();
   final _domainController = TextEditingController();
-  final _teamMembersController = TextEditingController(); // Added teamMembers controller
+  final _teamMembersController = TextEditingController();
 
   String? _startDate;
   String? _endDate;
 
   bool _isFormValid = false;
+  bool _isLoading = false;
 
   File? _selectedImage;
 
@@ -49,32 +51,42 @@ class _CreateProjectEventState extends ConsumerState<CreateProjectEvent> {
   }
 
   Future<void> _selectStartDate(BuildContext context) async {
+    final DateTime tomorrow = DateTime.now().add(Duration(days: 1));
+
     final DateTime? pickedDate = await showDatePicker(
       context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2000),
+      initialDate: tomorrow,
+      firstDate: tomorrow,
       lastDate: DateTime(2101),
     );
 
     if (pickedDate != null) {
       setState(() {
-        _startDate = DateFormat('yyyy-MM-dd').format(pickedDate) + 'T00:00:00Z';
+        _startDate = DateFormat('yyyy-MM-dd').format(pickedDate);
       });
       _checkFormValidity();
     }
   }
 
   Future<void> _selectEndDate(BuildContext context) async {
+    if (_startDate == null) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Please select a start date first')));
+      return;
+    }
+
+    final DateTime startDateTime = DateTime.parse(_startDate!);
+    final DateTime nextDay = startDateTime.add(Duration(days: 1));
+
     final DateTime? pickedDate = await showDatePicker(
       context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2000),
+      initialDate: nextDay,
+      firstDate: nextDay,
       lastDate: DateTime(2101),
     );
 
     if (pickedDate != null) {
       setState(() {
-        _endDate = DateFormat('yyyy-MM-dd').format(pickedDate) + 'T00:00:00Z';
+        _endDate = DateFormat('yyyy-MM-dd').format(pickedDate);
       });
       _checkFormValidity();
     }
@@ -91,7 +103,7 @@ class _CreateProjectEventState extends ConsumerState<CreateProjectEvent> {
         _projectLinkController.text.isNotEmpty &&
         _goalsController.text.isNotEmpty &&
         _domainController.text.isNotEmpty &&
-        _teamMembersController.text.isNotEmpty; // Include teamMembers
+        _teamMembersController.text.isNotEmpty;
 
     setState(() {
       _isFormValid = isFormValid;
@@ -259,7 +271,7 @@ class _CreateProjectEventState extends ConsumerState<CreateProjectEvent> {
               ),
               const SizedBox(height: 16),
               ProjectTextfield(
-                controller: _teamMembersController, // Added text field for team members
+                controller: _teamMembersController,
                 labelText: 'Team Members (comma separated)',
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -270,9 +282,10 @@ class _CreateProjectEventState extends ConsumerState<CreateProjectEvent> {
                 onChanged: (_) => _checkFormValidity(),
               ),
               const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: _pickImage,
-                child: const Text('Select Project Image'),
+              ProjectButton(
+                buttonText: 'Select Project Image',
+                onTap: _pickImage,
+                isLoading: false,
               ),
               if (_selectedImage != null)
                 Padding(
@@ -285,9 +298,14 @@ class _CreateProjectEventState extends ConsumerState<CreateProjectEvent> {
                   ),
                 ),
               const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: _isFormValid
+              ProjectButton(
+                buttonText: 'Create Project Event',
+                onTap: _isFormValid
                     ? () async {
+                        setState(() {
+                          _isLoading = true;
+                        });
+
                         final newProject = CreateProjectModel(
                           title: _titleController.text,
                           description: _descriptionController.text,
@@ -299,7 +317,7 @@ class _CreateProjectEventState extends ConsumerState<CreateProjectEvent> {
                           projectLink: _projectLinkController.text,
                           goals: _goalsController.text,
                           domain: _domainController.text,
-                          teamMembers: _teamMembersController.text, // Added team members
+                          teamMembers: _teamMembersController.text,
                           status: _getWorkshopStatus(_startDate),
                         );
 
@@ -309,29 +327,18 @@ class _CreateProjectEventState extends ConsumerState<CreateProjectEvent> {
                           await profileCreateNotifier.createProjects(newProject, imageFile: _selectedImage);
                           ScaffoldMessenger.of(context)
                               .showSnackBar(SnackBar(content: Text('Project Created Successfully')));
+                          Navigator.pop(context);
                         } catch (e) {
                           ScaffoldMessenger.of(context)
                               .showSnackBar(SnackBar(content: Text('Error creating project: $e')));
+                        } finally {
+                          setState(() {
+                            _isLoading = false;
+                          });
                         }
                       }
                     : null,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppPalette.yellowColor,
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-                child: const Center(
-                  child: Text(
-                    'Create Project Event',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
+                isLoading: _isLoading,
               ),
             ],
           ),
