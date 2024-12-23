@@ -6,7 +6,7 @@ part of 'all_comunities_joined_notifier.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$allComunitiesJoinedNotifierHash() => r'e140d28013392f2b335af48882e24d6b8bbc0173';
+String _$allComunitiesJoinedNotifierHash() => r'a27b758a0a6be8123563a35831b7f4895aa740af';
 
 /// See also [AllComunitiesJoinedNotifier].
 @ProviderFor(AllComunitiesJoinedNotifier)

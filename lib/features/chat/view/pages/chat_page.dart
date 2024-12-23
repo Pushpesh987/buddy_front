@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
-import '../../../all_comunities/views/pages/all_communities_page.dart';
 import '../../../joined_communities/views/pages/joined_communities_page.dart';
+import '../../../all_comunities/views/pages/all_communities_page.dart';
 
 class ChatPage extends StatelessWidget {
   const ChatPage({super.key});

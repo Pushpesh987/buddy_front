@@ -20,7 +20,6 @@ class AllComunitiesJoinedNotifier extends AutoDisposeAsyncNotifier<void> {
 
       return response.fold(
         (error) {
-          print("error:::::>>>>>${error}");
           return Left('Error joining community: $error');
         },
         (data) {

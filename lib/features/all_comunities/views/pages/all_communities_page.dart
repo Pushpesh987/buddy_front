@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../joined_communities/views/pages/joined_communities_page.dart';
 import '../../viewmodels/all_comunities_joined_notifier.dart';
 import '../../viewmodels/all_comunities_notifier.dart';
 import 'package:intl/intl.dart';
@@ -47,12 +46,8 @@ class AllCommunitiesPage extends ConsumerWidget {
                         );
                       },
                       (_) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => JoinedCommunitiesPage(),
-                          ),
-                        );
+                        // Switch to the Joined Communities tab
+                        DefaultTabController.of(context).animateTo(1);
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text('Successfully joined the community!')),
                         );
