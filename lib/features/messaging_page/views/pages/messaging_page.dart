@@ -1,34 +1,20 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../viewmodel/message_notifier.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:jwt_decode/jwt_decode.dart';
 
-class MessagingPage extends ConsumerWidget {
+class MessagingPage extends StatelessWidget {
   final String communityName;
   final String communityId;
 
   const MessagingPage({super.key, required this.communityName, required this.communityId});
 
-  Future<String?> _getUserId() async {
-    final secureStorage = FlutterSecureStorage();
-    final token = await secureStorage.read(key: 'auth_token');
-    if (token != null) {
-      try {
-        final payload = Jwt.parseJwt(token);
-        return payload['user_id'];
-      } catch (e) {
-        return null;
-      }
-    }
-    return null;
-  }
-
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final messageState = ref.watch(messageProvider(communityId));
+  Widget build(BuildContext context) {
     final messageController = TextEditingController();
+    final List<Map<String, String>> messages = [
+      {'user': 'Pushpesh', 'message': 'Hey, how is everyone doing?'},
+      {'user': 'Suhan', 'message': 'I’m doing great, thanks for asking!'},
+      {'user': 'You', 'message': 'I’m doing well, just catching up with work.'},
+      {'user': 'Ranjeet', 'message': 'All good on my side, what about you all?'},
+    ];
 
     return Scaffold(
       appBar: AppBar(
@@ -54,49 +40,46 @@ class MessagingPage extends ConsumerWidget {
       body: Column(
         children: [
           Expanded(
-            child: FutureBuilder<String?>(
-              future: _getUserId(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
-                }
-
-                if (snapshot.hasError) {
-                  return Center(child: Text('Error: ${snapshot.error}'));
-                }
-
-                final currentUserId = snapshot.data;
-
-                return messageState.when(
-                  data: (messages) {
-                    return ListView.builder(
-                      reverse: true,
-                      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                      itemCount: messages.length,
-                      itemBuilder: (context, index) {
-                        final message = messages[index];
-                        final isCurrentUser = message.sender == currentUserId;
-                        return Align(
-                          alignment: isCurrentUser ? Alignment.centerRight : Alignment.centerLeft,
-                          child: Card(
-                            elevation: 4,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(12),
-                              child: Text(
-                                message.message,
-                                style: const TextStyle(fontSize: 16, color: Colors.black87),
-                              ),
+            child: ListView.builder(
+              reverse: true,
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              itemCount: messages.length,
+              itemBuilder: (context, index) {
+                final message = messages[index];
+                final isCurrentUser = message['user'] == 'You';
+                return Align(
+                  alignment: isCurrentUser ? Alignment.centerRight : Alignment.centerLeft,
+                  child: Card(
+                    elevation: 4,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    color: isCurrentUser ? Colors.teal.shade100 : Colors.grey.shade200,
+                    child: Padding(
+                      padding: const EdgeInsets.all(12),
+                      child: Column(
+                        crossAxisAlignment: isCurrentUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            message['user']!,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                              color: Colors.black87,
                             ),
                           ),
-                        );
-                      },
-                    );
-                  },
-                  loading: () => const Center(child: CircularProgressIndicator()),
-                  error: (error, _) => Center(child: Text('Error: $error')),
+                          const SizedBox(height: 4),
+                          Text(
+                            message['message']!,
+                            style: const TextStyle(
+                              fontSize: 16,
+                              color: Colors.black87,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 );
               },
             ),
@@ -115,15 +98,12 @@ class MessagingPage extends ConsumerWidget {
                       ),
                       contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                     ),
-                    onSubmitted: (messageText) {
-                      _sendMessage(messageText, ref, messageController);
-                    },
                   ),
                 ),
                 IconButton(
                   icon: const Icon(Icons.send),
                   onPressed: () {
-                    _sendMessage(messageController.text.trim(), ref, messageController);
+                    _sendMessage(messageController.text.trim(), messageController);
                   },
                   color: Colors.teal,
                 ),
@@ -135,9 +115,8 @@ class MessagingPage extends ConsumerWidget {
     );
   }
 
-  void _sendMessage(String messageText, WidgetRef ref, TextEditingController controller) {
+  void _sendMessage(String messageText, TextEditingController controller) {
     if (messageText.isNotEmpty) {
-      ref.read(messageNotifierProvider.notifier).sendMessage(messageText);
       controller.clear();
     }
   }

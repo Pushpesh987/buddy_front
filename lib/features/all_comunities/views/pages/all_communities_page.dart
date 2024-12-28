@@ -42,7 +42,7 @@ class AllCommunitiesPage extends ConsumerWidget {
                     result.fold(
                       (error) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text(error)),
+                          SnackBar(content: Text('Already Joined')),
                         );
                       },
                       (_) {
