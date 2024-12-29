@@ -6,8 +6,7 @@ part of 'message.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$MessageImpl _$$MessageImplFromJson(Map<String, dynamic> json) =>
-    _$MessageImpl(
+_$MessageImpl _$$MessageImplFromJson(Map<String, dynamic> json) => _$MessageImpl(
       id: (json['id'] as num).toInt(),
       communityId: (json['community_id'] as num).toInt(),
       userId: json['user_id'] as String,
@@ -16,8 +15,7 @@ _$MessageImpl _$$MessageImplFromJson(Map<String, dynamic> json) =>
       createdAt: DateTime.parse(json['created_at'] as String),
     );
 
-Map<String, dynamic> _$$MessageImplToJson(_$MessageImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$$MessageImplToJson(_$MessageImpl instance) => <String, dynamic>{
       'id': instance.id,
       'community_id': instance.communityId,
       'user_id': instance.userId,

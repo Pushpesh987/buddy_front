@@ -25,8 +25,7 @@ mixin _$Message {
   int get communityId => throw _privateConstructorUsedError;
   @JsonKey(name: 'user_id')
   String get userId => throw _privateConstructorUsedError;
-  String get username =>
-      throw _privateConstructorUsedError; // New field for the username
+  String get username => throw _privateConstructorUsedError; // New field for the username
   String get message => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
   DateTime get createdAt => throw _privateConstructorUsedError;
@@ -42,8 +41,7 @@ mixin _$Message {
 
 /// @nodoc
 abstract class $MessageCopyWith<$Res> {
-  factory $MessageCopyWith(Message value, $Res Function(Message) then) =
-      _$MessageCopyWithImpl<$Res, Message>;
+  factory $MessageCopyWith(Message value, $Res Function(Message) then) = _$MessageCopyWithImpl<$Res, Message>;
   @useResult
   $Res call(
       {int id,
@@ -55,8 +53,7 @@ abstract class $MessageCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$MessageCopyWithImpl<$Res, $Val extends Message>
-    implements $MessageCopyWith<$Res> {
+class _$MessageCopyWithImpl<$Res, $Val extends Message> implements $MessageCopyWith<$Res> {
   _$MessageCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -107,8 +104,7 @@ class _$MessageCopyWithImpl<$Res, $Val extends Message>
 
 /// @nodoc
 abstract class _$$MessageImplCopyWith<$Res> implements $MessageCopyWith<$Res> {
-  factory _$$MessageImplCopyWith(
-          _$MessageImpl value, $Res Function(_$MessageImpl) then) =
+  factory _$$MessageImplCopyWith(_$MessageImpl value, $Res Function(_$MessageImpl) then) =
       __$$MessageImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -122,12 +118,9 @@ abstract class _$$MessageImplCopyWith<$Res> implements $MessageCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$MessageImplCopyWithImpl<$Res>
-    extends _$MessageCopyWithImpl<$Res, _$MessageImpl>
+class __$$MessageImplCopyWithImpl<$Res> extends _$MessageCopyWithImpl<$Res, _$MessageImpl>
     implements _$$MessageImplCopyWith<$Res> {
-  __$$MessageImplCopyWithImpl(
-      _$MessageImpl _value, $Res Function(_$MessageImpl) _then)
-      : super(_value, _then);
+  __$$MessageImplCopyWithImpl(_$MessageImpl _value, $Res Function(_$MessageImpl) _then) : super(_value, _then);
 
   /// Create a copy of Message
   /// with the given fields replaced by the non-null parameter values.
@@ -181,8 +174,7 @@ class _$MessageImpl implements _Message {
       required this.message,
       @JsonKey(name: 'created_at') required this.createdAt});
 
-  factory _$MessageImpl.fromJson(Map<String, dynamic> json) =>
-      _$$MessageImplFromJson(json);
+  factory _$MessageImpl.fromJson(Map<String, dynamic> json) => _$$MessageImplFromJson(json);
 
   @override
   final int id;
@@ -212,28 +204,23 @@ class _$MessageImpl implements _Message {
         (other.runtimeType == runtimeType &&
             other is _$MessageImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.communityId, communityId) ||
-                other.communityId == communityId) &&
+            (identical(other.communityId, communityId) || other.communityId == communityId) &&
             (identical(other.userId, userId) || other.userId == userId) &&
-            (identical(other.username, username) ||
-                other.username == username) &&
+            (identical(other.username, username) || other.username == username) &&
             (identical(other.message, message) || other.message == message) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt));
+            (identical(other.createdAt, createdAt) || other.createdAt == createdAt));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, communityId, userId, username, message, createdAt);
+  int get hashCode => Object.hash(runtimeType, id, communityId, userId, username, message, createdAt);
 
   /// Create a copy of Message
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$MessageImplCopyWith<_$MessageImpl> get copyWith =>
-      __$$MessageImplCopyWithImpl<_$MessageImpl>(this, _$identity);
+  _$$MessageImplCopyWith<_$MessageImpl> get copyWith => __$$MessageImplCopyWithImpl<_$MessageImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -245,13 +232,12 @@ class _$MessageImpl implements _Message {
 
 abstract class _Message implements Message {
   const factory _Message(
-          {required final int id,
-          @JsonKey(name: 'community_id') required final int communityId,
-          @JsonKey(name: 'user_id') required final String userId,
-          required final String username,
-          required final String message,
-          @JsonKey(name: 'created_at') required final DateTime createdAt}) =
-      _$MessageImpl;
+      {required final int id,
+      @JsonKey(name: 'community_id') required final int communityId,
+      @JsonKey(name: 'user_id') required final String userId,
+      required final String username,
+      required final String message,
+      @JsonKey(name: 'created_at') required final DateTime createdAt}) = _$MessageImpl;
 
   factory _Message.fromJson(Map<String, dynamic> json) = _$MessageImpl.fromJson;
 
@@ -275,6 +261,5 @@ abstract class _Message implements Message {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$MessageImplCopyWith<_$MessageImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$MessageImplCopyWith<_$MessageImpl> get copyWith => throw _privateConstructorUsedError;
 }

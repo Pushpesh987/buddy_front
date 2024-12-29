@@ -29,8 +29,7 @@ class _SystemHash {
   }
 }
 
-abstract class _$MessageNotifier
-    extends BuildlessAutoDisposeAsyncNotifier<List<Message>> {
+abstract class _$MessageNotifier extends BuildlessAutoDisposeAsyncNotifier<List<Message>> {
   late final int communityId;
 
   FutureOr<List<Message>> build(
@@ -73,16 +72,14 @@ class MessageNotifierFamily extends Family<AsyncValue<List<Message>>> {
   static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
 
   @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies => _allTransitiveDependencies;
 
   @override
   String? get name => r'messageNotifierProvider';
 }
 
 /// See also [MessageNotifier].
-class MessageNotifierProvider extends AutoDisposeAsyncNotifierProviderImpl<
-    MessageNotifier, List<Message>> {
+class MessageNotifierProvider extends AutoDisposeAsyncNotifierProviderImpl<MessageNotifier, List<Message>> {
   /// See also [MessageNotifier].
   MessageNotifierProvider(
     int communityId,
@@ -90,13 +87,9 @@ class MessageNotifierProvider extends AutoDisposeAsyncNotifierProviderImpl<
           () => MessageNotifier()..communityId = communityId,
           from: messageNotifierProvider,
           name: r'messageNotifierProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$messageNotifierHash,
+          debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$messageNotifierHash,
           dependencies: MessageNotifierFamily._dependencies,
-          allTransitiveDependencies:
-              MessageNotifierFamily._allTransitiveDependencies,
+          allTransitiveDependencies: MessageNotifierFamily._allTransitiveDependencies,
           communityId: communityId,
         );
 
@@ -138,8 +131,7 @@ class MessageNotifierProvider extends AutoDisposeAsyncNotifierProviderImpl<
   }
 
   @override
-  AutoDisposeAsyncNotifierProviderElement<MessageNotifier, List<Message>>
-      createElement() {
+  AutoDisposeAsyncNotifierProviderElement<MessageNotifier, List<Message>> createElement() {
     return _MessageNotifierProviderElement(this);
   }
 
@@ -164,9 +156,8 @@ mixin MessageNotifierRef on AutoDisposeAsyncNotifierProviderRef<List<Message>> {
   int get communityId;
 }
 
-class _MessageNotifierProviderElement
-    extends AutoDisposeAsyncNotifierProviderElement<MessageNotifier,
-        List<Message>> with MessageNotifierRef {
+class _MessageNotifierProviderElement extends AutoDisposeAsyncNotifierProviderElement<MessageNotifier, List<Message>>
+    with MessageNotifierRef {
   _MessageNotifierProviderElement(super.provider);
 
   @override

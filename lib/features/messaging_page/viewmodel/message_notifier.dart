@@ -2,6 +2,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../../../core/api_service/api_service.dart';
 import '../../../../core/service_provider.dart/service_provider.dart';
 import '../models/message.dart';
+import '../websocket_provider.dart';
 
 part 'message_notifier.g.dart';
 
@@ -13,7 +14,7 @@ class MessageNotifier extends _$MessageNotifier {
     try {
       final response = await apiService.request(
         HttpMethod.get,
-        '/api/v1/communities/$communityId/messages', // Replace with your endpoint
+        '/api/v1/communities/$communityId/messages',
       );
 
       return response.fold(
@@ -30,7 +31,7 @@ class MessageNotifier extends _$MessageNotifier {
           final messages = messagesData
               .map((item) {
                 try {
-                  return Message.fromJson(item); // Ensure your Message model has a fromJson factory
+                  return Message.fromJson(item);
                 } catch (e) {
                   return null;
                 }
@@ -44,6 +45,19 @@ class MessageNotifier extends _$MessageNotifier {
     } catch (e) {
       throw Exception('Unexpected error fetching messages: $e');
     }
+  }
+
+  void sendMessage({
+    required String messageText,
+    required String userId,
+    required String communityId,
+  }) {
+    final websocketChannel = ref.watch(websocketProvider({
+      'communityId': communityId,
+      'userId': userId,
+    }));
+
+    websocketChannel.sink.add(messageText);
   }
 
   @override

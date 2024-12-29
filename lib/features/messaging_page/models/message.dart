@@ -9,7 +9,7 @@ class Message with _$Message {
     required int id,
     @JsonKey(name: 'community_id') required int communityId,
     @JsonKey(name: 'user_id') required String userId,
-    required String username,  // New field for the username
+    required String username,
     required String message,
     @JsonKey(name: 'created_at') required DateTime createdAt,
   }) = _Message;

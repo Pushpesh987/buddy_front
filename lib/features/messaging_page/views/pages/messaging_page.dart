@@ -90,7 +90,7 @@ class MessagingPage extends ConsumerWidget {
                                         isCurrentUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        isCurrentUser ? 'You' : message.username, // Use username here
+                                        isCurrentUser ? 'You' : message.username,
                                         style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 14,
@@ -148,6 +148,7 @@ class MessagingPage extends ConsumerWidget {
                           communityId,
                           messageController.text.trim(),
                           messageController,
+                          currentUserId,
                         );
                       },
                       color: Colors.teal,
@@ -167,11 +168,17 @@ class MessagingPage extends ConsumerWidget {
     String communityId,
     String messageText,
     TextEditingController controller,
+    String? currentUserId,
   ) {
-    // if (messageText.isNotEmpty) {
-    //   ref.read(messageNotifierProvider(int.parse(communityId)).notifier).sendMessage(messageText);
-    //   controller.clear();
-    // }
-    print("message sended");
+    if (messageText.isNotEmpty && currentUserId != null) {
+      ref.read(messageNotifierProvider(int.parse(communityId)).notifier).sendMessage(
+            messageText: messageText,
+            userId: currentUserId,
+            communityId: communityId,
+          );
+      controller.clear();
+    } else {
+      print("Failed to send message. Message text or currentUserId is null.");
+    }
   }
 }
