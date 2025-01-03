@@ -66,60 +66,63 @@ class MessagingPage extends ConsumerWidget {
             children: [
               Expanded(
                 child: messageState.when(
-                  data: (messages) => messages.isEmpty
-                      ? const Center(child: Text('No messages yet.'))
-                      : ListView.builder(
-                          reverse: true,
-                          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                          itemCount: messages.length,
-                          itemBuilder: (context, index) {
-                            final message = messages[index];
-                            final isCurrentUser = message.userId == currentUserId;
-                            return Align(
-                              alignment: isCurrentUser ? Alignment.centerRight : Alignment.centerLeft,
-                              child: Card(
-                                elevation: 4,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                color: isCurrentUser ? Colors.teal.shade100 : Colors.grey.shade200,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(12),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        isCurrentUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        isCurrentUser ? 'You' : message.username,
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 14,
-                                          color: Colors.black87,
+                  data: (messages) {
+                    return messages.isEmpty
+                        ? const Center(child: Text('No messages yet.'))
+                        : ListView.builder(
+                            reverse: true,
+                            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                            itemCount: messages.length,
+                            itemBuilder: (context, index) {
+                              final message = messages[index];
+                              final isCurrentUser = message.userId == currentUserId;
+                              return Align(
+                                alignment: isCurrentUser ? Alignment.centerRight : Alignment.centerLeft,
+                                child: Card(
+                                  elevation: 4,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  color: isCurrentUser ? Colors.teal.shade100 : Colors.grey.shade200,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(12),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          isCurrentUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          isCurrentUser ? 'You' : (message.username ?? 'Anonymous'),
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 14,
+                                            color: Colors.black87,
+                                          ),
                                         ),
-                                      ),
-                                      const SizedBox(height: 4),
-                                      Text(
-                                        message.message,
-                                        style: const TextStyle(
-                                          fontSize: 16,
-                                          color: Colors.black87,
+                                        const SizedBox(height: 4),
+                                        Text(
+                                          message.message ?? '',
+                                          style: const TextStyle(
+                                            fontSize: 16,
+                                            color: Colors.black87,
+                                          ),
                                         ),
-                                      ),
-                                      const SizedBox(height: 4),
-                                      Text(
-                                        DateFormat('dd MMM yyyy, hh:mm a').format(message.createdAt),
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          color: Colors.grey.shade600,
+                                        const SizedBox(height: 4),
+                                        Text(
+                                          DateFormat('dd MMM yyyy, hh:mm a')
+                                              .format((message.createdAt ?? DateTime.now())),
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: Colors.grey.shade600,
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                            );
-                          },
-                        ),
+                              );
+                            },
+                          );
+                  },
                   loading: () => const Center(child: CircularProgressIndicator()),
                   error: (error, stackTrace) => Center(child: Text('Error: $error')),
                 ),
@@ -171,12 +174,14 @@ class MessagingPage extends ConsumerWidget {
     String? currentUserId,
   ) {
     if (messageText.isNotEmpty && currentUserId != null) {
+      // Send message through WebSocket
       ref.read(messageNotifierProvider(int.parse(communityId)).notifier).sendMessage(
             messageText: messageText,
             userId: currentUserId,
             communityId: communityId,
           );
       controller.clear();
+      print("Message sent: $messageText");
     } else {
       print("Failed to send message. Message text or currentUserId is null.");
     }

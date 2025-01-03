@@ -20,15 +20,15 @@ Message _$MessageFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Message {
-  int get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'community_id')
-  int get communityId => throw _privateConstructorUsedError;
+  int? get communityId => throw _privateConstructorUsedError;
   @JsonKey(name: 'user_id')
-  String get userId => throw _privateConstructorUsedError;
-  String get username => throw _privateConstructorUsedError; // New field for the username
-  String get message => throw _privateConstructorUsedError;
+  String? get userId => throw _privateConstructorUsedError;
+  String? get username => throw _privateConstructorUsedError;
+  String? get message => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
-  DateTime get createdAt => throw _privateConstructorUsedError;
+  DateTime? get createdAt => throw _privateConstructorUsedError;
 
   /// Serializes this Message to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -41,19 +41,21 @@ mixin _$Message {
 
 /// @nodoc
 abstract class $MessageCopyWith<$Res> {
-  factory $MessageCopyWith(Message value, $Res Function(Message) then) = _$MessageCopyWithImpl<$Res, Message>;
+  factory $MessageCopyWith(Message value, $Res Function(Message) then) =
+      _$MessageCopyWithImpl<$Res, Message>;
   @useResult
   $Res call(
-      {int id,
-      @JsonKey(name: 'community_id') int communityId,
-      @JsonKey(name: 'user_id') String userId,
-      String username,
-      String message,
-      @JsonKey(name: 'created_at') DateTime createdAt});
+      {int? id,
+      @JsonKey(name: 'community_id') int? communityId,
+      @JsonKey(name: 'user_id') String? userId,
+      String? username,
+      String? message,
+      @JsonKey(name: 'created_at') DateTime? createdAt});
 }
 
 /// @nodoc
-class _$MessageCopyWithImpl<$Res, $Val extends Message> implements $MessageCopyWith<$Res> {
+class _$MessageCopyWithImpl<$Res, $Val extends Message>
+    implements $MessageCopyWith<$Res> {
   _$MessageCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -66,99 +68,103 @@ class _$MessageCopyWithImpl<$Res, $Val extends Message> implements $MessageCopyW
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? communityId = null,
-    Object? userId = null,
-    Object? username = null,
-    Object? message = null,
-    Object? createdAt = null,
+    Object? id = freezed,
+    Object? communityId = freezed,
+    Object? userId = freezed,
+    Object? username = freezed,
+    Object? message = freezed,
+    Object? createdAt = freezed,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      communityId: null == communityId
+              as int?,
+      communityId: freezed == communityId
           ? _value.communityId
           : communityId // ignore: cast_nullable_to_non_nullable
-              as int,
-      userId: null == userId
+              as int?,
+      userId: freezed == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
-              as String,
-      username: null == username
+              as String?,
+      username: freezed == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
-              as String,
-      message: null == message
+              as String?,
+      message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdAt: null == createdAt
+              as String?,
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
     ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$MessageImplCopyWith<$Res> implements $MessageCopyWith<$Res> {
-  factory _$$MessageImplCopyWith(_$MessageImpl value, $Res Function(_$MessageImpl) then) =
+  factory _$$MessageImplCopyWith(
+          _$MessageImpl value, $Res Function(_$MessageImpl) then) =
       __$$MessageImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {int id,
-      @JsonKey(name: 'community_id') int communityId,
-      @JsonKey(name: 'user_id') String userId,
-      String username,
-      String message,
-      @JsonKey(name: 'created_at') DateTime createdAt});
+      {int? id,
+      @JsonKey(name: 'community_id') int? communityId,
+      @JsonKey(name: 'user_id') String? userId,
+      String? username,
+      String? message,
+      @JsonKey(name: 'created_at') DateTime? createdAt});
 }
 
 /// @nodoc
-class __$$MessageImplCopyWithImpl<$Res> extends _$MessageCopyWithImpl<$Res, _$MessageImpl>
+class __$$MessageImplCopyWithImpl<$Res>
+    extends _$MessageCopyWithImpl<$Res, _$MessageImpl>
     implements _$$MessageImplCopyWith<$Res> {
-  __$$MessageImplCopyWithImpl(_$MessageImpl _value, $Res Function(_$MessageImpl) _then) : super(_value, _then);
+  __$$MessageImplCopyWithImpl(
+      _$MessageImpl _value, $Res Function(_$MessageImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of Message
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? communityId = null,
-    Object? userId = null,
-    Object? username = null,
-    Object? message = null,
-    Object? createdAt = null,
+    Object? id = freezed,
+    Object? communityId = freezed,
+    Object? userId = freezed,
+    Object? username = freezed,
+    Object? message = freezed,
+    Object? createdAt = freezed,
   }) {
     return _then(_$MessageImpl(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      communityId: null == communityId
+              as int?,
+      communityId: freezed == communityId
           ? _value.communityId
           : communityId // ignore: cast_nullable_to_non_nullable
-              as int,
-      userId: null == userId
+              as int?,
+      userId: freezed == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
-              as String,
-      username: null == username
+              as String?,
+      username: freezed == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
-              as String,
-      message: null == message
+              as String?,
+      message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdAt: null == createdAt
+              as String?,
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
     ));
   }
 }
@@ -167,31 +173,31 @@ class __$$MessageImplCopyWithImpl<$Res> extends _$MessageCopyWithImpl<$Res, _$Me
 @JsonSerializable()
 class _$MessageImpl implements _Message {
   const _$MessageImpl(
-      {required this.id,
-      @JsonKey(name: 'community_id') required this.communityId,
-      @JsonKey(name: 'user_id') required this.userId,
-      required this.username,
-      required this.message,
-      @JsonKey(name: 'created_at') required this.createdAt});
+      {this.id,
+      @JsonKey(name: 'community_id') this.communityId,
+      @JsonKey(name: 'user_id') this.userId,
+      this.username,
+      this.message,
+      @JsonKey(name: 'created_at') this.createdAt});
 
-  factory _$MessageImpl.fromJson(Map<String, dynamic> json) => _$$MessageImplFromJson(json);
+  factory _$MessageImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MessageImplFromJson(json);
 
   @override
-  final int id;
+  final int? id;
   @override
   @JsonKey(name: 'community_id')
-  final int communityId;
+  final int? communityId;
   @override
   @JsonKey(name: 'user_id')
-  final String userId;
+  final String? userId;
   @override
-  final String username;
-// New field for the username
+  final String? username;
   @override
-  final String message;
+  final String? message;
   @override
   @JsonKey(name: 'created_at')
-  final DateTime createdAt;
+  final DateTime? createdAt;
 
   @override
   String toString() {
@@ -204,23 +210,28 @@ class _$MessageImpl implements _Message {
         (other.runtimeType == runtimeType &&
             other is _$MessageImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.communityId, communityId) || other.communityId == communityId) &&
+            (identical(other.communityId, communityId) ||
+                other.communityId == communityId) &&
             (identical(other.userId, userId) || other.userId == userId) &&
-            (identical(other.username, username) || other.username == username) &&
+            (identical(other.username, username) ||
+                other.username == username) &&
             (identical(other.message, message) || other.message == message) &&
-            (identical(other.createdAt, createdAt) || other.createdAt == createdAt));
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, communityId, userId, username, message, createdAt);
+  int get hashCode => Object.hash(
+      runtimeType, id, communityId, userId, username, message, createdAt);
 
   /// Create a copy of Message
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$MessageImplCopyWith<_$MessageImpl> get copyWith => __$$MessageImplCopyWithImpl<_$MessageImpl>(this, _$identity);
+  _$$MessageImplCopyWith<_$MessageImpl> get copyWith =>
+      __$$MessageImplCopyWithImpl<_$MessageImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -232,34 +243,35 @@ class _$MessageImpl implements _Message {
 
 abstract class _Message implements Message {
   const factory _Message(
-      {required final int id,
-      @JsonKey(name: 'community_id') required final int communityId,
-      @JsonKey(name: 'user_id') required final String userId,
-      required final String username,
-      required final String message,
-      @JsonKey(name: 'created_at') required final DateTime createdAt}) = _$MessageImpl;
+      {final int? id,
+      @JsonKey(name: 'community_id') final int? communityId,
+      @JsonKey(name: 'user_id') final String? userId,
+      final String? username,
+      final String? message,
+      @JsonKey(name: 'created_at') final DateTime? createdAt}) = _$MessageImpl;
 
   factory _Message.fromJson(Map<String, dynamic> json) = _$MessageImpl.fromJson;
 
   @override
-  int get id;
+  int? get id;
   @override
   @JsonKey(name: 'community_id')
-  int get communityId;
+  int? get communityId;
   @override
   @JsonKey(name: 'user_id')
-  String get userId;
+  String? get userId;
   @override
-  String get username; // New field for the username
+  String? get username;
   @override
-  String get message;
+  String? get message;
   @override
   @JsonKey(name: 'created_at')
-  DateTime get createdAt;
+  DateTime? get createdAt;
 
   /// Create a copy of Message
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$MessageImplCopyWith<_$MessageImpl> get copyWith => throw _privateConstructorUsedError;
+  _$$MessageImplCopyWith<_$MessageImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
